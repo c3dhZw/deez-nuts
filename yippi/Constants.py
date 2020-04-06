@@ -1,0 +1,6 @@
+BASE_URL: str = "https://e621.net"
+POSTS_URL: str = BASE_URL + "/posts.json"
+UPLOAD_URL: str = BASE_URL + "/uploads.json"
+FLAGS_URL: str = BASE_URL + "/post_flags.json"
+NOTES_URL: str = BASE_URL + "/notes.json"
+POOLS_URL: str = BASE_URL + "/pools.json"
