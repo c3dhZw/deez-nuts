@@ -29,6 +29,8 @@ class AbstractYippi(ABC):
     def _convert_search_query(self, **kwargs) -> dict:
         queries = {}
         for k, v in kwargs.items():
+            if k[-1] == "_":
+                k = k[0:-1]
             queries[f"search[{k}]"] = v
         return queries
 
