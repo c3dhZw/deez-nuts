@@ -1,6 +1,6 @@
 [paths]
 source =
-   src
+   yippi
    */site-packages
 
 [run]

@@ -1,4 +1,3 @@
-
 from yippi import main
 
 

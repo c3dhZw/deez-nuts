@@ -3,15 +3,12 @@ import asyncio
 from .AbstractYippi import AbstractYippi
 from .Exceptions import UserError
 from .Classes import Post
-
+from typing import Union, List
 from ratelimit import limits
 
 
 class AsyncYippiClient(AbstractYippi):
-    def __init__(self,
-                 *args,
-                 loop: asyncio.AbstractEventLoop = None,
-                 **kwargs):
+    def __init__(self, *args, loop: asyncio.AbstractEventLoop = None, **kwargs):
         super().__init__(*args, **kwargs)
         self._loop = loop if loop else asyncio.get_event_loop()
         self._session = aiohttp.ClientSession(loop=loop)
@@ -44,7 +41,8 @@ class AsyncYippiClient(AbstractYippi):
         return posts
 
     async def post(self, post_id: int):
-        return Post(await self._get_post(post_id))
+        api_res = await self._get_post(post_id)
+        return Post(api_res['post'])
 
     async def notes(
         self,
@@ -67,10 +65,9 @@ class AsyncYippiClient(AbstractYippi):
         )
         return result
 
-    async def flags(self,
-                    post_id: int = None,
-                    creator_id: int = None,
-                    creator_name: str = None):
+    async def flags(
+        self, post_id: int = None, creator_id: int = None, creator_name: str = None
+    ):
         result = await self._get_flags(post_id, creator_id, creator_name)
         return result
 

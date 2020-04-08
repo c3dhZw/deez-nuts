@@ -1,8 +1,9 @@
 from .Constants import *
 import inspect
 
+
 class Post:
-    def __init__(self, data: dict=None, client=None):
+    def __init__(self, data: dict = None, client=None):
         if data:
             self._original_data = data
             self.id: int = data.get("id", None)
@@ -55,6 +56,7 @@ class Post:
             output += "-" + " -".join(deleted)
         return output
 
+
 class Note:
     def __init__(self, data=None, client=None):
         if data:
@@ -75,6 +77,7 @@ class Note:
 
     def get_post(self):
         return self._client.post(self.post_id)
+
 
 class Pool:
     def __init__(self, data=None, client=None):
@@ -109,10 +112,11 @@ class Pool:
     def get_posts(self):
         if inspect.iscoroutinefunction(self._client.post):
             return self.get_posts_async()
-        
+
         result = [self._client.post(post_id) for post_id in self.post_ids]
         self._register_linked(result)
         return result
+
 
 class Flag:
     def __init__(self, data=None, client=None):
@@ -126,6 +130,6 @@ class Flag:
             self.is_deletion: bool = data.get("is_deletion", None)
             self.category: str = data.get("category", None)
         self._client = client
-    
+
     def get_post(self):
         return self._client.post(self.post_id)

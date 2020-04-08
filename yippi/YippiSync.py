@@ -39,7 +39,8 @@ class YippiClient(AbstractYippi):
         return posts
 
     def post(self, post_id: int):
-        return Post(self._get_post(post_id))
+        api_res = self._get_post(post_id)
+        return Post(api_res['post'])
 
     def notes(
         self,
@@ -62,10 +63,9 @@ class YippiClient(AbstractYippi):
         )
         return result
 
-    def flags(self,
-              post_id: int = None,
-              creator_id: int = None,
-              creator_name: str = None):
+    def flags(
+        self, post_id: int = None, creator_id: int = None, creator_name: str = None
+    ):
         result = self._get_flags(post_id, creator_id, creator_name)
         return result
 
