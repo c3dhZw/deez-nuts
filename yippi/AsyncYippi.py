@@ -15,7 +15,7 @@ class AsyncYippiClient(AbstractYippi):
     async def close(self) -> None:
         await self._session.close()
 
-    async def __aenter__(self) -> AsyncYippiClient:
+    async def __aenter__(self) -> 'AsyncYippiClient':
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
