@@ -7,10 +7,19 @@ from typing import Union, List
 
 
 class AsyncYippiClient(AbstractYippi):
-    def __init__(self, *args, loop: asyncio.AbstractEventLoop = None, **kwargs):
+    def __init__(self, *args, session: aiohttp.ClientSession, loop: asyncio.AbstractEventLoop = None, **kwargs):
         super().__init__(*args, **kwargs)
         self._loop = loop if loop else asyncio.get_event_loop()
-        self._session = aiohttp.ClientSession(loop=loop)
+        self._session = session if session else aiohttp.ClientSession(loop=loop)
+    
+    async def close(self) -> None:
+        await self._session.close()
+
+    async def __aenter__(self) -> AsyncYippiClient:
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
+        await self.close()
 
     async def _call_api(self, method, url, **kwargs):
         query_string = self._generate_query_keys(**kwargs)
