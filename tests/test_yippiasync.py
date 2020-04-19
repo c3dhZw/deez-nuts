@@ -1,4 +1,5 @@
 import pytest
+
 from yippi import AsyncYippiClient
 from yippi.Exceptions import UserError
 
