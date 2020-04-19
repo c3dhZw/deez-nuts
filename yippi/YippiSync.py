@@ -23,7 +23,7 @@ class YippiClient(AbstractYippi):
             if r.status_code >= 400:
                 raise UserError(res["message"])
 
-        if "application/json" not in r.headers.get('Content-Type'):
+        if "application/json" not in r.headers.get("Content-Type"):
             raise UserError("Invalid input or server error.")
 
         elif r.status_code > 500:
@@ -41,7 +41,7 @@ class YippiClient(AbstractYippi):
 
     def post(self, post_id: int):
         response = self._get_post(post_id)
-        return Post(response['post'])
+        return Post(response["post"])
 
     def notes(
         self,
@@ -70,7 +70,7 @@ class YippiClient(AbstractYippi):
         post_id: int = None,
         creator_id: int = None,
         creator_name: str = None,
-        limit: int = None
+        limit: int = None,
     ):
         response = self._get_flags(post_id, creator_id, creator_name)
         result = list(map(Flag, response))

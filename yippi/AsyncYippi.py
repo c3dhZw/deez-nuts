@@ -7,15 +7,21 @@ from typing import Union, List
 
 
 class AsyncYippiClient(AbstractYippi):
-    def __init__(self, *args, session: aiohttp.ClientSession = None, loop: asyncio.AbstractEventLoop = None, **kwargs):
+    def __init__(
+        self,
+        *args,
+        session: aiohttp.ClientSession = None,
+        loop: asyncio.AbstractEventLoop = None,
+        **kwargs
+    ):
         super().__init__(*args, **kwargs)
         self._loop = loop if loop else asyncio.get_event_loop()
         self._session = session if session else aiohttp.ClientSession(loop=loop)
-    
+
     async def close(self) -> None:
         await self._session.close()
 
-    async def __aenter__(self) -> 'AsyncYippiClient':
+    async def __aenter__(self) -> "AsyncYippiClient":
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
@@ -34,7 +40,7 @@ class AsyncYippiClient(AbstractYippi):
             if r.status >= 400:
                 raise UserError(res["message"])
 
-        if "application/json" not in r.headers.get('Content-Type'):
+        if "application/json" not in r.headers.get("Content-Type"):
             raise UserError("Invalid input or server error.")
 
         elif r.status > 500:
@@ -52,7 +58,7 @@ class AsyncYippiClient(AbstractYippi):
 
     async def post(self, post_id: int):
         api_res = await self._get_post(post_id)
-        return Post(api_res['post'])
+        return Post(api_res["post"])
 
     async def notes(
         self,
@@ -81,7 +87,7 @@ class AsyncYippiClient(AbstractYippi):
         post_id: int = None,
         creator_id: int = None,
         creator_name: str = None,
-        limit: int = None
+        limit: int = None,
     ):
         response = await self._get_flags(post_id, creator_id, creator_name)
         result = list(map(Flag, response))

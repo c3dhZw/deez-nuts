@@ -28,6 +28,7 @@ class AbstractYippi(ABC):
         creator: Your e621 username.
         
     """
+
     VALID_CATEGORY = ("series", "collection")
     VALID_ORDER = ("name", "created_at", "updated_at", "post_count")
 
@@ -55,9 +56,7 @@ class AbstractYippi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def _verify_response(
-        self, r: Union[requests.Response, aiohttp.ClientResponse]
-    ):
+    def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]):
         """Verifies response from server.
         
         Args:
@@ -151,7 +150,7 @@ class AbstractYippi(ABC):
         post_id: int = None,
         creator_id: int = None,
         creator_name: str = None,
-        limit: int = None
+        limit: int = None,
     ) -> dict:
         """Internal fetch of flags search.
 
@@ -172,7 +171,7 @@ class AbstractYippi(ABC):
             post_id=post_id, creator_id=creator_id, creator_name=creator_name
         )
         queries["limit"] = limit
-        
+
         return self._call_api("GET", FLAGS_URL, **queries)
 
     def _get_notes(
