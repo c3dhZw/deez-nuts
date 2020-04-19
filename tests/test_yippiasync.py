@@ -1,5 +1,4 @@
 import pytest
-
 from yippi import AsyncYippiClient
 from yippi.Exceptions import UserError
 
@@ -154,7 +153,7 @@ async def test_note(client):
 # @vcr.use_cassette("tests/vcr/flags.yaml", decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_flags(client):
-    flag = (await client.flags(post_id=2213076, limit=1))[0]
+    flag = (await client.flags(post_id=2213076, limit=1))[-1]
     assert flag.id == 368383
     assert flag.created_at == "2020-04-19T02:50:38.030-04:00"
     assert flag.post_id == 2213076
