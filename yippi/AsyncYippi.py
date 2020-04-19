@@ -1,9 +1,15 @@
-import aiohttp
 import asyncio
+from typing import List
+from typing import Union
+
+import aiohttp
+
 from .AbstractYippi import AbstractYippi
+from .Classes import Flag
+from .Classes import Note
+from .Classes import Pool
+from .Classes import Post
 from .Exceptions import UserError
-from .Classes import Post, Pool, Flag, Note
-from typing import Union, List
 
 
 class AsyncYippiClient(AbstractYippi):

@@ -1,8 +1,14 @@
+from typing import List
+from typing import Union
+
 import requests
+
 from .AbstractYippi import AbstractYippi
+from .Classes import Flag
+from .Classes import Note
+from .Classes import Pool
+from .Classes import Post
 from .Exceptions import UserError
-from .Classes import Post, Note, Flag, Pool
-from typing import Union, List
 
 
 class YippiClient(AbstractYippi):

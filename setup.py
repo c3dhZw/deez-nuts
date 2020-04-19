@@ -5,13 +5,9 @@ from __future__ import print_function
 
 import io
 import re
-from glob import glob
-from os.path import basename
 from os.path import dirname
 from os.path import join
-from os.path import splitext
 
-from setuptools import find_packages
 from setuptools import setup
 
 
@@ -26,7 +22,7 @@ setup(
     name="yippi",
     version="0.0.1",
     license="GPL-3.0-only",
-    description="A(nother) e621 API library.",
+    description="An (a)sync e621 API wrapper for Python.",
     long_description="%s\n%s"
     % (
         re.compile("^.. start-badges.*^.. end-badges", re.M | re.S).sub(
@@ -38,6 +34,7 @@ setup(
     author_email="rendyarya22@gmail.com",
     url="https://github.com/rorre/yippi",
     packages=["yippi"],
+    package_data={'': ['LICENSE']},
     package_dir={"yippi": "yippi"},
     include_package_data=True,
     zip_safe=False,
@@ -72,12 +69,10 @@ setup(
     ],
     python_requires=">=3.6.*",
     install_requires=[
-        # eg: 'aspectlib==1.1.1', 'six>=1.7',
+        "requests>=2.23.0", "aiohttp>=3.6.2"
     ],
-    extras_require={
-        # eg:
-        #   'rst': ['docutils>=0.11'],
-        #   ':python_version=="2.6"': ['argparse'],
-    },
-    setup_requires=[],
+    test_require=[
+        "pytest>=5.4.1", "pytest-recording>=0.7.0", "pytest-asyncio>=0.10.0",
+        "vcrpy>=4.0.2"
+    ],
 )

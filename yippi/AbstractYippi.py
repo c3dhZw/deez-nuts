@@ -1,32 +1,35 @@
-from abc import ABC, abstractmethod
-from typing import Optional, Dict, Mapping, Union, List
+from abc import ABC
+from abc import abstractmethod
+from typing import List
+from typing import Union
 from urllib.parse import urlencode
-from .Exceptions import UserError
-from .Constants import (
-    BASE_URL,
-    POSTS_URL,
-    UPLOAD_URL,
-    FLAGS_URL,
-    NOTES_URL,
-    POOLS_URL,
-    POST_URL,
-)
-from .Classes import Post, Pool, Note, Flag
-import requests
+
 import aiohttp
+import requests
+
+from .Classes import Flag
+from .Classes import Note
+from .Classes import Pool
+from .Classes import Post
+from .Constants import FLAGS_URL
+from .Constants import NOTES_URL
+from .Constants import POOLS_URL
+from .Constants import POST_URL
+from .Constants import POSTS_URL
+from .Exceptions import UserError
 
 
 class AbstractYippi(ABC):
     """An abstract class (abc) for all the Yippi's client.
-    
+
     Generally you don't really need to use this, except if you want to use
     different implementation for the client.
-    
+
     Args:
         project_name: Your project's name where this library is going to be used.
         version: You project's version number.
         creator: Your e621 username.
-        
+
     """
 
     VALID_CATEGORY = ("series", "collection")
@@ -42,26 +45,26 @@ class AbstractYippi(ABC):
         self, method: str, url: str, data: dict = None, **kwargs
     ) -> Union[requests.Response, aiohttp.ClientResponse]:
         """Calls the API with specified method and url.
-        
+
         Args:
             method: The method to use.
             url: The URL to call.
             data (Optional): The data to send into the server.
             **kwargs: Query params to request.
-        
+
         Returns:
             The client's :obj:`Response` object.
-            
+
         """
         raise NotImplementedError
 
     @abstractmethod
     def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]):
         """Verifies response from server.
-        
+
         Args:
             r: The :obj:`Response` object from client.
-            
+
         Raises:
             UserError: If the server returns a not found or if the server returns
                 HTTP code 4xx.
@@ -115,12 +118,12 @@ class AbstractYippi(ABC):
 
         In general you don't need to touch this. If you want to override
         how the call works, change :meth:`._call_api` instead.
-        
+
         Args:
             tags: The tags to search.
             limit: Limits the amount of notes returned to the number specified.
             page: The page that will be returned.
-        
+
         Returns:
             JSON object of server's response.
 
@@ -134,10 +137,10 @@ class AbstractYippi(ABC):
 
         In general you don't need to touch this. If you want to override
         how the call works, change :meth:`._call_api` instead.
-        
+
         Args:
             post_id: The post's ID to look up.
-        
+
         Returns:
             JSON object of server's response.
 
@@ -156,13 +159,13 @@ class AbstractYippi(ABC):
 
         In general you don't need to touch this. If you want to override
         how the call works, change :meth:`._call_api` instead.
-        
+
         Args:
             post_id: The ID of the flagged post.
             creator_id: The user’s ID that created the flag.
             creator_name: The user’s name that created the flag.
             limit: Limits the amount of notes returned to the number specified.
-        
+
         Returns:
             JSON object of server's response.
 
@@ -188,7 +191,7 @@ class AbstractYippi(ABC):
 
         In general you don't need to touch this. If you want to override
         how the call works, change :meth:`._call_api` instead.
-        
+
         Args:
             body_matches: The note's body matches the given terms.
                  Use a * in the search terms to search for raw strings.
@@ -199,7 +202,7 @@ class AbstractYippi(ABC):
             creator_id: The creator's user id.
             is_active: Can be ``True`` or ``False``.
             limit: Limits the amount of notes returned to the number specified.
-        
+
         Returns:
             JSON object of server's response.
 
@@ -238,7 +241,7 @@ class AbstractYippi(ABC):
 
         In general you don't need to touch this. If you want to override
         how the call works, change :meth:`._call_api` instead.
-        
+
         Args:
             name_matches: Search for pool names.
             id_: Search for a pool ID. Multiple IDs are fine.
@@ -253,7 +256,7 @@ class AbstractYippi(ABC):
                 can be any of: ``name``, ``created_at``, ``updated_at``, ``post_count``.
                 If not specified it orders by ``updated_at``.
             limit: The limit of how many pools should be retrieved.
-        
+
         Returns:
             JSON object of server's response.
 
@@ -297,12 +300,12 @@ class AbstractYippi(ABC):
         page: Union[int, str] = None,
     ) -> List[Post]:
         """Search for posts.
-        
+
         Args:
             tags: The tags to search.
             limit: Limits the amount of notes returned to the number specified.
             page: The page that will be returned.
-        
+
         Returns:
             :obj:`list` of :class:`~yippi.Classes.Post` of the posts.
 
@@ -312,10 +315,10 @@ class AbstractYippi(ABC):
     @abstractmethod
     def post(self, post_id: int) -> Post:
         """Fetch for a post.
-        
+
         Args:
             post_id: The post's ID to look up.
-        
+
         Returns:
             :class:`~yippi.Classes.Post` of the posts.
 
@@ -327,13 +330,13 @@ class AbstractYippi(ABC):
         self, post_id: int = None, creator_id: int = None, creator_name: str = None
     ) -> List[Flag]:
         """Search for flags
-        
+
         Args:
             post_id: The ID of the flagged post.
             creator_id: The user’s ID that created the flag.
             creator_name: The user’s name that created the flag.
             limit: Limits the amount of notes returned to the number specified.
-        
+
         Returns:
             :obj:`list` of :class:`~yippi.Classes.Flag` of the flags.
 
@@ -352,7 +355,7 @@ class AbstractYippi(ABC):
         limit: int = None,
     ) -> List[Note]:
         """Search for notes.
-        
+
         Args:
             body_matches: The note's body matches the given terms.
                  Use a * in the search terms to search for raw strings.
@@ -363,7 +366,7 @@ class AbstractYippi(ABC):
             creator_id: The creator's user id.
             is_active: Can be ``True`` or ``False``.
             limit: Limits the amount of notes returned to the number specified.
-        
+
         Returns:
             :obj:`list` of :class:`~yippi.Classes.Note` of the notes.
 
@@ -385,7 +388,7 @@ class AbstractYippi(ABC):
         limit: int = None,
     ) -> List[Pool]:
         """Search for pools.
-        
+
         Args:
             name_matches: Search for pool names.
             id_: Search for a pool ID. Multiple IDs are fine.
@@ -400,7 +403,7 @@ class AbstractYippi(ABC):
                 can be any of: ``name``, ``created_at``, ``updated_at``, ``post_count``.
                 If not specified it orders by ``updated_at``.
             limit: The limit of how many pools should be retrieved.
-        
+
         Returns:
             :obj:`list` of :class:`~yippi.Classes.Pool` of the pools.
 

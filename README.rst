@@ -1,8 +1,12 @@
 ========
 Overview
 ========
+.. image:: https://travis-ci.com/rorre/Yippi.svg?branch=master
+    :target: https://travis-ci.com/rorre/Yippi
+.. image:: https://codecov.io/gh/rorre/yippi/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/rorre/yippi
 
-A(nother) e621 API library.
+An (a)sync e621 API wrapper library.
 
 * Free software: GNU Lesser General Public License v3 (LGPLv3)
 
