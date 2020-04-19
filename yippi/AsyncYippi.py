@@ -112,5 +112,5 @@ class AsyncYippiClient(AbstractYippi):
             order,
             limit,
         )
-        result = list(map(Pool(response)))
+        result = list(map(Pool, response))
         return result
