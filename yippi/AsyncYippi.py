@@ -67,7 +67,11 @@ class AsyncYippiClient(AbstractYippi):
         return result
 
     async def flags(
-        self, post_id: int = None, creator_id: int = None, creator_name: str = None
+        self,
+        post_id: int = None,
+        creator_id: int = None,
+        creator_name: str = None,
+        limit: int = None
     ):
         result = await self._get_flags(post_id, creator_id, creator_name)
         return result

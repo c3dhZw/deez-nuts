@@ -1,7 +1,7 @@
 import requests
 from .AbstractYippi import AbstractYippi
 from .Exceptions import UserError
-from .Classes import Post
+from .Classes import Post, Note, Flag, Pool
 from typing import Union, List
 
 
@@ -35,13 +35,13 @@ class YippiClient(AbstractYippi):
         limit: int = None,
         page: Union[int, str] = None,
     ):
-        result = self._get_posts(tags, limit, page)
-        posts = list(map(Post, result["posts"]))
-        return posts
+        response = self._get_posts(tags, limit, page)
+        result = list(map(Post, response["posts"]))
+        return result
 
     def post(self, post_id: int):
-        api_res = self._get_post(post_id)
-        return Post(api_res['post'])
+        response = self._get_post(post_id)
+        return Post(response['post'])
 
     def notes(
         self,
@@ -53,7 +53,7 @@ class YippiClient(AbstractYippi):
         is_active: bool = None,
         limit: int = None,
     ):
-        result = self._get_notes(
+        response = self._get_notes(
             body_matches,
             post_id,
             post_tags_match,
@@ -62,12 +62,18 @@ class YippiClient(AbstractYippi):
             is_active,
             limit,
         )
+        result = list(map(Note, response))
         return result
 
     def flags(
-        self, post_id: int = None, creator_id: int = None, creator_name: str = None
+        self,
+        post_id: int = None,
+        creator_id: int = None,
+        creator_name: str = None,
+        limit: int = None
     ):
-        result = self._get_flags(post_id, creator_id, creator_name)
+        response = self._get_flags(post_id, creator_id, creator_name)
+        result = list(map(Flag, response))
         return result
 
     def pools(
@@ -83,7 +89,7 @@ class YippiClient(AbstractYippi):
         order: str = None,
         limit: int = None,
     ):
-        result = self._get_pools(
+        response = self._get_pools(
             name_matches,
             id_,
             description_matches,
@@ -95,4 +101,5 @@ class YippiClient(AbstractYippi):
             order,
             limit,
         )
+        result = list(map(Flag, response))
         return result

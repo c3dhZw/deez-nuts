@@ -64,11 +64,17 @@ class AbstractYippi(ABC):
         return self._call_api("GET", url)
 
     def _get_flags(
-        self, post_id: int = None, creator_id: int = None, creator_name: str = None
+        self,
+        post_id: int = None,
+        creator_id: int = None,
+        creator_name: str = None,
+        limit: int = None
     ) -> dict:
         queries: dict = self._convert_search_query(
             post_id=post_id, creator_id=creator_id, creator_name=creator_name
         )
+        queries["limit"] = limit
+        
         return self._call_api("GET", FLAGS_URL, **queries)
 
     def _get_notes(
