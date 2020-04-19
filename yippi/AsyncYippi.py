@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 from .AbstractYippi import AbstractYippi
 from .Exceptions import UserError
-from .Classes import Post
+from .Classes import Post, Pool, Flag, Note
 from typing import Union, List
 
 
@@ -55,7 +55,7 @@ class AsyncYippiClient(AbstractYippi):
         is_active: bool = None,
         limit: int = None,
     ):
-        result = await self._get_notes(
+        response = await self._get_notes(
             body_matches,
             post_id,
             post_tags_match,
@@ -64,6 +64,7 @@ class AsyncYippiClient(AbstractYippi):
             is_active,
             limit,
         )
+        result = list(map(Note, response))
         return result
 
     async def flags(
@@ -73,7 +74,8 @@ class AsyncYippiClient(AbstractYippi):
         creator_name: str = None,
         limit: int = None
     ):
-        result = await self._get_flags(post_id, creator_id, creator_name)
+        response = await self._get_flags(post_id, creator_id, creator_name)
+        result = list(map(Flag, response))
         return result
 
     async def pools(
@@ -89,7 +91,7 @@ class AsyncYippiClient(AbstractYippi):
         order: str = None,
         limit: int = None,
     ):
-        result = await self._get_pools(
+        response = await self._get_pools(
             name_matches,
             id_,
             description_matches,
@@ -101,4 +103,5 @@ class AsyncYippiClient(AbstractYippi):
             order,
             limit,
         )
+        result = list(map(Pool(response)))
         return result
