@@ -25,7 +25,7 @@ def read(*names, **kwargs):
 setup(
     name="yippi",
     version="0.0.1",
-    license="LGPL-3.0-only",
+    license="GPL-3.0-only",
     description="A(nother) e621 API library.",
     long_description="%s\n%s"
     % (
@@ -36,7 +36,7 @@ setup(
     ),
     author="Rendy Arya Kemal",
     author_email="rendyarya22@gmail.com",
-    url="https://git.rorre.xyz/rorre/yippi",
+    url="https://github.com/rorre/yippi",
     packages=["yippi"],
     package_dir={"yippi": "yippi"},
     include_package_data=True,
@@ -45,14 +45,12 @@ setup(
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)"
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
         "Operating System :: Unix",
         "Operating System :: POSIX",
         "Operating System :: Microsoft :: Windows",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
@@ -67,7 +65,7 @@ setup(
     project_urls={
         "Documentation": "https://yippi.readthedocs.io/",
         "Changelog": "https://yippi.readthedocs.io/en/latest/changelog.html",
-        "Issue Tracker": "https://git.rorre.xyz/rorre/yippi/issues",
+        "Issue Tracker": "https://github.com/rorre/yippi/issues",
     },
     keywords=[
         # eg: 'keyword1', 'keyword2', 'keyword3',

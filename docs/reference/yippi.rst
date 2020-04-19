@@ -1,9 +1,42 @@
-yippi
-=====
+yippi package
+=============
 
-.. testsetup::
+yippi.AbstractYippi module
+--------------------------
 
-    from yippi import *
+.. automodule:: yippi.AbstractYippi
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: yippi
-    :members:
+yippi.AsyncYippi module
+-----------------------
+
+.. automodule:: yippi.AsyncYippi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+yippi.Classes module
+--------------------
+
+.. automodule:: yippi.Classes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+yippi.Exceptions module
+-----------------------
+
+.. automodule:: yippi.Exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+yippi.YippiSync module
+----------------------
+
+.. automodule:: yippi.YippiSync
+   :members:
+   :undoc-members:
+   :show-inheritance:

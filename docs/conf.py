@@ -12,7 +12,7 @@ extensions = [
     "sphinx.ext.ifconfig",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.viewcode"
 ]
 source_suffix = ".rst"
 master_doc = "index"
@@ -20,7 +20,7 @@ project = "yippi"
 year = "2020"
 author = "Rendy Arya Kemal"
 copyright = "{0}, {1}".format(year, author)
-version = release = "0.0.0"
+version = release = "0.0.1"
 
 pygments_style = "trac"
 templates_path = ["."]

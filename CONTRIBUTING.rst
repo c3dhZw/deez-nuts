@@ -8,7 +8,7 @@ little bit helps, and credit will always be given.
 Bug reports
 ===========
 
-When `reporting a bug <https://git.rorre.xyz/rorre/yippi/issues>`_ please include:
+When `reporting a bug <https://github.com/rorre/yippi/issues>`_ please include:
 
     * Your operating system name and version.
     * Any details about your local setup that might be helpful in troubleshooting.
@@ -17,14 +17,14 @@ When `reporting a bug <https://git.rorre.xyz/rorre/yippi/issues>`_ please includ
 Documentation improvements
 ==========================
 
-yippi could always use more documentation, whether as part of the
+Yippi could always use more documentation, whether as part of the
 official yippi docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Feature requests and feedback
 =============================
 
-The best way to send feedback is to file an issue at https://git.rorre.xyz/rorre/yippi/issues.
+The best way to send feedback is to file an issue at https://github.com/rorre/yippi/issues.
 
 If you are proposing a feature:
 
@@ -37,11 +37,11 @@ Development
 
 To set up `yippi` for local development:
 
-1. Fork `yippi <https://git.rorre.xyz/rorre/yippi>`_
+1. Fork `yippi <https://github.com/rorre/yippi>`_
    (look for the "Fork" button).
 2. Clone your fork locally::
 
-    git clone git@git.rorre.xyz:rorre/yippi.git
+    git clone git@github.com:rorre/yippi.git
 
 3. Create a branch for local development::
 

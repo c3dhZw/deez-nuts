@@ -29,6 +29,9 @@ class Post:
             self.is_favorited: bool = data.get("is_favorited", None)
         self._client = client
 
+    def __repr__(self):
+        return "Post(id=%s)" % (self.id)
+
     def _diff_list(self, this, that):
         result = []
         for e in this:
@@ -75,6 +78,9 @@ class Note:
             self.creator_name: str = data.get("creator_name", None)
         self._client = client
 
+    def __repr__(self):
+        return "Note(id=%s)" % (self.id)
+
     def get_post(self):
         return self._client.post(self.post_id)
 
@@ -95,6 +101,9 @@ class Pool:
             self.creator_name: str = data.get("creator_name", None)
             self.post_count: int = data.get("post_count", None)
         self._client = client
+
+    def __repr__(self):
+        return "Pool(id=%s, name=%s)" % (self.id, self.name)
 
     def _register_linked(self, arr):
         previous = None
@@ -130,6 +139,9 @@ class Flag:
             self.is_deletion: bool = data.get("is_deletion", None)
             self.category: str = data.get("category", None)
         self._client = client
+
+    def __repr__(self):
+        return "Flag(id=%s)" % (self.id)
 
     def get_post(self):
         return self._client.post(self.post_id)
