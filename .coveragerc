@@ -1,15 +1,3 @@
-[paths]
-source =
-   yippi
-   */site-packages
-
-[run]
-branch = true
-source =
-    yippi
-    tests
-parallel = true
-
 [report]
 show_missing = true
 precision = 2
