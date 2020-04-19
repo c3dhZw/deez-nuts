@@ -325,7 +325,7 @@ class AbstractYippi(ABC):
     @abstractmethod
     def flags(
         self, post_id: int = None, creator_id: int = None, creator_name: str = None
-    ):
+    ) -> List[Flag]:
         """Search for flags
         
         Args:
@@ -350,7 +350,7 @@ class AbstractYippi(ABC):
         creator_id: str = None,
         is_active: bool = None,
         limit: int = None,
-    ):
+    ) -> List[Note]:
         """Search for notes.
         
         Args:
@@ -383,7 +383,7 @@ class AbstractYippi(ABC):
         category: str = None,
         order: str = None,
         limit: int = None,
-    ):
+    ) -> List[Pool]:
         """Search for pools.
         
         Args:
