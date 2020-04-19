@@ -7,7 +7,7 @@ from typing import Union, List
 
 
 class AsyncYippiClient(AbstractYippi):
-    def __init__(self, *args, session: aiohttp.ClientSession, loop: asyncio.AbstractEventLoop = None, **kwargs):
+    def __init__(self, *args, session: aiohttp.ClientSession = None, loop: asyncio.AbstractEventLoop = None, **kwargs):
         super().__init__(*args, **kwargs)
         self._loop = loop if loop else asyncio.get_event_loop()
         self._session = session if session else aiohttp.ClientSession(loop=loop)
