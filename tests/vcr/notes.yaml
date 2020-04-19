@@ -1,0 +1,76 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/notes.json?limit=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4yNuw7CMBAE/2XrC7o4sQ3XUtPRIRQFbBEXkMi58BCCb0ehomTbWc3snkgBYqzn
+        yhOOObYaQ9MqBIYNF1wX5WrLRuxSrFv40hVcCzMI0xD+P3/NfW7mWuVcVVrCHeJ9TXhAysoRbilo
+        N2NCF9OpU4hlwjXmMfUXiCGksWmPmq4RonmKhKEf9Ss182xNOPThAcG6m94/3Ut7jhBsJtWY8dp/
+        AAAA//8DAEkTCEH5AAAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 5864d88f6c19eb21-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 19 Apr 2020 07:17:27 GMT
+      ETag:
+      - W/"b83e2b86bf3bcedd7ab4d3b47576e6ec"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d10d1252da1c41fc769e63f01490ca2091587280647; expires=Tue, 19-May-20
+        07:17:27 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 24158865-db47-4fc0-802c-3b956d001d8b
+      X-Runtime:
+      - '0.036654'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 0232e5ad9d0000eb21ee81d200000001
+    status:
+      code: 200
+      message: OK
+version: 1
