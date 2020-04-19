@@ -21,7 +21,7 @@ class YippiClient(AbstractYippi):
         if r.status_code != 200 and r.status_code < 500:
             res = r.json()
             if r.status_code >= 400:
-                raise UserError(res["reason"])
+                raise UserError(res["message"])
 
         if "application/json" not in r.headers.get('Content-Type'):
             raise UserError("Invalid input or server error.")

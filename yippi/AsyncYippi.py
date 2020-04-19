@@ -23,7 +23,7 @@ class AsyncYippiClient(AbstractYippi):
         if r.status != 200 and r.status < 500:
             res = await r.json()
             if r.status >= 400:
-                raise UserError(res["reason"])
+                raise UserError(res["message"])
 
         if "application/json" not in r.headers.get('Content-Type'):
             raise UserError("Invalid input or server error.")
