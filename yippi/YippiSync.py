@@ -101,5 +101,5 @@ class YippiClient(AbstractYippi):
             order,
             limit,
         )
-        result = list(map(Flag, response))
+        result = list(map(Pool, response))
         return result
