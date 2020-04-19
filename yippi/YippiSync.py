@@ -3,7 +3,6 @@ from .AbstractYippi import AbstractYippi
 from .Exceptions import UserError
 from .Classes import Post
 from typing import Union, List
-from ratelimit import limits
 
 
 class YippiClient(AbstractYippi):
@@ -11,7 +10,6 @@ class YippiClient(AbstractYippi):
         super().__init__(*args, **kwargs)
         self._session = requests.Session()
 
-    @limits(calls=2, period=60)
     def _call_api(self, method, url, **kwargs):
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string

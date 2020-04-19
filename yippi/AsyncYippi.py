@@ -4,7 +4,6 @@ from .AbstractYippi import AbstractYippi
 from .Exceptions import UserError
 from .Classes import Post
 from typing import Union, List
-from ratelimit import limits
 
 
 class AsyncYippiClient(AbstractYippi):
@@ -13,7 +12,6 @@ class AsyncYippiClient(AbstractYippi):
         self._loop = loop if loop else asyncio.get_event_loop()
         self._session = aiohttp.ClientSession(loop=loop)
 
-    @limits(calls=2, period=60)
     async def _call_api(self, method, url, **kwargs):
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string
