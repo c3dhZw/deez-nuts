@@ -15,7 +15,6 @@ async def test_context():
     async with AsyncYippiClient("Yippi", "0.1", "Error-") as client:
         pass
 
-# @vcr.use_cassette('tests/vcr/post_1383235.yaml', decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_getpost(client):
     post = await client.post(1383235)
@@ -113,14 +112,12 @@ async def test_getpost(client):
     assert not post.is_favorited
 
 
-# @vcr.use_cassette('tests/vcr/404.yaml', decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_404(client):
     with pytest.raises(UserError):
         await client.post(99999999999)
 
 
-# @vcr.use_cassette('tests/vcr/search.yaml', decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_post_search(client):
     assert await client.posts("m/m")
@@ -129,14 +126,12 @@ async def test_post_search(client):
     assert await client.posts("m/m", page=1)
 
 
-# @vcr.use_cassette("tests/vcr/search_error.yaml", decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_post_search_error(client):
     with pytest.raises(UserError):
         await client.posts("m/m", page=1000)
 
 
-# @vcr.use_cassette("tests/vcr/notes.yaml", decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_note(client):
     note = (await client.notes(post_id=2222254, creator_id=366315, limit=1))[0]
@@ -155,7 +150,6 @@ async def test_note(client):
     assert note.creator_name == "Mutter"
 
 
-# @vcr.use_cassette("tests/vcr/flags.yaml", decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_flags(client):
     flag = (await client.flags(post_id=2213076, limit=1))[-1]
@@ -169,7 +163,6 @@ async def test_flags(client):
     assert flag.category == "normal"
 
 
-# @vcr.use_cassette("tests/vcr/pools.yaml", decode_compressed_response=True)
 @pytest.mark.asyncio
 async def test_pools(client):
     pool = (await client.pools("Critical Success"))[0]
