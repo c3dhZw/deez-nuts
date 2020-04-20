@@ -1,8 +1,24 @@
 import inspect
-
+from typing import List, Union
 
 class Post:
-    def __init__(self, data: dict = None, client=None):
+    """Representation of e621's Post object.
+    
+    Args:
+        data (optional): The json server response of a ``/posts.json`` call.
+        client (optional): The yippi client, used for api calls.
+    
+    Attributes:
+        Refer to `e621 API docs`_ for available attributes.
+    
+    .. _e621 API docs:
+        https://e621.net/wiki_pages/2425
+    """
+    def __init__(
+        self,
+        data: dict = None,
+        client: Union['AsyncYippiClient', 'YippiClient'] = None
+    ):
         if data:
             self._original_data = data
             self.id: int = data.get("id", None)
@@ -31,7 +47,17 @@ class Post:
     def __repr__(self):
         return "Post(id=%s)" % (self.id)
 
-    def _diff_list(self, this, that):
+    def _diff_list(self, this: List, that: List) -> List[str]:
+        """Find differences between two list.
+
+        Args:
+            this: List to check from
+            that: Base list to check.
+        
+        Returns:
+            :obj:`list` of :obj:`str`: List of strings that exists in ``this``, but not in ``that``.
+        """
+        
         result = []
         for e in this:
             if e not in that:
@@ -39,6 +65,15 @@ class Post:
         return result
 
     def get_tags_difference(self) -> str:
+        """Get tags difference after modifying ``.tags``, formatted based on e621's format.
+
+        The e621 format is all the new tags, with removed tags is prepended with a ``-`` sign.
+
+        For example: ``dog -cat`` adds dog and removes cat.
+        
+        Returns:
+            str: e621 formatted difference string.
+        """
         orig = self._original_data["tags"]
         new = self.tags
 
@@ -60,7 +95,23 @@ class Post:
 
 
 class Note:
-    def __init__(self, data=None, client=None):
+    """Representation of e621's Note object.
+    
+    Args:
+        data (optional): The json server response of a ``/notes.json`` call.
+        client (optional): The yippi client, used for api calls.
+    
+    Attributes:
+        Refer to `e621 API docs`_ for available attributes.
+    
+    .. _e621 API docs:
+        https://e621.net/wiki_pages/2425
+    """
+    def __init__(
+        self,
+        data: dict = None,
+        client: Union['AsyncYippiClient', 'YippiClient'] = None
+    ):
         if data:
             self.id: int = data.get("id", None)
             self.created_at: str = data.get("created_at", None)
@@ -80,12 +131,33 @@ class Note:
     def __repr__(self):
         return "Note(id=%s)" % (self.id)
 
-    def get_post(self):
+    def get_post(self) -> 'Post':
+        """Fetch the post linked with this note.
+        
+        Returns:
+            :class:`yippi.Classes.Post`: The post linked with this note.
+        """
         return self._client.post(self.post_id)
 
 
 class Pool:
-    def __init__(self, data=None, client=None):
+    """Representation of e621's Pool object.
+    
+    Args:
+        data (optional): The json server response of a ``pools.json`` call.
+        client (optional): The yippi client, used for api calls.
+    
+    Attributes:
+        Refer to `e621 API docs`_ for available attributes.
+    
+    .. _e621 API docs:
+        https://e621.net/wiki_pages/2425
+    """
+    def __init__(
+        self,
+        data: dict = None,
+        client: Union['AsyncYippiClient', 'YippiClient'] = None
+    ):
         if data:
             self.id: int = data.get("id", None)
             self.name: str = data.get("name", None)
@@ -104,7 +176,14 @@ class Pool:
     def __repr__(self):
         return "Pool(id=%s, name=%s)" % (self.id, self.name)
 
-    def _register_linked(self, arr):
+    def _register_linked(self, arr : List['Post']):
+        """Register a series of posts to have ``.continue`` and ``.previous`` attribute.
+
+        Useful for those who are lazy to track down index number.
+        
+        Args:
+            arr: Series of posts to register.
+        """
         previous = None
         for current in arr:
             if previous:
@@ -112,12 +191,24 @@ class Pool:
                 current.previous = previous
             previous = current
 
-    async def get_posts_async(self):
+    async def get_posts_async(self) -> List['Post']:
+        """Async representation of :meth:`.get-posts()`
+        
+        Returns:
+            :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
+        """
         result = [await self._client.post(post_id) for post_id in self.post_ids]
         self._register_linked(result)
         return result
 
-    def get_posts(self):
+    def get_posts(self) -> List['Post']:
+        """Fetch all posts linked with this pool.
+
+        If the client is an async client, it will automatically call :meth:`.get_posts_async()`.
+        
+        Returns:
+            :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
+        """
         if inspect.iscoroutinefunction(self._client.post):
             return self.get_posts_async()
 
@@ -127,7 +218,23 @@ class Pool:
 
 
 class Flag:
-    def __init__(self, data=None, client=None):
+    """Representation of e621's Flag object.
+    
+    Args:
+        data (optional): The json server response of a ``post_flags.json`` call.
+        client (optional): The yippi client, used for api calls.
+    
+    Attributes:
+        Refer to `e621 API docs`_ for available attributes.
+    
+    .. _e621 API docs:
+        https://e621.net/wiki_pages/2425
+    """
+    def __init__(
+        self,
+        data: dict = None,
+        client: Union['AsyncYippiClient', 'YippiClient'] = None
+    ):
         if data:
             self.id: int = data.get("id", None)
             self.created_at: str = data.get("created_at", None)
@@ -143,4 +250,9 @@ class Flag:
         return "Flag(id=%s)" % (self.id)
 
     def get_post(self):
+        """Fetch the post linked with this flag.
+        
+        Returns:
+            :class:`yippi.Classes.Post`: The post linked with this flag.
+        """
         return self._client.post(self.post_id)
