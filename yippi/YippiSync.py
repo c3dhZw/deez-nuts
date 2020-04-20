@@ -17,10 +17,10 @@ class YippiClient(AbstractYippi):
         super().__init__(*args, **kwargs)
         self._session = requests.Session()
 
-    def _call_api(self, method, url, **kwargs):
+    def _call_api(self, method, url, data=None, **kwargs):
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string
-        r = self._session.request(method, url, headers=self.headers)
+        r = self._session.request(method, url, data=data, headers=self.headers)
         self._verify_response(r)
         return r.json()
 

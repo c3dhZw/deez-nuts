@@ -34,10 +34,10 @@ class AsyncYippiClient(AbstractYippi):
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
         await self.close()
 
-    async def _call_api(self, method, url, **kwargs):
+    async def _call_api(self, method, url, data=None, **kwargs):
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string
-        r = await self._session.request(method, url, headers=self.headers)
+        r = await self._session.request(method, url, data=data, headers=self.headers)
         await self._verify_response(r)
         return await r.json()
 

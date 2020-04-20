@@ -3,6 +3,9 @@ from copy import deepcopy
 from typing import List
 from typing import Union
 
+from .Constants import BASE_URL
+from .Exceptions import UserError
+
 
 class Post:
     """Representation of e621's Post object.
@@ -95,6 +98,46 @@ class Post:
             output += "-" + " -".join(deleted)
         return output
 
+    def vote(self, score: int = 1, replace: bool = False) -> dict:
+        """Vote the post.
+
+        Args:
+            score (optional): Score to be given, this could be either 1 or -1, with
+            1 represents vote up and -1 represent vote down. Defaults to 1.
+            replace (optional): Replaces old vote or not. Defaults to True.
+
+        Raises:
+            UserError: Raised if
+                - Post does not come from :meth:`~yippi.AbstractMethod.post`
+                    or :meth:`~yippi.AbstractMethod.posts`.
+                - If the value of ``score`` is out of scope.
+                - ``client`` kwargs was not supplied.
+
+        Returns:
+            dict: JSON response with keys ``score``, ``up``, ``down``, and ``our_score``.
+                Where ``dict['our_score']`` is 1, 0, -1 depending on the action.
+        """
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
+        if not self.id:
+            raise UserError("Post does not come from e621 API.")
+
+        if score not in (1, -1):
+            raise UserError("Score must either be 1 or -1.")
+
+        data = {"score": score, "no_unvote": replace}
+        return self._client._call_api(
+            "POST", BASE_URL + f"/{self.id}/votes.json", data=data
+        )
+
+    def update(self):
+        raise NotImplementedError
+
+    @staticmethod
+    def create(cls):
+        raise NotImplementedError
+
 
 class Note:
     """Representation of e621's Note object.
@@ -139,6 +182,38 @@ class Note:
             :class:`yippi.Classes.Post`: The post linked with this note.
         """
         return self._client.post(self.post_id)
+
+    @staticmethod
+    def create(cls):
+        raise NotImplementedError
+
+    def update(self):
+        raise NotImplementedError
+
+    def revert(self, version_id: str) -> dict:
+        """Reverts note to specified version_id
+
+        Args:
+            version_id: Target version to revert.
+
+        Raises:
+            UserError: Raised if
+                - Note does not come from :meth:`~yippi.AbstractMethod.notes`.
+                - ``client`` kwargs was not supplied.
+
+        Returns:
+            dict: JSON status response from API.
+        """
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
+        if not self.id:
+            raise UserError("Post does not come from e621 API.")
+
+        data = {"version_id": version_id}
+        return self._client._call_api(
+            "PUT", BASE_URL + f"/notes/{self.id}/revert.json", data=data
+        )
 
 
 class Pool:
@@ -244,6 +319,38 @@ class Pool:
         self._register_linked(result)
         return result
 
+    @staticmethod
+    def create(cls):
+        raise NotImplementedError
+
+    def update(self):
+        raise NotImplementedError
+
+    def revert(self, version_id: str) -> dict:
+        """Reverts note to specified version_id
+
+        Args:
+            version_id: Target version to revert.
+
+        Raises:
+            UserError: Raised if
+                - Pool does not come from :meth:`~yippi.AbstractMethod.pools`.
+                - ``client`` kwargs was not supplied.
+
+        Returns:
+            dict: JSON status response from API.
+        """
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
+        if not self.id:
+            raise UserError("Post does not come from e621 API.")
+
+        data = {"version_id": version_id}
+        return self._client._call_api(
+            "PUT", BASE_URL + f"/notes/{self.id}/revert.json", data=data
+        )
+
 
 class Flag:
     """Representation of e621's Flag object.
@@ -283,3 +390,7 @@ class Flag:
             :class:`yippi.Classes.Post`: The post linked with this flag.
         """
         return self._client.post(self.post_id)
+
+    @staticmethod
+    def create(self):
+        raise NotImplementedError

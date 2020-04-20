@@ -35,7 +35,7 @@ setup(
     author_email="rendyarya22@gmail.com",
     url="https://github.com/rorre/yippi",
     packages=["yippi"],
-    package_data={'': ['LICENSE']},
+    package_data={"": ["LICENSE"]},
     package_dir={"yippi": "yippi"},
     include_package_data=True,
     zip_safe=False,
@@ -69,11 +69,11 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     python_requires=">=3.6.*",
-    install_requires=[
-        "requests>=2.23.0", "aiohttp>=3.6.2"
-    ],
+    install_requires=["requests>=2.23.0", "aiohttp>=3.6.2"],
     tests_require=[
-        "pytest>=5.4.1", "pytest-recording>=0.7.0", "pytest-asyncio>=0.10.0",
-        "vcrpy>=4.0.2"
+        "pytest>=5.4.1",
+        "pytest-recording>=0.7.0",
+        "pytest-asyncio>=0.10.0",
+        "vcrpy>=4.0.2",
     ],
 )
