@@ -8,7 +8,7 @@ from .Classes import Flag
 from .Classes import Note
 from .Classes import Pool
 from .Classes import Post
-from .Exceptions import UserError
+from .Exceptions import APIError, UserError
 
 
 class YippiClient(AbstractYippi):
@@ -29,11 +29,11 @@ class YippiClient(AbstractYippi):
             if r.status_code >= 400:
                 raise UserError(res["message"])
 
+        elif r.status_code >= 500:
+            raise APIError(r.reason)
+
         if "application/json" not in r.headers.get("Content-Type"):
             raise UserError("Invalid input or server error.")
-
-        elif r.status_code > 500:
-            r.raise_for_status()
 
     def posts(
         self,

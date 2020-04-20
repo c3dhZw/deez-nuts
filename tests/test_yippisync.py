@@ -2,7 +2,7 @@ import pytest
 import vcr
 
 from yippi import YippiClient
-from yippi.Exceptions import UserError
+from yippi.Exceptions import APIError, UserError
 
 
 @pytest.fixture
@@ -173,3 +173,9 @@ def test_pools(client):
     assert set([653514, 653515, 653820]).issubset(pool.post_ids)
     assert pool.creator_name == "Emserdalf"
     assert pool.post_count == 48
+
+@vcr.use_cassette("tests/vcr/server_error.yaml")
+def test_500(client):
+    with pytest.raises(APIError):
+        # We can't simulate e621 error, so we just use external help.
+        client._call_api("GET", "https://httpstat.us/500")

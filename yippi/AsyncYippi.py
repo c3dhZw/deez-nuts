@@ -9,7 +9,7 @@ from .Classes import Flag
 from .Classes import Note
 from .Classes import Pool
 from .Classes import Post
-from .Exceptions import UserError
+from .Exceptions import APIError, UserError
 
 
 class AsyncYippiClient(AbstractYippi):
@@ -46,11 +46,11 @@ class AsyncYippiClient(AbstractYippi):
             if r.status >= 400:
                 raise UserError(res["message"])
 
+        elif r.status > 500:
+            raise APIError(r.reason)
+
         if "application/json" not in r.headers.get("Content-Type"):
             raise UserError("Invalid input or server error.")
-
-        elif r.status > 500:
-            r.raise_for_status()
 
     async def posts(
         self,

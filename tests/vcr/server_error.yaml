@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://httpstat.us/500
+  response:
+    body:
+      string: 500 Internal Server Error
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - Request-Context
+      Cache-Control:
+      - private
+      Content-Length:
+      - '25'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 01:22:37 GMT
+      Request-Context:
+      - appId=cid-v1:7585021b-2db7-4da6-abff-2cf23005f0a9
+      Server:
+      - Microsoft-IIS/10.0
+      Set-Cookie:
+      - ARRAffinity=dc9bb7185987c0d65790987c33534f3a4e8956d9544852ccf290ce45876d7754;Path=/;HttpOnly;Domain=httpstat.us
+      X-AspNet-Version:
+      - 4.0.30319
+      X-AspNetMvc-Version:
+      - '5.1'
+      X-Powered-By:
+      - ASP.NET
+    status:
+      code: 500
+      message: Internal Server Error
+version: 1

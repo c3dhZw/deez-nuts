@@ -1,7 +1,7 @@
 import pytest
 
 from yippi import AsyncYippiClient
-from yippi.Exceptions import UserError
+from yippi.Exceptions import APIError, UserError
 
 
 @pytest.fixture
@@ -10,6 +10,10 @@ async def client():
     yield client
     await client.close()
 
+@pytest.mark.asyncio
+async def test_context():
+    with AsyncYippiClient("Yippi", "0.1", "Error-") as client:
+        pass
 
 # @vcr.use_cassette('tests/vcr/post_1383235.yaml', decode_compressed_response=True)
 @pytest.mark.asyncio
@@ -181,3 +185,9 @@ async def test_pools(client):
     assert set([653514, 653515, 653820]).issubset(pool.post_ids)
     assert pool.creator_name == "Emserdalf"
     assert pool.post_count == 48
+
+@pytest.mark.asyncio
+async def test_500(client):
+    # We can't simulate e621 error, so we just use external help.
+    with pytest.raises(APIError):
+        await client._call_api("GET", "https://httpstat.us/500")
