@@ -2,6 +2,7 @@ include *.in
 include *.rst
 include *.txt
 include tox.ini
+include pyproject.toml
 recursive-include tests *.py
 recursive-include tests *.yaml
 
