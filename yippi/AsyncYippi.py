@@ -23,7 +23,7 @@ class AsyncYippiClient(AbstractYippi):
     ):
         super().__init__(*args, **kwargs)
         self._loop = loop if loop else asyncio.get_event_loop()
-        self._session = session if session else aiohttp.ClientSession(loop=loop)
+        self._session = session if session else aiohttp.ClientSession(loop=self._loop)
 
     async def close(self) -> None:
         await self._session.close()
