@@ -1,0 +1,84 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/pools.json?search%5Bname_matches%5D=Critical+Success
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA0yTzY7bNhCAX2XAXmkvSfFnJKAogmSPOWV7SgKDK40tIpIokNS6alFgH6N5vX2S
+        QpbT5kB8HPKbAUlwPv/FQscaK0zN2eRHYg17n0IJrR9On5a2pZwZZ20iX6g7+cIapoQ0B2EOUj2J
+        qpGqEfoonDgI3QjBOFvm7mdZiYOQBymfhGuqqlF4tFochNnlW+WYTtspUDhZc9ZRblOYS4gTa9gT
+        pbSCHxL5boVvE13hw8cwXcBDigPNg1/h4keCq8/T2+v3Ape4bZcIzwTk83qExxeaoMTl0lOCRH4I
+        f96U3hfoCXqfN72Qb3vwMNH1ORCUniDFmfIRHvNMbfDDsEI472l3KWR490Jp5XDtI3TUho4y+Alo
+        auMyFUpwDWWr+rxMbQ/xDJcYYYxTLpTylu+h7f3UEvgCHt5e/7nE2EEJI729fj/CUxjpdpm05B6W
+        GeIEYZxTfAmZOriSn+OUj1/Sl2kbfSlzbh4eLsuYou+ObRwf/NoS+VR+6dL19/Vn67ykefATlZuX
+        +zg/hELj0ef5j9+2Weh+xcowzkI++baEF2LN2Q+ZOGt9oUtMK2tYphQo71ZHAxXq/tPmmMspdJk1
+        n62pjNT8BrMBleBSa+lQ3WnvdHfWO2vJrUPxQ6sVt3WFVnInRK00d6KqleFOoNaSO6l0hdwpqSq7
+        Y4tqLd0O5K7Slay50xKF405bpw13RtxM46Q03FkjtkUnldugjRLcYWVR77DcoZNbVEtjJHe1QVtz
+        FMJJ3LFFiIgcpUGhOCopVcVRWWU0Ry203mCFqHcgRyOlFByNUarmaGq0FUerqwo52hql5eh0jZbj
+        ppqv//fQvX8fx0yp88OZ3V//9hNZo/Hvr/8CAAD//wMA8D8MTfADAAA=
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586d531ce949d372-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 07:59:13 GMT
+      ETag:
+      - W/"2ea3d8cc3c744af62307527008838560"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d1317172646a7ac17ed504e422e626b361587369553; expires=Wed, 20-May-20
+        07:59:13 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - f6a140f8-89ff-456b-94e6-64df4ae5ed2b
+      X-Runtime:
+      - '0.076839'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 02383246100000d372c7abd200000001
+    status:
+      code: 200
+      message: OK
+version: 1

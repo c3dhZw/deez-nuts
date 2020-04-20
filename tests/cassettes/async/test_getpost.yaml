@@ -1,0 +1,41 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/posts/1383235.json
+  response:
+    body:
+      string: '{"post":{"id":1383235,"created_at":"2017-11-20T12:23:11.340-05:00","updated_at":"2020-04-17T20:27:20.798-04:00","file":{"width":767,"height":1000,"ext":"png","size":489122,"md5":"539fd6c8c9af7b79693783b995ddf640","url":"https://static1.e621.net/data/53/9f/539fd6c8c9af7b79693783b995ddf640.png"},"preview":{"width":115,"height":150,"url":"https://static1.e621.net/data/preview/53/9f/539fd6c8c9af7b79693783b995ddf640.jpg"},"sample":{"has":false,"height":1000,"width":767,"url":"https://static1.e621.net/data/53/9f/539fd6c8c9af7b79693783b995ddf640.png"},"score":{"up":126,"down":-1,"total":125},"tags":{"general":["5_fingers","anthro","bed","bedding","blanket","clothed","clothing","door","duo","fingers","fur","furniture","lying","male","male/male","on_side","pillow","sleeping","spooning"],"species":["bird_dog","canid","canine","canis","domestic_dog","golden_retriever","hunting_dog","mammal","retriever","wolf"],"character":["daniel_segja","joel_mustard"],"copyright":["patreon"],"artist":["zeta-haru"],"invalid":[],"lore":[],"meta":["comic"]},"locked_tags":[],"change_seq":23384218,"flags":{"pending":false,"flagged":false,"note_locked":false,"status_locked":false,"rating_locked":false,"deleted":false},"rating":"s","fav_count":306,"sources":["https://www.furaffinity.net/view/25500100/","https://furaffinity.net/user/zeta-haru"],"pools":[6527],"relationships":{"parent_id":null,"has_children":false,"has_active_children":false,"children":[]},"approver_id":38571,"uploader_id":269143,"description":"","comment_count":42,"is_favorited":false}}'
+    headers:
+      Access-Control-Allow-Origin: '*'
+      CF-Cache-Status: DYNAMIC
+      CF-RAY: 586d4f769ea0d376-LAX
+      Cache-Control: max-age=0, private, must-revalidate
+      Connection: keep-alive
+      Content-Encoding: gzip
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 20 Apr 2020 07:56:43 GMT
+      Etag: W/"17b12b9787ba4f9b53c7e1f18a698d15"
+      Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy: strict-origin-when-cross-origin
+      Server: cloudflare
+      Set-Cookie: __cfduid=d0e3ff0d3085d67b3fe20caf4bf5f71171587369403; expires=Wed,
+        20-May-20 07:56:43 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security: max-age=0; includeSubDomains
+      Transfer-Encoding: chunked
+      X-Content-Type-Options: nosniff
+      X-Download-Options: noopen
+      X-Frame-Options: deny
+      X-Permitted-Cross-Domain-Policies: none
+      X-Request-Id: d44bb406-1143-46e5-99e3-08413b4441b7
+      X-Runtime: '0.013059'
+      X-XSS-Protection: 1; mode=block
+      cf-request-id: 02382ffe1f0000d3768b123200000001
+    status:
+      code: 200
+      message: OK
+    url: https://e621.net/posts/1383235.json
+version: 1

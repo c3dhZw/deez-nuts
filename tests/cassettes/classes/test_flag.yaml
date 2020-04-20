@@ -1,0 +1,181 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/post_flags.json
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586d560fc80fe79c-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 08:01:14 GMT
+      ETag:
+      - W/"7019629d44f9c9a6321bfa32e189744c"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d410f544f729f5702164a61895d3fa5751587369674; expires=Wed, 20-May-20
+        08:01:14 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 216e3944-078b-49bc-a0e2-a521f3ef04a6
+      X-Runtime:
+      - '0.128603'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 0238341dd80000e79cdd253200000001
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d410f544f729f5702164a61895d3fa5751587369674
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/posts/686168.json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA5RUXa/jKAz9L35O2yRt0hRptH9i3rojRIKTsEuAAdLezuj+95Xz1d6rlWbmCWzM
+        8fEB+yc4GyKwn6AksLIqs7JKoPEoIkouIjDI06zYpeddWn3NU1Zk7FTs07zapSeWppDA6ORrcJ7u
+        0tMuq77mR5ZVLM335eSag1ulkbLdlYw9sKxI0wR6VF0fgeUpWfhGQP+4DhII6gcCK/LzqcwSGGQB
+        DOoqbds8rY9ZfSkq2eRFexLVBRshKzxdzkTJa2DQx+gCOxxCFFE12R7LPNsbjAcpojjU1SFtD78C
+        2xOP9wScx5vC+yv1LH8yz4r097IuOH+YPYjBzbr1IgCLfsSX3NnxmKysqt8lMkP+KY/G+onG6Kjm
+        BKS9G2C7MoFoo9DALu8JRNEFCurQoCfnFUQt7aCM0LwedYeQgDBqEJp3aFQUWomny6FRYTJj7+22
+        IT9GL6Iy3f86eT8OwkACtXIoadVj6Gm1UukHb/WoJAHLkVDx+6gMbtnQYxOVpfstDkLjtuHW8I3L
+        4lrTTnlabwdeY6+M5M4GtcKMzb8oeVBaPyZTa25Qh+XQQwJL9ZR/Iv8h1ez5kEkZbFvieUPeoAnW
+        h1656SCiDw4bhQSmhe/QP6EWeynrZTlstX4oa5b4s4s/gy3VyGs9VbGFTJWtgnoM0QtlJuIB35Zu
+        5lK1LXo0DQGFQWiN/om8Ota3DM6jkDOfec81doQfoqd35rWVjxdzFna2prA7iggJ3ERH/++546+0
+        vxH6rB67Tl9Dbl9kfYpJkWGYMH5g7QXdanrhRRPRA7uSad3Dz21JpvBR0XS9AlUV8EFXlLkJTdOW
+        IvTUULQbMAqKnN91Uq1X3GOAb+8UN32mubWuc2LTIQ/4HVheXspTcTkn0Oql9xyaSTXWCh1wPuhQ
+        rrPD2Ih8xtxCaE6M4bN3efrVO1+XqDFuQe9rFDCY2kbceGNHE4Gd8gSCHX0zC7uOpPv9vnfqTd2m
+        eTTgUKPnSusxxL3r3V+DlfhlQKnG4e8xTfNyPuNKfimyY54fqzMp6azVixwe9fSS1A+zAMKjoRvA
+        8jw/FpcqoeHJm15p6dFsBZJTLC31+ezpuNIjCOe8vRFVCSw7lzR3R6etkJvvdKwy0ic0XrnpazEA
+        +hfDQHQWWbIEVOCtuFmvXnR8/w8AAP//AwCpiR7FjgcAAA==
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586d5635ec7fe79c-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 08:01:20 GMT
+      ETag:
+      - W/"ef56c11fcc191f908fb72a4a35d83c16"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 26cdd5de-fb70-4c18-9076-16271cfe1f32
+      X-Runtime:
+      - '0.017049'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 02383435ae0000e79cdd053200000001
+    status:
+      code: 200
+      message: OK
+version: 1

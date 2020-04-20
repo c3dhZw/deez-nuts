@@ -5,6 +5,11 @@ from yippi.Exceptions import APIError
 from yippi.Exceptions import UserError
 
 
+@pytest.fixture(scope="module")
+def vcr_cassette_dir(request):
+    return "tests/cassettes/async"
+
+
 @pytest.fixture
 async def client():
     client = AsyncYippiClient("Yippi", "0.1", "Error-")
@@ -19,6 +24,7 @@ async def test_context():
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_getpost(client):
     post = await client.post(1383235)
     assert post.id == 1383235
@@ -43,7 +49,7 @@ async def test_getpost(client):
         "width": 767,
         "url": "https://static1.e621.net/data/53/9f/539fd6c8c9af7b79693783b995ddf640.png",
     }
-    assert post.score == {"up": 5, "down": 0, "total": 125}
+    assert post.score == {"up": 126, "down": -1, "total": 125}
     assert post.tags == {
         "general": [
             "5_fingers",
@@ -116,12 +122,14 @@ async def test_getpost(client):
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_404(client):
     with pytest.raises(UserError):
         await client.post(99999999999)
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_post_search(client):
     assert await client.posts("m/m")
     assert await client.posts(["m/m", "rating:s"])
@@ -130,12 +138,14 @@ async def test_post_search(client):
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_post_search_error(client):
     with pytest.raises(UserError):
         await client.posts("m/m", page=1000)
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_note(client):
     note = (await client.notes(post_id=2222254, creator_id=366315, limit=1))[0]
     assert note.id == 257037
@@ -154,6 +164,7 @@ async def test_note(client):
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_flags(client):
     flag = (await client.flags(post_id=2213076, limit=1))[-1]
     assert flag.id == 368383
@@ -167,6 +178,7 @@ async def test_flags(client):
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_pools(client):
     pool = (await client.pools("Critical Success"))[0]
     assert pool.id == 6059
@@ -184,6 +196,7 @@ async def test_pools(client):
 
 
 @pytest.mark.asyncio
+@pytest.mark.vcr()
 async def test_500(client):
     # We can't simulate e621 error, so we just use external help.
     with pytest.raises(APIError):

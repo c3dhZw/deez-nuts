@@ -1,9 +1,13 @@
 import pytest
-import vcr
 
 from yippi import YippiClient
 from yippi.Exceptions import APIError
 from yippi.Exceptions import UserError
+
+
+@pytest.fixture(scope="module")
+def vcr_cassette_dir(request):
+    return "tests/cassettes/sync"
 
 
 @pytest.fixture
@@ -11,7 +15,7 @@ def client():
     return YippiClient("Yippi", "0.1", "Error-")
 
 
-@vcr.use_cassette("tests/vcr/post_1383235.yaml", decode_compressed_response=True)
+@pytest.mark.vcr()
 def test_getpost(client):
     post = client.post(1383235)
     assert post.id == 1383235
@@ -36,7 +40,7 @@ def test_getpost(client):
         "width": 767,
         "url": "https://static1.e621.net/data/53/9f/539fd6c8c9af7b79693783b995ddf640.png",
     }
-    assert post.score == {"up": 5, "down": 0, "total": 125}
+    assert post.score == {"up": 126, "down": -1, "total": 125}
     assert post.tags == {
         "general": [
             "5_fingers",
@@ -108,13 +112,13 @@ def test_getpost(client):
     assert not post.is_favorited
 
 
-@vcr.use_cassette("tests/vcr/404.yaml", decode_compressed_response=True)
+@pytest.mark.vcr()
 def test_404(client):
     with pytest.raises(UserError):
         client.post(99999999999)
 
 
-@vcr.use_cassette("tests/vcr/search.yaml", decode_compressed_response=True)
+@pytest.mark.vcr()
 def test_post_search(client):
     assert client.posts("m/m")
     assert client.posts(["m/m", "rating:s"])
@@ -122,15 +126,15 @@ def test_post_search(client):
     assert client.posts("m/m", page=1)
 
 
-@vcr.use_cassette("tests/vcr/search_error.yaml", decode_compressed_response=True)
+@pytest.mark.vcr()
 def test_post_search_error(client):
     with pytest.raises(UserError):
         client.posts("m/m", page=1000)
 
 
-@vcr.use_cassette("tests/vcr/notes.yaml", decode_compressed_response=True)
+@pytest.mark.vcr()
 def test_note(client):
-    note = client.notes(limit=1)[0]
+    note = client.notes(post_id=2222254, creator_id=366315, limit=1)[0]
     assert note.id == 257037
     assert note.created_at == "2020-04-19T02:58:56.716-04:00"
     assert note.updated_at == "2020-04-19T02:58:56.716-04:00"
@@ -146,9 +150,9 @@ def test_note(client):
     assert note.creator_name == "Mutter"
 
 
-@vcr.use_cassette("tests/vcr/flags.yaml", decode_compressed_response=True)
+@pytest.mark.vcr()
 def test_flags(client):
-    flag = client.flags(limit=1)[0]
+    flag = client.flags(post_id=2213076, limit=1)[-1]
     assert flag.id == 368383
     assert flag.created_at == "2020-04-19T02:50:38.030-04:00"
     assert flag.post_id == 2213076
@@ -159,7 +163,7 @@ def test_flags(client):
     assert flag.category == "normal"
 
 
-@vcr.use_cassette("tests/vcr/pools.yaml", decode_compressed_response=True)
+@pytest.mark.vcr()
 def test_pools(client):
     pool = client.pools("Critical Success")[0]
     assert pool.id == 6059
@@ -176,7 +180,7 @@ def test_pools(client):
     assert pool.post_count == 48
 
 
-@vcr.use_cassette("tests/vcr/server_error.yaml")
+@pytest.mark.vcr()
 def test_500(client):
     with pytest.raises(APIError):
         # We can't simulate e621 error, so we just use external help.

@@ -1,0 +1,161 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/notes.json?limit=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4yOTYoCMRSEzzK1fi3pdH7MO4AncDcMTTTRDoxG0mlnRATv4A09iSgMzFJq8y2K
+        r+rzjBTAUlthHWFdoq8x9L6CIYUUjVBN65ZSsnKszEx080YoFgKE6RDeL7/MufTPNaWVMZrwC9ZG
+        EU5gZS3hJ4U6gGXbEYaYtkMF65ZwjGVMeQ+WhDT2fl3TMYJrmSLhkMf6srbOOWM7wiqHExiLafDP
+        3K+3j38H9n4Xwdj6sknxO2xK3v0xLl8PAAAA//8DAMWT9lcQAQAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586d55937d3be7d1-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 08:00:54 GMT
+      ETag:
+      - W/"85b2d071ec8ea54ebd025b94c33e814a"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d7fc889ab94d488043f7f44539923289d1587369654; expires=Wed, 20-May-20
+        08:00:54 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 243ff3af-3f83-4026-9ff5-339251d6311d
+      X-Runtime:
+      - '0.012265'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 023833d0270000e7d1048f1200000001
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d7fc889ab94d488043f7f44539923289d1587369654
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/posts/1999673.json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6xVyY7jNhD9lzrLNiVvEm8DzJxzGQQIGg2iTJUktrkoJGWnZ9D/HpRkdzudQxIg
+        F7E2Fx8fX9E/YQwpg/wJpgVZNk1zOG4L0JEwU6swg4RKlM1KNKuq/C6OUhzlXqwb0azETgoBBUxj
+        +1hciZXYrcrme1XJXSP3u3WzK9+LO2OJt7uaNg8gayEKGMj0QwZZiv2uAPqD+7yMPRSQzA8CWe6a
+        Y10V4No9SKg1nup62+i6PmFNompa0da12Ivtrjsd9owoWpAw5DwmudmkjNnock2Hqlx7ypsWM25q
+        vcHT5p+arRnHWwFjpIuh6wPystw+IN+Lf7frrc9/3D2hGxfaBkwgO7SJPtP2SOj/f/6kQ5wBTCPI
+        QwFtuHqQooAcMlqQh7cCMvaJS3ryFDn4BHvVGd9TTFDAyaI+qwFNnJ0pDbyGnIO7Es7BcOVvDFev
+        6JX4R9ridVlDHqi9W8azOnQMKbHwoptrpkyqQ9+z05FDS7PBWG6r+TH3+ADVTXH5Kh2snVH0kV7V
+        KbSvd3upmc0b+vsyOfTBtKoLeuJuxnuKijCqzk5dBwVY6m+HsyGcje8VZsUKII454006m5ihgDCS
+        Vy5MmWlJwxJMQ4j5vuu9MuWguVWa7WhGalVGY99dTmQeI76e8bZ/nroMzwWkkbShxLeD3ji06n6M
+        hxMxNnRuJm4xHqvGGPRr8H+1Hwsiah2C/7A+ks8F6AEj6kxxxhDRrBL6ORHG17ho+gnO5IIPqouG
+        fJs4jTGbNOcoBoeOOGj8BS2/XU/PzDGLlC1HGbmyEuURCnjBET0lUjdakuk95imyQHJEnyy/YPD8
+        xj30eSaUxfy0wPU9qUS/g6wOzaHaH8oCOntT+0i+ZTnep5ITPbXvvg+Z1NL0PcYTOaXP0YiZBfIp
+        2pKl/O6/3ctAwqxfvCgdJs/PQFVAClPUy+Xep388pXW+GtevdXAbR63Bzdcvq+3LL/Trb1++ffvq
+        PA+5DNH0TOgYguUGZb2tj88FRLKYTfBpMONyYIzks2LO/WQtT0NSejC2jeQ/HidMCnU2F/p77iPw
+        xIzjOMZwoTi3rOpG7Br+U7EB21twexSi2TEXSUczMhyQwCMfnGMwNwpEASapDi8hmgfO3v4EAAD/
+        /wMACmGubuYGAAA=
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586d55979a6ee7d1-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 08:00:55 GMT
+      ETag:
+      - W/"52c2c72fdf611d2e1a6abfad2ce80db0"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 250db856-f7f0-4448-a813-ef9f20abec6d
+      X-Runtime:
+      - '0.013406'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 023833d2bc0000e7d104925200000001
+    status:
+      code: 200
+      message: OK
+version: 1

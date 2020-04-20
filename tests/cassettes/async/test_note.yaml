@@ -1,0 +1,41 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/notes.json?search%5Bpost_id%5D=2222254&search%5Bcreator_id%5D=366315&limit=1
+  response:
+    body:
+      string: '[{"id":257037,"created_at":"2020-04-19T02:58:56.716-04:00","updated_at":"2020-04-19T02:58:56.716-04:00","creator_id":366315,"x":774,"y":136,"width":36,"height":50,"version":2,"is_active":true,"post_id":2222254,"body":"Chu~","creator_name":"Mutter"}]'
+    headers:
+      Access-Control-Allow-Origin: '*'
+      CF-Cache-Status: DYNAMIC
+      CF-RAY: 586d56834e42d366-LAX
+      Cache-Control: max-age=0, private, must-revalidate
+      Connection: keep-alive
+      Content-Encoding: gzip
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 20 Apr 2020 08:01:32 GMT
+      Etag: W/"b83e2b86bf3bcedd7ab4d3b47576e6ec"
+      Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy: strict-origin-when-cross-origin
+      Server: cloudflare
+      Set-Cookie: __cfduid=dbbf9bdaf10f322bede2d382ba60f14c31587369692; expires=Wed,
+        20-May-20 08:01:32 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security: max-age=0; includeSubDomains
+      Transfer-Encoding: chunked
+      X-Content-Type-Options: nosniff
+      X-Download-Options: noopen
+      X-Frame-Options: deny
+      X-Permitted-Cross-Domain-Policies: none
+      X-Request-Id: e7b1d63b-fff7-480b-b2e0-f92b4c89f2e0
+      X-Runtime: '0.037958'
+      X-XSS-Protection: 1; mode=block
+      cf-request-id: 023834660e0000d3668fbf4200000001
+    status:
+      code: 200
+      message: OK
+    url: https://e621.net/notes.json?search%5Bpost_id%5D=2222254&search%5Bcreator_id%5D=366315&limit=1
+version: 1
