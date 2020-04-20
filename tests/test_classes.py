@@ -1,4 +1,6 @@
+import aiohttp
 import pytest
+import requests
 
 from yippi import AsyncYippiClient
 from yippi import YippiClient
@@ -11,14 +13,16 @@ def vcr_cassette_dir(request):
 
 @pytest.fixture
 def client():
-    return YippiClient("Yippi", "0.1", "Error-")
+    session = requests.Session()
+    return YippiClient("Yippi", "0.1", "Error-", session)
 
 
 @pytest.fixture
 async def async_client():
-    async_client = AsyncYippiClient("Yippi", "0.1", "Error-")
-    yield async_client
-    await async_client.close()
+    async with aiohttp.ClientSession() as session:
+        async_client = AsyncYippiClient("Yippi", "0.1", "Error-", session)
+        yield async_client
+        await async_client.close()
 
 
 @pytest.mark.vcr()

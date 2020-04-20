@@ -1,8 +1,6 @@
 from typing import List
 from typing import Union
 
-import requests
-
 from .AbstractYippi import AbstractYippi
 from .Classes import Flag
 from .Classes import Note
@@ -13,10 +11,6 @@ from .Exceptions import UserError
 
 
 class YippiClient(AbstractYippi):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._session = requests.Session()
-
     def _call_api(self, method, url, data=None, **kwargs):
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string

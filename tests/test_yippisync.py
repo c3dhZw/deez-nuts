@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from yippi import YippiClient
 from yippi.Exceptions import APIError
@@ -12,7 +13,8 @@ def vcr_cassette_dir(request):
 
 @pytest.fixture
 def client():
-    return YippiClient("Yippi", "0.1", "Error-")
+    session = requests.Session()
+    return YippiClient("Yippi", "0.1", "Error-", session)
 
 
 @pytest.mark.vcr()

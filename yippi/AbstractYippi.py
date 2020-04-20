@@ -29,16 +29,27 @@ class AbstractYippi(ABC):
         project_name: Your project's name where this library is going to be used.
         version: You project's version number.
         creator: Your e621 username.
+        session: The HTTP client session object.
+        loop: The event loop to run on. This is only required on async client.
 
     """
 
     VALID_CATEGORY = ("series", "collection")
     VALID_ORDER = ("name", "created_at", "updated_at", "post_count")
 
-    def __init__(self, project_name: str, version: str, creator: str):
+    def __init__(
+        self,
+        project_name: str,
+        version: str,
+        creator: str,
+        session: Union[aiohttp.ClientSession, requests.Session],
+        loop=None,
+    ):
         self.headers = {
             "User-Agent": f"{project_name}/f{version} (by {creator} on e621)"
         }
+        self._loop = loop
+        self._session = session
 
     @abstractmethod
     def _call_api(

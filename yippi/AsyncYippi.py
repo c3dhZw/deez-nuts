@@ -1,8 +1,6 @@
-import asyncio
+
 from typing import List
 from typing import Union
-
-import aiohttp
 
 from .AbstractYippi import AbstractYippi
 from .Classes import Flag
@@ -14,17 +12,6 @@ from .Exceptions import UserError
 
 
 class AsyncYippiClient(AbstractYippi):
-    def __init__(
-        self,
-        *args,
-        session: aiohttp.ClientSession = None,
-        loop: asyncio.AbstractEventLoop = None,
-        **kwargs
-    ):
-        super().__init__(*args, **kwargs)
-        self._loop = loop if loop else asyncio.get_event_loop()
-        self._session = session if session else aiohttp.ClientSession(loop=self._loop)
-
     async def close(self) -> None:
         await self._session.close()
 
