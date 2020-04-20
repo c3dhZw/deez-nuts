@@ -2,7 +2,8 @@ import pytest
 import vcr
 
 from yippi import YippiClient
-from yippi.Exceptions import APIError, UserError
+from yippi.Exceptions import APIError
+from yippi.Exceptions import UserError
 
 
 @pytest.fixture
@@ -173,6 +174,7 @@ def test_pools(client):
     assert set([653514, 653515, 653820]).issubset(pool.post_ids)
     assert pool.creator_name == "Emserdalf"
     assert pool.post_count == 48
+
 
 @vcr.use_cassette("tests/vcr/server_error.yaml")
 def test_500(client):

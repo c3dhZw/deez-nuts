@@ -1,24 +1,25 @@
 import inspect
 from copy import deepcopy
-from typing import List, Union
+from typing import List
+from typing import Union
+
 
 class Post:
     """Representation of e621's Post object.
-    
+
     Args:
         data (optional): The json server response of a ``/posts.json`` call.
         client (optional): The yippi client, used for api calls.
-    
+
     Attributes:
         Refer to `e621 API docs`_ for available attributes.
-    
+
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
     """
+
     def __init__(
-        self,
-        data: dict = None,
-        client: Union['AsyncYippiClient', 'YippiClient'] = None
+        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
     ):
         if data:
             self._original_data = deepcopy(data)
@@ -54,11 +55,11 @@ class Post:
         Args:
             this: List to check from
             that: Base list to check.
-        
+
         Returns:
             :obj:`list` of :obj:`str`: List of strings that exists in ``this``, but not in ``that``.
         """
-        
+
         result = []
         for e in this:
             if e not in that:
@@ -71,7 +72,7 @@ class Post:
         The e621 format is all the new tags, with removed tags is prepended with a ``-`` sign.
 
         For example: ``dog -cat`` adds dog and removes cat.
-        
+
         Returns:
             str: e621 formatted difference string.
         """
@@ -97,21 +98,20 @@ class Post:
 
 class Note:
     """Representation of e621's Note object.
-    
+
     Args:
         data (optional): The json server response of a ``/notes.json`` call.
         client (optional): The yippi client, used for api calls.
-    
+
     Attributes:
         Refer to `e621 API docs`_ for available attributes.
-    
+
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
     """
+
     def __init__(
-        self,
-        data: dict = None,
-        client: Union['AsyncYippiClient', 'YippiClient'] = None
+        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
     ):
         if data:
             self.id: int = data.get("id", None)
@@ -132,9 +132,9 @@ class Note:
     def __repr__(self):
         return "Note(id=%s)" % (self.id)
 
-    def get_post(self) -> 'Post':
+    def get_post(self) -> "Post":
         """Fetch the post linked with this note.
-        
+
         Returns:
             :class:`yippi.Classes.Post`: The post linked with this note.
         """
@@ -143,21 +143,20 @@ class Note:
 
 class Pool:
     """Representation of e621's Pool object.
-    
+
     Args:
         data (optional): The json server response of a ``pools.json`` call.
         client (optional): The yippi client, used for api calls.
-    
+
     Attributes:
         Refer to `e621 API docs`_ for available attributes.
-    
+
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
     """
+
     def __init__(
-        self,
-        data: dict = None,
-        client: Union['AsyncYippiClient', 'YippiClient'] = None
+        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
     ):
         if data:
             self.id: int = data.get("id", None)
@@ -177,12 +176,12 @@ class Pool:
     def __repr__(self):
         return "Pool(id=%s, name=%s)" % (self.id, self.name)
 
-    def _sort_posts(self, arr : List['Post']):
+    def _sort_posts(self, arr: List["Post"]):
         """Sort a list of post based on page numbering.
 
         The way it works is to sort it based on what has been provided on ``.post_ids``.
         Thus it will sort based on page number instead of e621's liking.
-        
+
         Args:
             arr: List of post to be sorted.
         """
@@ -191,11 +190,11 @@ class Pool:
             sorted_array.append(next(p for p in arr if p.id == post_id))
         return sorted_array
 
-    def _register_linked(self, arr : List['Post']):
+    def _register_linked(self, arr: List["Post"]):
         """Register a series of posts to have ``.continue`` and ``.previous`` attribute.
 
         Useful for those who are lazy to track down index number.
-        
+
         Args:
             arr: Series of posts to register.
         """
@@ -206,27 +205,29 @@ class Pool:
                 current.previous = previous
             previous = current
 
-    async def get_posts_async(self) -> List['Post']:
+    async def get_posts_async(self) -> List["Post"]:
         """Async representation of :meth:`.get-posts()`
-        
+
         Returns:
             :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
         """
         result = []
         current_page = 1
         while len(result) < len(self.post_ids):
-            result.extend(await self._client.posts("pool:" + str(self.id), page=current_page))
+            result.extend(
+                await self._client.posts("pool:" + str(self.id), page=current_page)
+            )
             current_page += 1
-        
+
         result = self._sort_posts(result)
         self._register_linked(result)
         return result
 
-    def get_posts(self) -> List['Post']:
+    def get_posts(self) -> List["Post"]:
         """Fetch all posts linked with this pool.
 
         If the client is an async client, it will automatically call :meth:`.get_posts_async()`.
-        
+
         Returns:
             :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
         """
@@ -238,7 +239,7 @@ class Pool:
         while len(result) < len(self.post_ids):
             result.extend(self._client.posts("pool:" + str(self.id), page=current_page))
             current_page += 1
-        
+
         result = self._sort_posts(result)
         self._register_linked(result)
         return result
@@ -246,21 +247,20 @@ class Pool:
 
 class Flag:
     """Representation of e621's Flag object.
-    
+
     Args:
         data (optional): The json server response of a ``post_flags.json`` call.
         client (optional): The yippi client, used for api calls.
-    
+
     Attributes:
         Refer to `e621 API docs`_ for available attributes.
-    
+
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
     """
+
     def __init__(
-        self,
-        data: dict = None,
-        client: Union['AsyncYippiClient', 'YippiClient'] = None
+        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
     ):
         if data:
             self.id: int = data.get("id", None)
@@ -278,7 +278,7 @@ class Flag:
 
     def get_post(self):
         """Fetch the post linked with this flag.
-        
+
         Returns:
             :class:`yippi.Classes.Post`: The post linked with this flag.
         """

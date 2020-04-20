@@ -71,7 +71,7 @@ setup(
     install_requires=[
         "requests>=2.23.0", "aiohttp>=3.6.2"
     ],
-    test_require=[
+    tests_require=[
         "pytest>=5.4.1", "pytest-recording>=0.7.0", "pytest-asyncio>=0.10.0",
         "vcrpy>=4.0.2"
     ],

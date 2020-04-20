@@ -1,7 +1,8 @@
 import pytest
 
 from yippi import AsyncYippiClient
-from yippi.Exceptions import APIError, UserError
+from yippi.Exceptions import APIError
+from yippi.Exceptions import UserError
 
 
 @pytest.fixture
@@ -10,10 +11,12 @@ async def client():
     yield client
     await client.close()
 
+
 @pytest.mark.asyncio
 async def test_context():
-    async with AsyncYippiClient("Yippi", "0.1", "Error-") as client:
+    async with AsyncYippiClient("Yippi", "0.1", "Error-"):
         pass
+
 
 @pytest.mark.asyncio
 async def test_getpost(client):
@@ -178,6 +181,7 @@ async def test_pools(client):
     assert set([653514, 653515, 653820]).issubset(pool.post_ids)
     assert pool.creator_name == "Emserdalf"
     assert pool.post_count == 48
+
 
 @pytest.mark.asyncio
 async def test_500(client):

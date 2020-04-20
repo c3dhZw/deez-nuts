@@ -8,7 +8,8 @@ from .Classes import Flag
 from .Classes import Note
 from .Classes import Pool
 from .Classes import Post
-from .Exceptions import APIError, UserError
+from .Exceptions import APIError
+from .Exceptions import UserError
 
 
 class YippiClient(AbstractYippi):
