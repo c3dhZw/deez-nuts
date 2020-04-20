@@ -1,0 +1,142 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/notes.json?limit=1
+  response:
+    body:
+      string: '[{"id":257077,"created_at":"2020-04-19T21:28:27.432-04:00","updated_at":"2020-04-19T21:28:27.432-04:00","creator_id":370049,"x":1045,"y":1137,"width":184,"height":217,"version":2,"is_active":true,"post_id":2223224,"body":"Tastes
+        like orange!!!","creator_name":"yeoldenut"}]'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586b83f4dc1ce809-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 02:43:02 GMT
+      ETag:
+      - W/"6424d890d13e9402101c48352daebc2d"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=db3054e251ceae68333c973f09a80be2b1587350582; expires=Wed, 20-May-20
+        02:43:02 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 959cfb4f-8312-43e4-8c3c-230cd1f9f39e
+      X-Runtime:
+      - '0.043543'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 023710cd060000e809fe09b200000001
+      content-length:
+      - '273'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=db3054e251ceae68333c973f09a80be2b1587350582
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/posts/2223224.json
+  response:
+    body:
+      string: '{"post":{"id":2223224,"created_at":"2020-04-19T21:27:05.653-04:00","updated_at":"2020-04-19T22:39:29.510-04:00","file":{"width":1240,"height":1754,"ext":"jpg","size":777224,"md5":"247a16dec207dc0b5f9fb12c08561777","url":"https://static1.e621.net/data/24/7a/247a16dec207dc0b5f9fb12c08561777.jpg"},"preview":{"width":106,"height":150,"url":"https://static1.e621.net/data/preview/24/7a/247a16dec207dc0b5f9fb12c08561777.jpg"},"sample":{"has":true,"height":1202,"width":850,"url":"https://static1.e621.net/data/sample/24/7a/247a16dec207dc0b5f9fb12c08561777.jpg"},"score":{"up":0,"down":0,"total":0},"tags":{"general":["4_fingers","4_toes","anthro","apron","apron_only","barefoot","beverage","black_nose","blue_eyes","blush","bodily_fluids","bow_tie","brown_body","brown_fur","brown_stripes","chest_tuft","clothing","cum","cum_in_a_cup","cum_stain","duo","erection","eyebrows","faceless_male","fingers","fur","genital_fluids","genitals","glass","hair","holding_object","holding_penis","male","masturbation","mostly_nude","multicolored_body","multicolored_fur","nipples","open_mouth","penile","penile_masturbation","penis","shirt","shirt_cuffs","simple_background","smile","solo_focus","stripes","t-shirt","tan_body","tan_fur","toes","topwear","tuft","waiter","white_background"],"species":["domestic_cat","felid","feline","felis","mammal"],"character":["hkl"],"copyright":[],"artist":["hkl9917462"],"invalid":[],"lore":[],"meta":["2019","censored","digital_media_(artwork)","hi_res"]},"locked_tags":[],"change_seq":26960284,"flags":{"pending":true,"flagged":false,"note_locked":false,"status_locked":false,"rating_locked":false,"deleted":false},"rating":"e","fav_count":8,"sources":["https://www.pixiv.net/en/artworks/72804087","https://twitter.com/HKL9917462/status/1087643114502709248","https://pbs.twimg.com/media/DxgVnaQU8AA3O39?format=jpg\u0026name=orig","https://i.pximg.net/img-original/img/2019/01/23/17/49/26/72804087_p0.jpg","https://www.pixiv.net/member_illust.php?mode=medium\u0026illust_id=72804087"],"pools":[],"relationships":{"parent_id":null,"has_children":false,"has_active_children":false,"children":[]},"approver_id":null,"uploader_id":370049,"description":"","comment_count":0,"is_favorited":false}}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586b83f73ae7e809-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 02:43:03 GMT
+      ETag:
+      - W/"7bef6a2d4b64eb139bfef6b618b64fe4"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - f83428af-b1b3-4f04-8721-21d012d27b55
+      X-Runtime:
+      - '0.013346'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 023710ce840000e809fe0ba200000001
+      content-length:
+      - '2214'
+    status:
+      code: 200
+      message: OK
+version: 1

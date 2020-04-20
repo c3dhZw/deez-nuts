@@ -12,7 +12,7 @@ async def client():
 
 @pytest.mark.asyncio
 async def test_context():
-    with AsyncYippiClient("Yippi", "0.1", "Error-") as client:
+    async with AsyncYippiClient("Yippi", "0.1", "Error-") as client:
         pass
 
 # @vcr.use_cassette('tests/vcr/post_1383235.yaml', decode_compressed_response=True)

@@ -1,0 +1,219 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/post_flags.json
+  response:
+    body:
+      string: '[{"id":368517,"created_at":"2020-04-19T22:42:29.601-04:00","post_id":2202625,"reason":"Inferior
+        version/duplicate of post #2223324","is_resolved":false,"updated_at":"2020-04-19T22:42:29.601-04:00","is_deletion":false,"category":"normal"},{"id":368516,"created_at":"2020-04-19T22:35:52.984-04:00","post_id":432582,"reason":"Inferior
+        version/duplicate of post #2223314","is_resolved":false,"updated_at":"2020-04-19T22:35:52.984-04:00","is_deletion":false,"category":"normal"},{"id":368515,"created_at":"2020-04-19T22:00:32.919-04:00","post_id":1712459,"reason":"Inferior
+        version/duplicate of post #2223228","creator_id":95927,"is_resolved":false,"updated_at":"2020-04-19T22:00:32.919-04:00","is_deletion":true,"category":"normal"},{"id":368514,"created_at":"2020-04-19T21:37:52.941-04:00","post_id":2223226,"reason":"Uploader
+        requested removal within 48 hours (Reason: I had. not completely cleaned it
+        up. I will be uploading a properly cleaned version)","is_resolved":false,"updated_at":"2020-04-19T21:37:52.941-04:00","is_deletion":false,"category":"normal"},{"id":368513,"created_at":"2020-04-19T21:31:02.555-04:00","post_id":1712459,"reason":"Inferior
+        version/duplicate of post #2223228","is_resolved":false,"updated_at":"2020-04-19T21:31:02.555-04:00","is_deletion":false,"category":"normal"},{"id":368512,"created_at":"2020-04-19T21:29:24.124-04:00","post_id":1791341,"reason":"Inferior
+        version/duplicate of post #2223227","is_resolved":false,"updated_at":"2020-04-19T21:29:24.124-04:00","is_deletion":false,"category":"normal"},{"id":368511,"created_at":"2020-04-19T21:28:35.747-04:00","post_id":1796561,"reason":"Inferior
+        version/duplicate of post #2223224","is_resolved":false,"updated_at":"2020-04-19T21:28:35.747-04:00","is_deletion":false,"category":"normal"},{"id":368510,"created_at":"2020-04-19T21:22:32.020-04:00","post_id":1960063,"reason":"Inferior
+        version/duplicate of post #2223217","is_resolved":false,"updated_at":"2020-04-19T21:22:32.020-04:00","is_deletion":false,"category":"normal"},{"id":368509,"created_at":"2020-04-19T21:22:31.731-04:00","post_id":2223064,"reason":"Does
+        not meet minimum quality standards. (Bad digitization of traditional media)","creator_id":169756,"is_resolved":false,"updated_at":"2020-04-19T21:22:31.731-04:00","is_deletion":true,"category":"normal"},{"id":368508,"created_at":"2020-04-19T21:21:17.651-04:00","post_id":2024734,"reason":"Inferior
+        version/duplicate of post #2223215","is_resolved":false,"updated_at":"2020-04-19T21:21:17.651-04:00","is_deletion":false,"category":"normal"},{"id":368507,"created_at":"2020-04-19T21:19:57.279-04:00","post_id":2074679,"reason":"Inferior
+        version/duplicate of post #2223213","is_resolved":false,"updated_at":"2020-04-19T21:19:57.279-04:00","is_deletion":false,"category":"normal"},{"id":368506,"created_at":"2020-04-19T21:15:52.797-04:00","post_id":2102902,"reason":"Inferior
+        version/duplicate of post #2223209","is_resolved":false,"updated_at":"2020-04-19T21:15:52.797-04:00","is_deletion":false,"category":"normal"},{"id":368505,"created_at":"2020-04-19T21:14:49.938-04:00","post_id":2129352,"reason":"Inferior
+        version/duplicate of post #2223207","is_resolved":false,"updated_at":"2020-04-19T21:14:49.938-04:00","is_deletion":false,"category":"normal"},{"id":368504,"created_at":"2020-04-19T21:12:48.962-04:00","post_id":2140871,"reason":"Inferior
+        version/duplicate of post #2223203","is_resolved":false,"updated_at":"2020-04-19T21:12:48.962-04:00","is_deletion":false,"category":"normal"},{"id":368503,"created_at":"2020-04-19T21:11:18.324-04:00","post_id":87441,"reason":"The
+        artist of this post is on the [[avoid_posting|avoid posting list]]","is_resolved":false,"updated_at":"2020-04-19T21:11:18.324-04:00","is_deletion":false,"category":"normal"},{"id":368502,"created_at":"2020-04-19T21:10:26.212-04:00","post_id":2165411,"reason":"Inferior
+        version/duplicate of post #2223202","is_resolved":false,"updated_at":"2020-04-19T21:10:26.212-04:00","is_deletion":false,"category":"normal"},{"id":368501,"created_at":"2020-04-19T20:21:11.475-04:00","post_id":2216683,"reason":"Does
+        not meet minimum quality standards. (Artistic)","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T20:21:11.475-04:00","is_deletion":true,"category":"normal"},{"id":368500,"created_at":"2020-04-19T19:33:27.283-04:00","post_id":2216178,"reason":"Screencap.
+        (Second life)","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T19:33:27.283-04:00","is_deletion":true,"category":"normal"},{"id":368499,"created_at":"2020-04-19T18:52:00.501-04:00","post_id":2223044,"reason":"Inferior
+        version/duplicate of post #2223042","is_resolved":false,"updated_at":"2020-04-19T18:52:00.501-04:00","is_deletion":false,"category":"normal"},{"id":368498,"created_at":"2020-04-19T18:39:31.409-04:00","post_id":2222936,"reason":"Inferior
+        version/duplicate of post #2222937","is_resolved":false,"updated_at":"2020-04-19T18:39:31.409-04:00","is_deletion":false,"category":"normal"},{"id":368497,"created_at":"2020-04-19T18:33:11.903-04:00","post_id":2222743,"reason":"Inferior
+        version of post #2223028.","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T18:33:11.903-04:00","is_deletion":true,"category":"normal"},{"id":368496,"created_at":"2020-04-19T18:33:08.767-04:00","post_id":2222749,"reason":"Inferior
+        version of post #2223028.","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T18:33:08.767-04:00","is_deletion":true,"category":"normal"},{"id":368495,"created_at":"2020-04-19T18:31:35.738-04:00","post_id":2222986,"reason":"Real
+        Photo","creator_id":169756,"is_resolved":false,"updated_at":"2020-04-19T18:31:35.738-04:00","is_deletion":true,"category":"normal"},{"id":368494,"created_at":"2020-04-19T18:09:11.954-04:00","post_id":2222937,"reason":"Inferior
+        version/duplicate of post #2222936","is_resolved":false,"updated_at":"2020-04-19T18:09:11.954-04:00","is_deletion":false,"category":"normal"},{"id":368493,"created_at":"2020-04-19T18:03:12.222-04:00","post_id":2222738,"reason":"Inferior
+        version/duplicate of post #2221338","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T18:03:12.222-04:00","is_deletion":true,"category":"normal"},{"id":368492,"created_at":"2020-04-19T18:02:39.877-04:00","post_id":2222692,"reason":"Inferior
+        version/duplicate of post #2222691","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T18:02:39.877-04:00","is_deletion":true,"category":"normal"},{"id":368491,"created_at":"2020-04-19T17:53:56.497-04:00","post_id":2222816,"reason":"Inferior
+        version of post #2222518.","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:53:56.497-04:00","is_deletion":true,"category":"normal"},{"id":368490,"created_at":"2020-04-19T17:46:18.792-04:00","post_id":2222516,"reason":"Inferior
+        version/duplicate of post #2222518","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:46:18.792-04:00","is_deletion":true,"category":"normal"},{"id":368489,"created_at":"2020-04-19T17:45:24.377-04:00","post_id":2222229,"reason":"Inferior
+        version/duplicate of post #2222254","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:45:24.377-04:00","is_deletion":true,"category":"normal"},{"id":368488,"created_at":"2020-04-19T17:43:51.001-04:00","post_id":2221944,"reason":"Inferior
+        version/duplicate of post #2221945","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:43:51.001-04:00","is_deletion":true,"category":"normal"},{"id":368487,"created_at":"2020-04-19T17:37:29.019-04:00","post_id":2221586,"reason":"Inferior
+        version/duplicate of post #1230551","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:37:29.019-04:00","is_deletion":true,"category":"normal"},{"id":368486,"created_at":"2020-04-19T17:36:21.854-04:00","post_id":2218134,"reason":"Inferior
+        version/duplicate of post #2222310","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:36:21.854-04:00","is_deletion":true,"category":"normal"},{"id":368485,"created_at":"2020-04-19T17:26:15.202-04:00","post_id":2214057,"reason":"Inferior
+        version/duplicate of post #2221932","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:26:15.202-04:00","is_deletion":true,"category":"normal"},{"id":368484,"created_at":"2020-04-19T17:24:57.048-04:00","post_id":2213076,"reason":"Inferior
+        version/duplicate of post #2222262","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:24:57.048-04:00","is_deletion":true,"category":"normal"},{"id":368483,"created_at":"2020-04-19T17:24:35.846-04:00","post_id":2213075,"reason":"Inferior
+        version/duplicate of post #2222258","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:24:35.846-04:00","is_deletion":true,"category":"normal"},{"id":368482,"created_at":"2020-04-19T17:22:35.191-04:00","post_id":2218107,"reason":"Proximiter
+        is DNP.","creator_id":193424,"is_resolved":false,"updated_at":"2020-04-19T17:22:35.191-04:00","is_deletion":true,"category":"normal"},{"id":368481,"created_at":"2020-04-19T17:22:25.118-04:00","post_id":2216687,"reason":"Proximiter
+        is DNP.","creator_id":193424,"is_resolved":false,"updated_at":"2020-04-19T17:22:25.118-04:00","is_deletion":true,"category":"normal"},{"id":368480,"created_at":"2020-04-19T17:22:11.158-04:00","post_id":2216681,"reason":"Proximiter
+        is DNP.","creator_id":193424,"is_resolved":false,"updated_at":"2020-04-19T17:22:11.158-04:00","is_deletion":true,"category":"normal"},{"id":368479,"created_at":"2020-04-19T17:21:55.006-04:00","post_id":2216667,"reason":"Proximiter
+        is DNP.","creator_id":193424,"is_resolved":false,"updated_at":"2020-04-19T17:21:55.006-04:00","is_deletion":true,"category":"normal"},{"id":368478,"created_at":"2020-04-19T17:21:27.040-04:00","post_id":2216644,"reason":"Proximiter
+        is DNP.","creator_id":193424,"is_resolved":false,"updated_at":"2020-04-19T17:21:27.040-04:00","is_deletion":true,"category":"normal"},{"id":368477,"created_at":"2020-04-19T17:17:38.623-04:00","post_id":2222506,"reason":"Inferior
+        version of post #2210718.","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:17:38.623-04:00","is_deletion":true,"category":"normal"},{"id":368476,"created_at":"2020-04-19T17:14:24.438-04:00","post_id":2204320,"reason":"Inferior
+        version/duplicate of post #2222298","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:14:24.438-04:00","is_deletion":true,"category":"normal"},{"id":368475,"created_at":"2020-04-19T17:12:30.423-04:00","post_id":2197039,"reason":"Inferior
+        version/duplicate of post #2222799","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:12:30.423-04:00","is_deletion":true,"category":"normal"},{"id":368474,"created_at":"2020-04-19T17:11:35.560-04:00","post_id":1977633,"reason":"Inferior
+        version/duplicate of post #1974308","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:11:35.560-04:00","is_deletion":true,"category":"normal"},{"id":368472,"created_at":"2020-04-19T17:09:46.242-04:00","post_id":1943918,"reason":"Inferior
+        version/duplicate of post #2094814","creator_id":38571,"is_resolved":false,"updated_at":"2020-04-19T17:09:46.242-04:00","is_deletion":true,"category":"normal"},{"id":368471,"created_at":"2020-04-19T16:31:30.383-04:00","post_id":2210718,"reason":"Inferior
+        version/duplicate of post #2222506","is_resolved":true,"updated_at":"2020-04-19T16:31:30.383-04:00","is_deletion":false,"category":"normal"},{"id":368470,"created_at":"2020-04-19T16:12:52.429-04:00","post_id":2178614,"reason":"Does
+        not meet minimum quality standards. (Artistic)","creator_id":285986,"is_resolved":false,"updated_at":"2020-04-19T16:12:52.429-04:00","is_deletion":true,"category":"normal"},{"id":368469,"created_at":"2020-04-19T16:09:51.160-04:00","post_id":2160143,"reason":"Inferior
+        version/duplicate of post #2125662","creator_id":285986,"is_resolved":false,"updated_at":"2020-04-19T16:09:51.160-04:00","is_deletion":true,"category":"normal"},{"id":368468,"created_at":"2020-04-19T16:00:44.392-04:00","post_id":1946769,"reason":"Inferior
+        version/duplicate of post #608638","creator_id":285986,"is_resolved":false,"updated_at":"2020-04-19T16:00:44.392-04:00","is_deletion":true,"category":"normal"},{"id":368467,"created_at":"2020-04-19T15:45:33.244-04:00","post_id":2215017,"reason":"Inferior
+        version/duplicate of post #2222840","creator_id":35757,"is_resolved":false,"updated_at":"2020-04-19T15:45:33.244-04:00","is_deletion":true,"category":"normal"},{"id":368466,"created_at":"2020-04-19T15:44:58.856-04:00","post_id":2215017,"reason":"Inferior
+        version/duplicate of post #2222840","is_resolved":false,"updated_at":"2020-04-19T15:44:58.856-04:00","is_deletion":false,"category":"normal"},{"id":368465,"created_at":"2020-04-19T15:18:07.905-04:00","post_id":2222518,"reason":"Inferior
+        version/duplicate of post #2222816","is_resolved":true,"updated_at":"2020-04-19T15:18:07.905-04:00","is_deletion":false,"category":"normal"},{"id":368464,"created_at":"2020-04-19T15:08:32.650-04:00","post_id":2197039,"reason":"Inferior
+        version/duplicate of post #2222799","is_resolved":false,"updated_at":"2020-04-19T15:08:32.650-04:00","is_deletion":false,"category":"normal"},{"id":368463,"created_at":"2020-04-19T15:08:16.155-04:00","post_id":2215017,"reason":"Inferior
+        version/duplicate of post #2222798","is_resolved":true,"updated_at":"2020-04-19T15:08:16.155-04:00","is_deletion":false,"category":"normal"},{"id":368462,"created_at":"2020-04-19T15:04:50.286-04:00","post_id":2222738,"reason":"Inferior
+        version/duplicate of post #2221338","is_resolved":false,"updated_at":"2020-04-19T15:04:50.286-04:00","is_deletion":false,"category":"normal"},{"id":368461,"created_at":"2020-04-19T14:53:12.289-04:00","post_id":2222715,"reason":"Inferior
+        version/duplicate of post #2222724","creator_id":169756,"is_resolved":false,"updated_at":"2020-04-19T14:53:12.289-04:00","is_deletion":true,"category":"normal"},{"id":368460,"created_at":"2020-04-19T14:52:45.022-04:00","post_id":2222455,"reason":"Inferior
+        version/duplicate of post #1776468","creator_id":169756,"is_resolved":false,"updated_at":"2020-04-19T14:52:45.022-04:00","is_deletion":true,"category":"normal"},{"id":368459,"created_at":"2020-04-19T14:37:50.235-04:00","post_id":2222756,"reason":"Uploader
+        requested removal within 48 hours (Reason: 2222757 is the corrected version,
+        version uploaded had errors that were fixed by the artist, and was not supposed
+        to be posted.)","is_resolved":true,"updated_at":"2020-04-19T14:37:50.235-04:00","is_deletion":false,"category":"normal"},{"id":368458,"created_at":"2020-04-19T14:28:39.505-04:00","post_id":2222743,"reason":"Inferior
+        version/duplicate of post #2222749","is_resolved":true,"updated_at":"2020-04-19T14:28:39.505-04:00","is_deletion":false,"category":"normal"},{"id":368457,"created_at":"2020-04-19T14:03:55.056-04:00","post_id":2222715,"reason":"Inferior
+        version/duplicate of post #2222724","is_resolved":false,"updated_at":"2020-04-19T14:03:55.056-04:00","is_deletion":false,"category":"normal"},{"id":368455,"created_at":"2020-04-19T13:55:29.938-04:00","post_id":2222202,"reason":"takedown
+        #10490: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:55:29.938-04:00","is_deletion":true,"category":"normal"},{"id":368454,"created_at":"2020-04-19T13:50:56.664-04:00","post_id":2222692,"reason":"Inferior
+        version/duplicate of post #2222691","is_resolved":false,"updated_at":"2020-04-19T13:50:56.664-04:00","is_deletion":false,"category":"normal"},{"id":368453,"created_at":"2020-04-19T13:47:16.829-04:00","post_id":1946769,"reason":"Inferior
+        version/duplicate of post #608638","is_resolved":false,"updated_at":"2020-04-19T13:47:16.829-04:00","is_deletion":false,"category":"normal"},{"id":368452,"created_at":"2020-04-19T13:29:39.228-04:00","post_id":2220669,"reason":"takedown
+        #10489: Character Owner requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:29:39.228-04:00","is_deletion":true,"category":"normal"},{"id":368451,"created_at":"2020-04-19T13:28:32.620-04:00","post_id":1832526,"reason":"takedown
+        #10483: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:28:32.620-04:00","is_deletion":true,"category":"normal"},{"id":368450,"created_at":"2020-04-19T13:27:58.736-04:00","post_id":1826296,"reason":"takedown
+        #10483: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:27:58.736-04:00","is_deletion":true,"category":"normal"},{"id":368449,"created_at":"2020-04-19T13:20:22.328-04:00","post_id":1369235,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:20:22.328-04:00","is_deletion":true,"category":"normal"},{"id":368448,"created_at":"2020-04-19T13:20:22.179-04:00","post_id":1157404,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:20:22.179-04:00","is_deletion":true,"category":"normal"},{"id":368447,"created_at":"2020-04-19T13:20:19.733-04:00","post_id":1140700,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:20:19.733-04:00","is_deletion":true,"category":"normal"},{"id":368446,"created_at":"2020-04-19T13:20:19.599-04:00","post_id":1131859,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:20:19.599-04:00","is_deletion":true,"category":"normal"},{"id":368445,"created_at":"2020-04-19T13:19:53.580-04:00","post_id":1117752,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:19:53.580-04:00","is_deletion":true,"category":"normal"},{"id":368444,"created_at":"2020-04-19T13:19:53.432-04:00","post_id":1105453,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:19:53.432-04:00","is_deletion":true,"category":"normal"},{"id":368443,"created_at":"2020-04-19T13:19:22.820-04:00","post_id":1094130,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:19:22.820-04:00","is_deletion":true,"category":"normal"},{"id":368442,"created_at":"2020-04-19T13:19:22.586-04:00","post_id":1072885,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:19:22.586-04:00","is_deletion":true,"category":"normal"},{"id":368441,"created_at":"2020-04-19T13:18:57.218-04:00","post_id":1062498,"reason":"takedown
+        #10491: Artist requested removal","creator_id":360277,"is_resolved":false,"updated_at":"2020-04-19T13:18:57.218-04:00","is_deletion":true,"category":"normal"}]'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586bcc61cc34e809-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 03:32:29 GMT
+      ETag:
+      - W/"9c1b31a4292c452b3519bcfcb3a2d8ef"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d859e5afb1f57f0d4a025ff4017bd18291587353549; expires=Wed, 20-May-20
+        03:32:29 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 660e3d4d-f47c-430c-9fcb-5454cf50ed54
+      X-Runtime:
+      - '0.150874'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 02373e111f0000e809048c8200000001
+      content-length:
+      - '18717'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d859e5afb1f57f0d4a025ff4017bd18291587353549
+      User-Agent:
+      - Yippi/f0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/posts/2202625.json
+  response:
+    body:
+      string: '{"post":{"id":2202625,"created_at":"2020-04-04T16:47:26.755-04:00","updated_at":"2020-04-19T23:03:20.211-04:00","file":{"width":1280,"height":960,"ext":"jpg","size":241919,"md5":"6a5174c104347d16de8da82011ef3aa3","url":"https://static1.e621.net/data/6a/51/6a5174c104347d16de8da82011ef3aa3.jpg"},"preview":{"width":150,"height":112,"url":"https://static1.e621.net/data/preview/6a/51/6a5174c104347d16de8da82011ef3aa3.jpg"},"sample":{"has":true,"height":637,"width":850,"url":"https://static1.e621.net/data/sample/6a/51/6a5174c104347d16de8da82011ef3aa3.jpg"},"score":{"up":72,"down":-2,"total":70},"tags":{"general":["after_sex","animal_genitalia","animal_penis","anthro","anthro_on_anthro","bed","bodily_fluids","canine_penis","clothing","cum","cum_on_face","dialogue","duo","female","fur","furniture","genital_fluids","genitals","grey_body","grey_fur","inside","knot","licking","licking_cum","light","lighting","looking_at_another","male","on_bed","orange_body","orange_fur","panties","penis","plushie","speech_bubble","text","tongue","tongue_out","underwear","white_body","white_fur"],"species":["canid","canine","fox","lagomorph","leporid","mammal","rabbit","red_fox"],"character":["judy_hopps","nick_wilde"],"copyright":["disney","zootopia"],"artist":["samur_shalem"],"invalid":[],"lore":[],"meta":["2020","4:3","english_text"]},"locked_tags":[],"change_seq":26962518,"flags":{"pending":false,"flagged":true,"note_locked":false,"status_locked":false,"rating_locked":false,"deleted":false},"rating":"e","fav_count":185,"sources":["https://twitter.com/SpicySamur/status/1246155409049567233","https://pbs.twimg.com/media/EUs7dv8U0AABQZY.jpg?name=orig"],"pools":[],"relationships":{"parent_id":2223324,"has_children":false,"has_active_children":false,"children":[]},"approver_id":169756,"uploader_id":167841,"description":"","comment_count":4,"is_favorited":false}}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 586bcc64dd39e809-LAX
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 20 Apr 2020 03:32:29 GMT
+      ETag:
+      - W/"5fe88df388dc3ec3f737cf40d22b5527"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=0; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      - deny
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - 2ecc6027-a7c1-4a62-8159-9b9565f9dc66
+      X-Runtime:
+      - '0.021786'
+      X-XSS-Protection:
+      - 1; mode=block
+      - 1; mode=block
+      cf-request-id:
+      - 02373e130b0000e809048f9200000001
+      content-length:
+      - '1863'
+    status:
+      code: 200
+      message: OK
+version: 1
