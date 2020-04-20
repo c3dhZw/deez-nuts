@@ -46,7 +46,7 @@ class AsyncYippiClient(AbstractYippi):
             if r.status >= 400:
                 raise UserError(res["message"])
 
-        elif r.status > 500:
+        elif r.status >= 500:
             raise APIError(r.reason)
 
         if "application/json" not in r.headers.get("Content-Type"):
