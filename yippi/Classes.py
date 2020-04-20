@@ -1,4 +1,5 @@
 import inspect
+from copy import deepcopy
 from typing import List, Union
 
 class Post:
@@ -20,7 +21,7 @@ class Post:
         client: Union['AsyncYippiClient', 'YippiClient'] = None
     ):
         if data:
-            self._original_data = data
+            self._original_data = deepcopy(data)
             self.id: int = data.get("id", None)
             self.created_at: str = data.get("created_at", None)
             self.updated_at: str = data.get("updated_at", None)
@@ -176,6 +177,20 @@ class Pool:
     def __repr__(self):
         return "Pool(id=%s, name=%s)" % (self.id, self.name)
 
+    def _sort_posts(self, arr : List['Post']):
+        """Sort a list of post based on page numbering.
+
+        The way it works is to sort it based on what has been provided on ``.post_ids``.
+        Thus it will sort based on page number instead of e621's liking.
+        
+        Args:
+            arr: List of post to be sorted.
+        """
+        sorted_array = []
+        for post_id in self.post_ids:
+            sorted_array.append(next(p for p in arr if p.id == post_id))
+        return sorted_array
+
     def _register_linked(self, arr : List['Post']):
         """Register a series of posts to have ``.continue`` and ``.previous`` attribute.
 
@@ -197,7 +212,13 @@ class Pool:
         Returns:
             :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
         """
-        result = [await self._client.post(post_id) for post_id in self.post_ids]
+        result = []
+        current_page = 1
+        while len(result) < len(self.post_ids):
+            result.extend(await self._client.posts("pool:" + str(self.id), page=current_page))
+            current_page += 1
+        
+        result = self._sort_posts(result)
         self._register_linked(result)
         return result
 
@@ -212,7 +233,13 @@ class Pool:
         if inspect.iscoroutinefunction(self._client.post):
             return self.get_posts_async()
 
-        result = [self._client.post(post_id) for post_id in self.post_ids]
+        result = []
+        current_page = 1
+        while len(result) < len(self.post_ids):
+            result.extend(self._client.posts("pool:" + str(self.id), page=current_page))
+            current_page += 1
+        
+        result = self._sort_posts(result)
         self._register_linked(result)
         return result
 
