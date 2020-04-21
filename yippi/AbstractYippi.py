@@ -50,6 +50,7 @@ class AbstractYippi(ABC):
         }
         self._loop = loop
         self._session = session
+        self._login = None
 
     @abstractmethod
     def _call_api(
@@ -302,6 +303,15 @@ class AbstractYippi(ABC):
         )
         queries["limit"] = limit
         return self._call_api("GET", POOLS_URL, **queries)
+
+    def login(self, username: str, api_key: str):
+        """Supply login credentials to client.
+
+        Args:
+            username: Your e621 username.
+            api_key: Your API key. Find it under "Account" on e621.
+        """
+        self._login = (username, api_key)
 
     @abstractmethod
     def posts(

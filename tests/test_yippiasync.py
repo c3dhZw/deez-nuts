@@ -2,6 +2,7 @@ import aiohttp
 import pytest
 
 from yippi import AsyncYippiClient
+from yippi.Enums import Rating
 from yippi.Exceptions import APIError
 from yippi.Exceptions import UserError
 
@@ -104,7 +105,7 @@ async def test_getpost(client):
         "rating_locked": False,
         "deleted": False,
     }
-    assert post.rating == "s"
+    assert post.rating == Rating.SAFE
     assert post.fav_count == 306
     assert post.sources == [
         "https://www.furaffinity.net/view/25500100/",

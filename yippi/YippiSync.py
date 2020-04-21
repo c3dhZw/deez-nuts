@@ -1,6 +1,8 @@
 from typing import List
 from typing import Union
 
+from requests.auth import HTTPBasicAuth
+
 from .AbstractYippi import AbstractYippi
 from .Classes import Flag
 from .Classes import Note
@@ -12,9 +14,15 @@ from .Exceptions import UserError
 
 class YippiClient(AbstractYippi):
     def _call_api(self, method, url, data=None, **kwargs):
+        auth = None
+        if self._login:
+            auth = HTTPBasicAuth(*self._login)
+
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string
-        r = self._session.request(method, url, data=data, headers=self.headers)
+        r = self._session.request(
+            method, url, data=data, headers=self.headers, auth=auth
+        )
         self._verify_response(r)
         return r.json()
 
@@ -22,7 +30,7 @@ class YippiClient(AbstractYippi):
         if r.status_code != 200 and r.status_code < 500:
             res = r.json()
             if r.status_code >= 400:
-                raise UserError(res["message"])
+                raise UserError(res.get("message") or res.get("reason"), json=res)
 
         elif r.status_code >= 500:
             raise APIError(r.reason)

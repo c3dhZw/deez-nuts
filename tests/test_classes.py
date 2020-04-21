@@ -3,6 +3,7 @@ import pytest
 import requests
 
 from yippi import AsyncYippiClient
+from yippi import Post
 from yippi import YippiClient
 
 
@@ -23,14 +24,6 @@ async def async_client(event_loop):
         async_client = AsyncYippiClient("Yippi", "0.1", "Error-", session)
         yield async_client
         await async_client.close()
-
-
-@pytest.mark.vcr()
-def test_post(client):
-    post = client.post(1383235)
-    post.tags["general"].append("solo")
-    post.tags["general"].remove("male/male")
-    assert post.get_tags_difference() == "solo -male/male"
 
 
 @pytest.mark.vcr()
@@ -57,3 +50,43 @@ async def test_pool_async(async_client):
 def test_flag(client):
     flag = client.flags(limit=1)[0]
     assert flag.get_post()
+
+
+@pytest.mark.vcr()
+def test_vote(client):
+    post = client.post(1383235)
+    assert post.vote()["our_score"] == 1
+    assert post.vote(-1)["our_score"] == -1
+    assert post.vote(-1)["our_score"] == 0
+
+
+def test_diffgen():
+    p = Post()
+    assert (
+        p._generate_difference(
+            {"test1": ["furry", "m/m"], "test2": ["male", "duo"]},
+            {"test1": ["m/m"], "test2": ["male", "duo", "girly"]},
+        )
+        == "girly -furry"
+    )
+    assert (
+        p._generate_difference(
+            {"test1": ["furry", "m/m"], "test2": ["male", "duo"]},
+            {"test1": ["m/m"], "test2": ["male", "duo", "furry"]},
+        )
+        == ""
+    )
+    assert p._generate_difference(["furry", "m/m"], ["m/m", "duo"]) == "duo -furry"
+    assert p._generate_difference("furry m/m", "m/m furry duo") == "duo"
+    assert p._generate_difference("furry m/m", "m/m") == "-furry"
+    with pytest.raises(ValueError):
+        p._generate_difference("furry m/m", ["m/m furry duo"])
+
+
+def test_create_post():
+    Post.from_file("tests/data/sample.jpg")
+    with pytest.raises(ValueError):
+        Post.from_file("nonexistent/furry/image")
+    Post.from_url("https://google.com")
+    with pytest.raises(ValueError):
+        Post.from_url("i.am.an.invalid.url")

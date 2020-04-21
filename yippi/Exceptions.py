@@ -3,4 +3,6 @@ class APIError(Exception):
 
 
 class UserError(Exception):
-    pass
+    def __init__(self, *args, json=None, **kwargs):
+        self.json = json
+        super().__init__(*args, **kwargs)

@@ -1,6 +1,7 @@
-
 from typing import List
 from typing import Union
+
+from aiohttp import BasicAuth
 
 from .AbstractYippi import AbstractYippi
 from .Classes import Flag
@@ -22,9 +23,15 @@ class AsyncYippiClient(AbstractYippi):
         await self.close()
 
     async def _call_api(self, method, url, data=None, **kwargs):
+        auth = None
+        if self._login:
+            auth = BasicAuth(*self._login)
+
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string
-        r = await self._session.request(method, url, data=data, headers=self.headers)
+        r = await self._session.request(
+            method, url, data=data, headers=self.headers, auth=auth
+        )
         await self._verify_response(r)
         return await r.json()
 
@@ -32,7 +39,7 @@ class AsyncYippiClient(AbstractYippi):
         if r.status != 200 and r.status < 500:
             res = await r.json()
             if r.status >= 400:
-                raise UserError(res["message"])
+                raise UserError(res.get("message") or res.get("reason"), json=res)
 
         elif r.status >= 500:
             raise APIError(r.reason)
