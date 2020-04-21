@@ -46,7 +46,7 @@ class AbstractYippi(ABC):
         loop=None,
     ):
         self.headers = {
-            "User-Agent": f"{project_name}/f{version} (by {creator} on e621)"
+            "User-Agent": f"{project_name}/{version} (by {creator} on e621)"
         }
         self._loop = loop
         self._session = session

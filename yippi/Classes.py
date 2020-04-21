@@ -159,7 +159,7 @@ class Post:
 
         data = {"score": score, "no_unvote": replace}
         return self._client._call_api(
-            "POST", BASE_URL + f"/{self.id}/votes.json", data=data
+            "POST", POST_URL + f"/{self.id}/votes.json", data=data
         )
 
     @classmethod
