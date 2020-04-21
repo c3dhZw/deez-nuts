@@ -18,8 +18,8 @@ def client():
 
 
 @pytest.fixture
-async def async_client():
-    async with aiohttp.ClientSession() as session:
+async def async_client(event_loop):
+    async with aiohttp.ClientSession(loop=event_loop) as session:
         async_client = AsyncYippiClient("Yippi", "0.1", "Error-", session)
         yield async_client
         await async_client.close()
