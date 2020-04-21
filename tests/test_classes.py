@@ -1,3 +1,5 @@
+import os
+
 import aiohttp
 import pytest
 import requests
@@ -7,6 +9,13 @@ from yippi import Post
 from yippi import YippiClient
 
 
+@pytest.fixture(scope='module')
+def vcr_config():
+    return {
+        "filter_headers": [('authorization', 'REDACTED')],
+    }
+
+
 @pytest.fixture(scope="module")
 def vcr_cassette_dir(request):
     return "tests/cassettes/classes"
@@ -14,8 +23,13 @@ def vcr_cassette_dir(request):
 
 @pytest.fixture
 def client():
+    username = os.environ.get("ESIX_USERNAME")
+    key = os.environ.get("ESIX_APIKEY")
     session = requests.Session()
-    return YippiClient("Yippi", "0.1", "Error-", session)
+    client = YippiClient("Yippi", "0.1", "Error-", session)
+    if username and key:
+        client.login(username, key)
+    return client
 
 
 @pytest.fixture
@@ -53,7 +67,10 @@ def test_flag(client):
 
 
 @pytest.mark.vcr()
-def test_vote(client):
+def test_post_vote(client):
+    if not client._login:
+        pytest.skip("No login credentials provided.")
+
     post = client.post(1383235)
     assert post.vote()["our_score"] == 1
     assert post.vote(-1)["our_score"] == -1
