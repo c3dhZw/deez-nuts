@@ -1,0 +1,204 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Yippi/0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/pools/6059.json
+  response:
+    body:
+      string: "{\"id\":6059,\"name\":\"Critical_Success\",\"created_at\":\"2015-05-12T03:12:04.070-04:00\",\"updated_at\":\"2020-01-11T07:33:28.640-05:00\",\"creator_id\":80719,\"description\":\"Terry
+        already knew DMing a roleplay game wasn\u2019t going to be easy. Even tougher
+        realizing that he has to teach a newbie the ropes. Especially if that newbie
+        is Avery, who decides an encounter with a bunch of goo monsters is a chance
+        at a \u2018good time\u2019. Time to brush up on improvised weapons.\\r\\n\\r\\nhttps://gumroad.com/ayceeart#drwUy\\r\\nhttps://furplanet.com/shop/item.aspx?itemid=835\",\"is_active\":false,\"category\":\"series\",\"is_deleted\":false,\"post_ids\":[653514,653515,653820,1441782,1441786,1441787,1441789,1441791,678082,1441792,693861,700924,703925,708441,712438,721236,721238,729417,729418,734319,741807,746745,750238,757115,765045,771275,774520,783684,783686,787184,791551,795869,800718,800719,808888,815802,821123,826254,840444,846009,846008,851110,855229,859863,864338,869816,874986,885115],\"creator_name\":\"Emserdalf\",\"post_count\":48}"
+    headers:
+      Access-Control-Allow-Origin: '*'
+      CF-Cache-Status: DYNAMIC
+      CF-RAY: 588839ec6daaeb04-LAX
+      Cache-Control: max-age=0, private, must-revalidate
+      Connection: keep-alive
+      Content-Encoding: gzip
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 23 Apr 2020 14:20:37 GMT
+      ETag: W/"ef6e2187478b35639278e947b757b63b"
+      Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy: strict-origin-when-cross-origin
+      Server: cloudflare
+      Set-Cookie: __cfduid=d3aa79c2087c20a0a51cbe0fc8d8571981587651637; expires=Sat,
+        23-May-20 14:20:37 GMT; path=/; domain=.e621.net; HttpOnly; SameSite=Lax
+      Strict-Transport-Security: max-age=0; includeSubDomains
+      Transfer-Encoding: chunked
+      X-Content-Type-Options: nosniff
+      X-Download-Options: noopen
+      X-Frame-Options: deny
+      X-Permitted-Cross-Domain-Policies: none
+      X-Request-Id: c8e7771b-2bb8-4d64-8b01-11a38d52a9c4
+      X-Runtime: '0.009891'
+      X-XSS-Protection: 1; mode=block
+      cf-request-id: 02490287be0000eb0412318200000001
+    status:
+      code: 200
+      message: OK
+    url: https://e621.net/pools/6059.json
+- request:
+    body: null
+    headers:
+      User-Agent:
+      - Yippi/0.1 (by Error- on e621)
+    method: GET
+    uri: https://e621.net/pools/605999.json
+  response:
+    body:
+      string: "<!doctype html>\n<html>\n<head>\n  <title></title>\n  <link rel=\"shortcut
+        icon\" href=\"/favicon.ico\" type=\"image/x-icon\">\n  <link rel=\"apple-touch-icon\"
+        sizes=\"180x180\" href=\"/apple-touch-icon.png\">\n  <link rel=\"icon\" type=\"image/png\"
+        sizes=\"32x32\" href=\"/favicon-32x32.png\">\n  <link rel=\"icon\" type=\"image/png\"
+        sizes=\"16x16\" href=\"/favicon-16x16.png\">\n  <link rel=\"manifest\" href=\"/manifest.json\">\n
+        \ <link rel=\"mask-icon\" href=\"/safari-pinned-tab.svg\" color=\"#00549e\">\n
+        \ <meta name=\"theme-color\" content=\"#00549e\">\n  <meta name=\"RATING\"
+        content=\"RTA-5042-1996-1400-1577-RTA\" />\n  <link rel=\"top\" title=\"e621\"
+        href=\"/\">\n  <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta
+        name=\"csrf-token\" content=\"7uTn+Y4vb0ehrub4u40hnPYcjsBvGjdb+2glGA3PNim2w91eHayniMGpu4mnzftn7QawvVtslbbu76Oj77m44Q==\"
+        />\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n
+        \ <meta name=\"current-user-name\" content=\"Anonymous\">\n  <meta name=\"current-user-id\"
+        content=\"\">\n  <meta name=\"current-user-can-approve-posts\" content=\"false\">\n
+        \ <meta name=\"user-comment-threshold\" content=\"-10\">\n    <meta name=\"blacklisted-tags\"
+        content=\"[&quot;gore&quot;,&quot;scat&quot;,&quot;watersports&quot;,&quot;young
+        -rating:s&quot;,&quot;loli&quot;,&quot;shota&quot;]\">\n    <meta name=\"blacklist-users\"
+        content=\"false\">\n  <meta name=\"enable-js-navigation\" content=\"true\">\n
+        \ <meta name=\"enable-auto-complete\" content=\"true\">\n  <meta name=\"style-usernames\"
+        content=\"true\">\n  <meta name=\"last-forum-read-at\" content=\"1959-12-31
+        19:00:00 -0500\">\n  <meta name=\"disable-mobile-gestures\" content=\"false\">\n
+        \ <link rel=\"alternate\" type=\"application/atom+xml\" title=\"ATOM\" href=\"/posts.atom\"
+        />\n  <script src=\"/vendor/jquery-3.4.1.min.js\" nonce=\"5Rxv1/XrGvbZQEApvowglQ==\"
+        integrity=\"sha384-v/CvOfYoICV4azK6zXTy9qXP6UwbdbFVuxd2Lorpes7n5YVsaU1bQqIalcktKchl\"
+        crossorigin=\"anonymous\"></script>\n  <link rel=\"stylesheet\" media=\"screen\"
+        href=\"/vendor/fontawesome/css/all.min.css\" nonce=\"true\" integrity=\"sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf\"
+        crossorigin=\"anonymous\" />\n  <link rel=\"stylesheet\" media=\"screen\"
+        href=\"/packs/css/application-901e042a.css\" nonce=\"true\" />\n  <script
+        src=\"/packs/js/application-92aae0a8d90f7a1b25e4.js\" nonce=\"5Rxv1/XrGvbZQEApvowglQ==\"></script>\n
+        \ <script type=\"application/ld+json\">\n  {\n    \"@context\": \"http://schema.org\",\n
+        \   \"@type\": \"WebSite\",\n    \"url\" : \"https://e621.net/\",\n    \"potentialAction\":
+        [{\n      \"@type\": \"SearchAction\",\n      \"target\": \"https://e621.net/posts?tags={search_term_string}\",\n
+        \     \"query-input\": \"required name=search_term_string\"\n    }]\n  }\n
+        \ </script>\n  <script type=\"application/ld+json\">\n  {\n    \"@context\":
+        \"http://schema.org\",\n    \"@type\": \"WebSite\",\n    \"name\": \"e621\",\n
+        \   \"alternateName\": \"e621\",\n    \"url\" : \"https://e621.net/\"\n  }\n
+        \ </script>\n  \n  \n  <style id=\"blacklisted-hider\">\n    .post-preview,
+        #image-container, #c-comments .post, .mod-queue-preview.post-preview, .post-thumbnail
+        {\n      visibility: hidden !important;\n    }\n  </style>\n  <noscript>\n
+        \   <style>\n      .post-preview, #image-container, #c-comments .post, .mod-queue-preview.post-preview,
+        .post-thumbnail {\n        visibility: visible !important;\n      }\n    </style>\n
+        \ </noscript>\n</head>\n<body lang=\"en\" class=\"c-pools a-show resp\" data-controller=\"pools\"
+        data-action=\"show\" data-user-name=\"Anonymous\" data-user-level=\"0\" data-user-level-string=\"Anonymous\"
+        data-user-can-approve-posts=\"false\" data-user-can-upload-free=\"false\"
+        data-user-is-privileged=\"false\" data-user-is-contributor=\"false\" data-user-is-member=\"false\"
+        data-user-is-blocked=\"false\" data-user-is-janitor=\"false\" data-user-is-former-staff=\"false\"
+        data-user-is-admin=\"false\" data-user-is-moderator=\"false\" data-user-is-anonymous=\"true\"
+        data-user-is-banned=\"false\" data-user-is-approver=\"false\" data-user-is-voter=\"false\"
+        data-user-is-verified=\"false\">\n  <script nonce=\"5Rxv1/XrGvbZQEApvowglQ==\">\n//<![CDATA[\n(function()
+        {\n  try {\n    var theme = localStorage.getItem('theme') || 'hexagon';\n
+        \   var extra = localStorage.getItem('theme-extra') || 'hexagon';\n    var
+        nav = localStorage.getItem('theme-nav') || 'top';\n    var b = document.body;\n
+        \   b.setAttribute('data-th-main', theme);\n    b.setAttribute('data-th-extra',
+        extra);\n    b.setAttribute('data-th-nav', nav);\n  } catch(e) {\n  }\n})();\n\n//]]>\n</script>\n\n
+        \ <header id=\"top\">\n    <div id=\"maintoggle\">\n      <a href=\"#\"><i
+        id=\"maintoggle-on\" class=\"fas fa-bars\"></i></a>\n      <a href=\"#\"><i
+        id=\"maintoggle-off\" class=\"fas fa-times\" style=\"display: none;\"></i></a>\n
+        \   </div>\n\n    <nav id=\"nav\">\n      <menu class=\"main\">\n  <li id=\"nav-e\"><a
+        id=\"nav-e-link\" href=\"/\">e621</a></li>\n    <li id=\"nav-sign-in\"><a
+        id=\"nav-sign-in-link\" href=\"/session/new\">Sign in</a></li>\n  <li id=\"nav-posts\"><a
+        id=\"nav-posts-link\" href=\"/posts\">Posts</a></li>\n  <li id=\"nav-comments\"><a
+        id=\"nav-comments-link\" href=\"/comments?group_by=post\">Comments</a></li>\n
+        \ <li id=\"nav-artists\"><a id=\"nav-artists-link\" href=\"/artists\">Artists</a></li>\n
+        \ <li id=\"nav-tags\"><a id=\"nav-tags-link\" href=\"/tags\">Tags</a></li>\n
+        \ <li id=\"nav-blips\"><a id=\"nav-blips-link\" href=\"/blips\">Blips</a></li>\n
+        \ <li id=\"nav-pools\" class=\" current\"><a id=\"nav-pools-link\" href=\"/pools\">Pools</a></li>\n
+        \ <li id=\"nav-sets\"><a id=\"nav-sets-link\" href=\"/post_sets\">Sets</a></li>\n
+        \ <li id=\"nav-wiki\"><a id=\"nav-wiki-link\" href=\"/wiki_pages?title=help%3Ahome\">Wiki</a></li>\n
+        \ <li id=\"nav-forum\"><a id=\"nav-forum-link\" href=\"/forum_topics\">Forum</a></li>\n
+        \ <li id=\"nav-help\"><a id=\"nav-help-link\" href=\"/help\">Help</a></li>\n
+        \ <li id=\"nav-more\"><a id=\"nav-more-link\" href=\"/static/site_map\">More
+        \xBB</a></li>\n</menu>\n\n      \n    </nav>\n\n  </header>\n\n  <div id=\"page\">\n
+        \     <div class=\"ui-state-highlight site-notice\" style=\"display: none;\"
+        id=\"news\" data-id=\"335\">\n    <div id=\"news-closebutton\" class=\"closebutton\">Dismiss</div>\n
+        \   <h6>News - Apr 01, 2020\n      (22 days ago)\n      <span id=\"news-showtext\"
+        class=\"showtext\">Click to show.</span>\n    </h6>\n    <div class=\"newsbody\"><p>We
+        now have a Discord server, <a class=\"dtext-link\" href=\"/static/discord\">come
+        talk to us</a>!</p><ul><li><strong>April 1st:</strong> We're currently experiencing
+        connectivity issues to some parts of the world, this does not appear to be
+        an issue on our end we'd be able to fix, but appears to be something with
+        Cloudflare's nodes. If you can try restarting your router / device and see
+        if you'll be routed to a node that works as it should. Alternatively if you're
+        using a VPN setting it to the US might help as well.</li></ul><p>Want to advertise
+        on e621? <a class=\"dtext-link\" href=\"/forum/show/10410\">Click here!</a></p></div>\n
+        \ </div>\n\n\n\n\n\n      <div class=\"ui-corner-all ui-state-highlight site-notice\"
+        id=\"tos-notice\">\n  <h1><a rel=\"nofollow\" href=\"/static/terms_of_service?url=%2Fpools%2F605999.json\">Read
+        the rules before proceeding!</a></h1>\n</div>\n\n\n    <div class=\"ui-corner-all
+        ui-state-highlight\" id=\"notice\" style=\"display: none;\">\n      <span>.</span>\n
+        \     <a href=\"#\" id=\"close-notice-link\">close</a>\n    </div>\n\n    <p>Not
+        found.</p>\n\n  </div>\n\n    <div class=\"guest-warning\" style=\"display:
+        none;\">\n  <div class=\"guest-warning-dialog\">\n    <h1 class=\"dialog-header\">Over
+        18?</h1>\n    <div class=\"dialog-content\">\n    <p>\n      You must be over
+        the age of 18 and agree\n      to <a target=\"_blank\" href=\"/static/terms_of_service\">the
+        terms of service</a> to access this page.\n    </p>\n    <p>\n      By default
+        a limited blacklist has been applied removing content that is commonly objected
+        to. You may remove\n      items\n      from this blacklist by using the blacklist
+        menu item.\n    </p>\n    </div>\n    <div class=\"dialog-footer\">\n      <button
+        id=\"guest-warning-accept\">I agree and am over 18</button>\n      <button
+        id=\"guest-warning-decline\">I do not agree, or am not over 18</button>\n
+        \   </div>\n  </div>\n</div>\n\n  <footer id=\"page-footer\">\n  Running e621\n
+        \ - <a href=\"/static/theme\">Themes</a>\n  &ndash; <a href=\"/static/terms_of_service\">Rules</a>\n
+        \ - <a href=\"/static/takedown\">Takedowns</a>\n  &ndash; <a href=\"/static/contact\">Contact</a>\n
+        \   &ndash; <a href=\"/static/keyboard_shortcuts\">Keyboard shortcuts available</a>\n
+        \   &ndash; <a rel=\"nofollow\" href=\"/static/toggle_mobile_mode\">Disable
+        mobile mode support</a>\n</footer>\n\n  <script nonce=\"5Rxv1/XrGvbZQEApvowglQ==\">\n//<![CDATA[\n
+        \ window.___deferred_posts = {};\n\n//]]>\n</script>\n    <script nonce=\"5Rxv1/XrGvbZQEApvowglQ==\">\n//<![CDATA[\n
+        \   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};\n
+        \     m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})\n
+        \   (window, document, \"script\", \"https://mc.yandex.ru/metrika/tag.js\",
+        \"ym\");\n\n    ym(51832286, \"init\", {\n      id:51832286,\n      clickmap:false,\n
+        \     trackLinks:true,\n      accurateTrackBounce:true\n    });\n\n//]]>\n</script>
+        \   <noscript><div><img src=\"https://mc.yandex.ru/watch/51832286\" style=\"position:absolute;
+        left:-9999px;\" alt=\"\" /></div></noscript>\n</body></html>\n"
+    headers:
+      Access-Control-Allow-Origin: '*'
+      CF-Cache-Status: DYNAMIC
+      CF-RAY: 588839f9fb0eeb04-LAX
+      Cache-Control: max-age=0, private, must-revalidate
+      Connection: keep-alive
+      Content-Encoding: gzip
+      Content-Security-Policy: 'default-src ''self''; script-src ''self'' ads.dragonfru.it
+        js-agent.newrelic.com bam.nr-data.net https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/
+        https://www.recaptcha.net/ https://mc.yandex.ru/ https://yastatic.net ''nonce-5Rxv1/XrGvbZQEApvowglQ=='';
+        style-src ''self'' ''unsafe-inline''; connect-src ''self'' ads.dragonfru.it
+        bam.nr-data.net https://mc.yandex.ru https://yastatic.net; object-src ''self''
+        static1.e621.net static1.e926.net; media-src ''self'' static1.e621.net static1.e926.net;
+        frame-ancestors ''none''; frame-src https://www.google.com/recaptcha/ https://www.recaptcha.net/;
+        font-src ''self''; img-src ''self'' data: static1.e621.net static1.e926.net
+        ads.dragonfru.it https://mc.yandex.ru https://yastatic.net; child-src ''none'';
+        form-action ''self'' discord.e621.net discordapp.com'
+      Content-Type: text/html; charset=utf-8
+      Date: Thu, 23 Apr 2020 14:20:39 GMT
+      Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy: strict-origin-when-cross-origin
+      Server: cloudflare
+      Set-Cookie: _danbooru_session=VW21UXNns5cy%2FqPdgxj9pmvyf2vYVuaTR8iuauXMZlmruiVWlS6tS8rNUa0w5pyx6%2B%2Fc22GFlLj8Ve2gWL9XiCOCjNkK71xOJfaD%2F5hfVsFGOVuTGw9szOIphtgVCUdjoBPvuQR2sys3SQZ3ve2wI40%2FaXRZRcQPqdpxZ6fMODlomQYXV%2F8XGEGrepolSZZS4r9uCtHsk3OLV6N8uOdLpXmMTr7NK4z8p53yPEPs%2BjpgbFojCi0GpiYEmCqdMChT7d86zJIQ2e5BiuLc%2F683hparj9y7ArqzKA%3D%3D--OcnhM3I1OhTGxA%2Bn--79olxt5jGART6RcNKyD9eA%3D%3D;
+        path=/; HttpOnly
+      Strict-Transport-Security: max-age=0; includeSubDomains
+      Transfer-Encoding: chunked
+      X-Content-Type-Options: nosniff
+      X-Download-Options: noopen
+      X-Frame-Options: deny
+      X-Permitted-Cross-Domain-Policies: none
+      X-Request-Id: 986ba0ec-5044-4640-8ec9-b743f7b27001
+      X-Runtime: '0.022377'
+      X-XSS-Protection: 1; mode=block
+      cf-request-id: 024902903f0000eb0412389200000001
+    status:
+      code: 200
+      message: OK
+    url: https://e621.net/pools/605999.json
+version: 1

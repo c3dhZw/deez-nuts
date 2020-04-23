@@ -13,6 +13,7 @@ from .Classes import Pool
 from .Classes import Post
 from .Constants import FLAGS_URL
 from .Constants import NOTES_URL
+from .Constants import POOL_URL
 from .Constants import POOLS_URL
 from .Constants import POST_URL
 from .Constants import POSTS_URL
@@ -304,6 +305,22 @@ class AbstractYippi(ABC):
         queries["limit"] = limit
         return self._call_api("GET", POOLS_URL, **queries)
 
+    def _get_pool(self, pool_id: int) -> dict:
+        """Internal fetch of pool lookup.
+
+        In general you don't need to touch this. If you want to override
+        how the call works, change :meth:`._call_api` instead.
+
+        Args:
+            pool_id: The pool's ID to look up.
+
+        Returns:
+            JSON object of server's response.
+
+        """
+        url = POOL_URL + str(pool_id) + ".json"
+        return self._call_api("GET", url)
+
     def login(self, username: str, api_key: str):
         """Supply login credentials to client.
 
@@ -427,6 +444,19 @@ class AbstractYippi(ABC):
 
         Returns:
             :obj:`list` of :class:`~yippi.Classes.Pool` of the pools.
+
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def pool(self, pool_id: int) -> Pool:
+        """Fetch for a pool.
+
+        Args:
+            pool_id: The pool's ID to look up.
+
+        Returns:
+            :class:`~yippi.Classes.Pool` of the pool.
 
         """
         raise NotImplementedError

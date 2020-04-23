@@ -121,3 +121,7 @@ class AsyncYippiClient(AbstractYippi):
         )
         result = [Pool(p, self) for p in response]
         return result
+
+    async def pool(self, pool_id: int):
+        response = await self._get_pool(pool_id)
+        return Pool(response, self)

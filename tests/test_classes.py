@@ -9,10 +9,10 @@ from yippi import Post
 from yippi import YippiClient
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def vcr_config():
     return {
-        "filter_headers": [('authorization', 'REDACTED')],
+        "filter_headers": [("authorization", "REDACTED")],
     }
 
 
