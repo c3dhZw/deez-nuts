@@ -6,14 +6,11 @@ Overview
 .. image:: https://codecov.io/gh/rorre/yippi/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/rorre/yippi
 .. image:: https://img.shields.io/pypi/pyversions/Yippi
-    :alt: PyPI - Python Version
 .. image:: https://img.shields.io/github/license/rorre/Yippi
-    :alt: GitHub license
     :target: https://github.com/rorre/Yippi/blob/master/LICENSE
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 .. image:: https://img.shields.io/pypi/v/yippi
-    :alt: PyPI
     :target: https://pypi.org/project/yippi
 .. image:: https://img.shields.io/github/issues/rorre/Yippi
     :alt: GitHub issues
@@ -41,8 +38,11 @@ Sync
 
 ::
 
+    >>> import requests
     >>> from yippi import YippiClient
-    >>> client = YippiClient("MyProject", "1.0", "MyUsernameOnE621")
+    >>>
+    >>> session = requests.Session()
+    >>> client = YippiClient("MyProject", "1.0", "MyUsernameOnE621", session)
     >>> posts = client.posts("m/m zeta-haru rating:s") # or ["m/m", "zeta-haru", "rating-s"], both works.
     [Post(id=1383235), Post(id=514753), Post(id=514638), Post(id=356347), Post(id=355044)]
     >>> posts[0].tags
@@ -60,8 +60,11 @@ Async
 
 ::
 
+    >>> import aiohttp
     >>> from yippi import AsyncYippiClient
-    >>> client = AsyncYippiClient("MyProject", "1.0", "MyUsernameOnE621")
+    >>>
+    >>> session = aiohttp.ClientSession()
+    >>> client = AsyncYippiClient("MyProject", "1.0", "MyUsernameOnE621", session)
     >>> posts = await client.posts("m/m zeta-haru rating:s") # or ["m/m", "zeta-haru", "rating-s"], both works.
     [Post(id=1383235), Post(id=514753), Post(id=514638), Post(id=356347), Post(id=355044)]
     >>> posts[0].tags
