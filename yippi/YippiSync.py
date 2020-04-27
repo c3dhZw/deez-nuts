@@ -24,7 +24,8 @@ class YippiClient(AbstractYippi):
             method, url, data=data, headers=self.headers, auth=auth
         )
         self._verify_response(r)
-        return r.json()
+        if not r.status_code == 204:
+            return r.json()
 
     def _verify_response(self, r):
         if r.status_code >= 300 and r.status_code < 500:
@@ -35,7 +36,7 @@ class YippiClient(AbstractYippi):
         elif r.status_code >= 500:
             raise APIError(r.reason)
 
-        if "application/json" not in r.headers.get("Content-Type"):
+        if "application/json" not in r.headers.get("Content-Type") and r.status_code != 204:
             res = r.text()
             if "Not found." in res:
                 raise UserError("Not found.")
