@@ -102,7 +102,7 @@ def test_diffgen():
 
 def test_create_post():
     Post.from_file("tests/data/sample.jpg")
-    with pytest.raises(ValueError):
+    with pytest.raises(FileNotFoundError):
         Post.from_file("nonexistent/furry/image")
     Post.from_url("https://google.com")
     with pytest.raises(ValueError):
