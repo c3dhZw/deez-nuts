@@ -1,4 +1,5 @@
 import inspect
+import mimetypes
 import os.path
 import re
 import warnings
@@ -7,9 +8,11 @@ from typing import List
 from typing import Union
 
 from .Constants import BASE_URL
+from .Constants import FAVORITES_URL
 from .Constants import NOTE_URL
 from .Constants import NOTES_URL
 from .Constants import POST_URL
+from .Constants import UPLOAD_URL
 from .Enums import Rating
 from .Exceptions import UserError
 
@@ -66,7 +69,15 @@ class Post:
         self._client = client
 
     def __repr__(self):
-        return "Post(id=%s)" % (self.id)
+        if self.id:
+            name = "Post(id=%s)" % (self.id)
+        elif self.file_path:
+            name = "Post(file_path=%s)" % (self.file_path)
+        elif self.file_url:
+            name = "Post(file_url=%s)" % (self.file_url)
+        else:
+            name = "Post()"
+        return name
 
     def _diff_list(self, this: List, that: List) -> List[str]:
         """Find differences between two list.
@@ -163,10 +174,10 @@ class Post:
 
     @classmethod
     def from_file(cls, path):
-        if not os.path.exists(path):
-            raise ValueError(f'Path "{path}" does not exist.')
         new_post = cls()
+        new_post.file = open(path, "rb")
         new_post.file_path = path
+        new_post.file_name = os.path.basename(path)
         return new_post
 
     @classmethod
@@ -178,7 +189,39 @@ class Post:
         return new_post
 
     def upload(self):
-        raise NotImplementedError
+        warnings.warn("This function has not been tested and should not be used.")
+        if isinstance(self.tags, str):
+            tags = self.tags
+        elif isinstance(self.tags, (list, tuple)):
+            tags = " ".join(self.tags)
+        elif isinstance(self.tags, dict):
+            tags_list = []
+            for k in self.tags.keys():
+                tags_list.extend(self.tags[k])
+            tags = " ".join(self.tags)
+        else:
+            raise UserError("Tags must be in a form of string, list, tuple or dict.")
+
+        sources = "\n".join(self.sources)
+        file = None
+        post_data = {
+            "upload[tag_string]": tags,
+            "upload[rating]": self.rating.value,
+            "upload[source]": sources,
+            "upload[description]": self.description or "",
+            "upload[parent_id]": getattr(self, "parent_id", ""),
+            "upload[locked_tags]": self.locked_tags or "",
+            "uploaad[locked_rating]": str(
+                getattr(self, "locked_rating", False)
+            ).lower(),
+        }
+        if hasattr(self, "file_url"):
+            post_data["upload[direct_url]"] = self.file_url
+        else:
+            file_mime = mimetypes.guess_type(self.file_name)[0]
+            file = {"upload[file]": (self.file_name, self.file, file_mime, {})}
+
+        return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
     def update(self, has_notes: bool, reason: str = None):
         """Updates the post. **This function has not been tested.**
@@ -238,6 +281,19 @@ class Post:
         )
 
         return self._client._call_api("PATCH", POST_URL + str(self.id), data=post_data)
+
+    def favorite(self):
+        if not self._original_data:
+            raise UserError("Post object did not come from Post endpoint.")
+
+        post_data = {"post_id": str(self.id)}
+        return self._client._call_api("POST", FAVORITES_URL + ".json", data=post_data)
+
+    def unfavorite(self):
+        if not self._original_data:
+            raise UserError("Post object did not come from Post endpoint.")
+
+        return self._client._call_api("DELETE", f"{FAVORITES_URL}/{str(self.id)}.json")
 
 
 class Note:

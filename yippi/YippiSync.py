@@ -13,7 +13,7 @@ from .Exceptions import UserError
 
 
 class YippiClient(AbstractYippi):
-    def _call_api(self, method, url, data=None, **kwargs):
+    def _call_api(self, method, url, data=None, file=None, **kwargs):
         auth = None
         if self._login:
             auth = HTTPBasicAuth(*self._login)
@@ -21,7 +21,7 @@ class YippiClient(AbstractYippi):
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string
         r = self._session.request(
-            method, url, data=data, headers=self.headers, auth=auth
+            method, url, data=data, files=file, headers=self.headers, auth=auth
         )
         self._verify_response(r)
         if not r.status_code == 204:
@@ -36,7 +36,10 @@ class YippiClient(AbstractYippi):
         elif r.status_code >= 500:
             raise APIError(r.reason)
 
-        if "application/json" not in r.headers.get("Content-Type") and r.status_code != 204:
+        if (
+            "application/json" not in r.headers.get("Content-Type")
+            and r.status_code != 204
+        ):
             res = r.text()
             if "Not found." in res:
                 raise UserError("Not found.")

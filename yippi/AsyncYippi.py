@@ -2,6 +2,7 @@ from typing import List
 from typing import Union
 
 from aiohttp import BasicAuth
+from aiohttp import FormData
 
 from .AbstractYippi import AbstractYippi
 from .Classes import Flag
@@ -22,10 +23,19 @@ class AsyncYippiClient(AbstractYippi):
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
         await self.close()
 
-    async def _call_api(self, method, url, data=None, **kwargs):
+    async def _call_api(self, method, url, data=None, file=None, **kwargs):
         auth = None
         if self._login:
             auth = BasicAuth(*self._login)
+
+        if file:
+            file = file["upload[file]"]
+            formdata = FormData()
+            formdata.add_field(
+                "upload[file]", file[1], filename=file[0], content_type=file[2]
+            )
+            formdata.add_fields(data)
+            data = formdata
 
         query_string = self._generate_query_keys(**kwargs)
         url += "?" + query_string
