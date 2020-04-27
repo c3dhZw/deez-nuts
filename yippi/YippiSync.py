@@ -36,6 +36,9 @@ class YippiClient(AbstractYippi):
             raise APIError(r.reason)
 
         if "application/json" not in r.headers.get("Content-Type"):
+            res = r.text()
+            if "Not found." in res:
+                raise UserError("Not found.")
             raise UserError("Invalid input or server error.")
 
     def posts(
