@@ -39,31 +39,30 @@ class Post:
     """
 
     def __init__(
-        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
+        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
     ):
-        if data:
-            self._original_data = deepcopy(data)
-            self.id: int = data.get("id", None)
-            self.created_at: str = data.get("created_at", None)
-            self.updated_at: str = data.get("updated_at", None)
-            self.file: dict = data.get("file", None)
-            self.preview: dict = data.get("preview", None)
-            self.sample: dict = data.get("sample", None)
-            self.score: dict = data.get("score", None)
-            self.tags: dict = data.get("tags", None)
-            self.locked_tags: list = data.get("locked_tags", None)
-            self.change_seq: int = data.get("change_seq", None)
-            self.flags: dict = data.get("flags", None)
-            self.rating: Rating = Rating(data.get("rating", None))
-            self.fav_count: int = data.get("fav_count", None)
-            self.sources: list = data.get("sources", None)
-            self.pools: list = data.get("pools", None)
-            self.relationships: dict = data.get("relationships", None)
-            self.approver_id: int = data.get("approver_id", None)
-            self.uploader_id: int = data.get("uploader_id", None)
-            self.description: str = data.get("description", None)
-            self.comment_count: int = data.get("comment_count", None)
-            self.is_favorited: bool = data.get("is_favorited", None)
+        self._original_data = deepcopy(kwargs)
+        self.id: int = kwargs.get("id", None)
+        self.created_at: str = kwargs.get("created_at", None)
+        self.updated_at: str = kwargs.get("updated_at", None)
+        self.file: dict = kwargs.get("file", None)
+        self.preview: dict = kwargs.get("preview", None)
+        self.sample: dict = kwargs.get("sample", None)
+        self.score: dict = kwargs.get("score", None)
+        self.tags: dict = kwargs.get("tags", None)
+        self.locked_tags: list = kwargs.get("locked_tags", None)
+        self.change_seq: int = kwargs.get("change_seq", None)
+        self.flags: dict = kwargs.get("flags", None)
+        self.rating: Rating = Rating(kwargs.get("rating", None))
+        self.fav_count: int = kwargs.get("fav_count", None)
+        self.sources: list = kwargs.get("sources", None)
+        self.pools: list = kwargs.get("pools", None)
+        self.relationships: dict = kwargs.get("relationships", None)
+        self.approver_id: int = kwargs.get("approver_id", None)
+        self.uploader_id: int = kwargs.get("uploader_id", None)
+        self.description: str = kwargs.get("description", None)
+        self.comment_count: int = kwargs.get("comment_count", None)
+        self.is_favorited: bool = kwargs.get("is_favorited", None)
         self._client = client
 
     def __repr__(self):
@@ -256,22 +255,21 @@ class Note:
     """
 
     def __init__(
-        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
+        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
     ):
-        if data:
-            self.id: int = data.get("id", None)
-            self.created_at: str = data.get("created_at", None)
-            self.updated_at: str = data.get("updated_at", None)
-            self.creator_id: int = data.get("creator_id", None)
-            self.x: int = data.get("x", None)
-            self.y: int = data.get("y", None)
-            self.width: int = data.get("width", None)
-            self.height: int = data.get("height", None)
-            self.version: int = data.get("version", None)
-            self.is_active: bool = data.get("is_active", None)
-            self.post_id: int = data.get("post_id", None)
-            self.body: str = data.get("body", None)
-            self.creator_name: str = data.get("creator_name", None)
+        self.id: int = kwargs.get("id", None)
+        self.created_at: str = kwargs.get("created_at", None)
+        self.updated_at: str = kwargs.get("updated_at", None)
+        self.creator_id: int = kwargs.get("creator_id", None)
+        self.x: int = kwargs.get("x", None)
+        self.y: int = kwargs.get("y", None)
+        self.width: int = kwargs.get("width", None)
+        self.height: int = kwargs.get("height", None)
+        self.version: int = kwargs.get("version", None)
+        self.is_active: bool = kwargs.get("is_active", None)
+        self.post_id: int = kwargs.get("post_id", None)
+        self.body: str = kwargs.get("body", None)
+        self.creator_name: str = kwargs.get("creator_name", None)
         self._client = client
 
     def __repr__(self):
@@ -384,21 +382,20 @@ class Pool:
     """
 
     def __init__(
-        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
+        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
     ):
-        if data:
-            self.id: int = data.get("id", None)
-            self.name: str = data.get("name", None)
-            self.created_at: str = data.get("created_at", None)
-            self.updated_at: str = data.get("updated_at", None)
-            self.creator_id: int = data.get("creator_id", None)
-            self.description: str = data.get("description", None)
-            self.is_active: bool = data.get("is_active", None)
-            self.category: str = data.get("category", None)
-            self.is_deleted: bool = data.get("is_deleted", None)
-            self.post_ids: list = data.get("post_ids", None)
-            self.creator_name: str = data.get("creator_name", None)
-            self.post_count: int = data.get("post_count", None)
+        self.id: int = kwargs.get("id", None)
+        self.name: str = kwargs.get("name", None)
+        self.created_at: str = kwargs.get("created_at", None)
+        self.updated_at: str = kwargs.get("updated_at", None)
+        self.creator_id: int = kwargs.get("creator_id", None)
+        self.description: str = kwargs.get("description", None)
+        self.is_active: bool = kwargs.get("is_active", None)
+        self.category: str = kwargs.get("category", None)
+        self.is_deleted: bool = kwargs.get("is_deleted", None)
+        self.post_ids: list = kwargs.get("post_ids", None)
+        self.creator_name: str = kwargs.get("creator_name", None)
+        self.post_count: int = kwargs.get("post_count", None)
         self._client = client
 
     def __repr__(self):
@@ -521,17 +518,16 @@ class Flag:
     """
 
     def __init__(
-        self, data: dict = None, client: Union["AsyncYippiClient", "YippiClient"] = None
+        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
     ):
-        if data:
-            self.id: int = data.get("id", None)
-            self.created_at: str = data.get("created_at", None)
-            self.post_id: int = data.get("post_id", None)
-            self.reason: str = data.get("reason", None)
-            self.is_resolved: bool = data.get("is_resolved", None)
-            self.updated_at: str = data.get("updated_at", None)
-            self.is_deletion: bool = data.get("is_deletion", None)
-            self.category: str = data.get("category", None)
+        self.id: int = kwargs.get("id", None)
+        self.created_at: str = kwargs.get("created_at", None)
+        self.post_id: int = kwargs.get("post_id", None)
+        self.reason: str = kwargs.get("reason", None)
+        self.is_resolved: bool = kwargs.get("is_resolved", None)
+        self.updated_at: str = kwargs.get("updated_at", None)
+        self.is_deletion: bool = kwargs.get("is_deletion", None)
+        self.category: str = kwargs.get("category", None)
         self._client = client
 
     def __repr__(self):

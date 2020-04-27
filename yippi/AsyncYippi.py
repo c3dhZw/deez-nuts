@@ -54,12 +54,12 @@ class AsyncYippiClient(AbstractYippi):
         page: Union[int, str] = None,
     ):
         response = await self._get_posts(tags, limit, page)
-        posts = [Post(p, self) for p in response["posts"]]
+        posts = [Post(self, **p) for p in response["posts"]]
         return posts
 
     async def post(self, post_id: int):
         api_res = await self._get_post(post_id)
-        return Post(api_res["post"], self)
+        return Post(self, **api_res["post"])
 
     async def notes(
         self,
@@ -80,7 +80,7 @@ class AsyncYippiClient(AbstractYippi):
             is_active,
             limit,
         )
-        result = [Note(n, self) for n in response]
+        result = [Note(self, **n) for n in response]
         return result
 
     async def flags(
@@ -91,7 +91,7 @@ class AsyncYippiClient(AbstractYippi):
         limit: int = None,
     ):
         response = await self._get_flags(post_id, creator_id, creator_name)
-        result = [Flag(f, self) for f in response]
+        result = [Flag(self, **f) for f in response]
         return result
 
     async def pools(
@@ -119,9 +119,9 @@ class AsyncYippiClient(AbstractYippi):
             order,
             limit,
         )
-        result = [Pool(p, self) for p in response]
+        result = [Pool(self, **p) for p in response]
         return result
 
     async def pool(self, pool_id: int):
         response = await self._get_pool(pool_id)
-        return Pool(response, self)
+        return Pool(self, **response)
