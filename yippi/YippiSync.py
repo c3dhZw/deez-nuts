@@ -40,7 +40,7 @@ class YippiClient(AbstractYippi):
             "application/json" not in r.headers.get("Content-Type")
             and r.status_code != 204
         ):
-            res = r.text()
+            res = r.text
             if "Not found." in res:
                 raise UserError("Not found.")
             raise UserError("Invalid input or server error.")

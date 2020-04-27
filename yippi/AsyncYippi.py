@@ -43,7 +43,7 @@ class AsyncYippiClient(AbstractYippi):
             method, url, data=data, headers=self.headers, auth=auth
         )
         await self._verify_response(r)
-        if not r.status_code == 204:
+        if not r.status == 204:
             return r.json()
 
     async def _verify_response(self, r):
