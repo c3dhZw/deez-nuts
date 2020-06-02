@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import inspect
 import mimetypes
 import os.path
@@ -15,6 +17,11 @@ from .Constants import POST_URL
 from .Constants import UPLOAD_URL
 from .Enums import Rating
 from .Exceptions import UserError
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .AsyncYippi import AsyncYippiClient
+    from .YippiSync import YippiClient
 
 regex = re.compile(
     r"^(?:http|ftp)s?://"
@@ -42,7 +49,7 @@ class Post:
     """
 
     def __init__(
-        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
+        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
     ):
         self._original_data = deepcopy(kwargs)
         self.id: int = kwargs.get("id")
@@ -311,7 +318,7 @@ class Note:
     """
 
     def __init__(
-        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
+        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
     ):
         self.id: int = kwargs.get("id")
         self.created_at: str = kwargs.get("created_at")
@@ -348,7 +355,7 @@ class Note:
         width: int,
         height: int,
         body: str,
-        client: Union["AsyncYippiClient", "YippiClient"],
+        client: Union[AsyncYippiClient, YippiClient],
     ) -> "Note":
         new_post = cls(client=client)
         new_post.post_id = int(post)
@@ -438,7 +445,7 @@ class Pool:
     """
 
     def __init__(
-        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
+        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
     ):
         self.id: int = kwargs.get("id")
         self.name: str = kwargs.get("name")
@@ -574,7 +581,7 @@ class Flag:
     """
 
     def __init__(
-        self, client: Union["AsyncYippiClient", "YippiClient"] = None, **kwargs
+        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
     ):
         self.id: int = kwargs.get("id")
         self.created_at: str = kwargs.get("created_at")
