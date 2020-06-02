@@ -9,15 +9,12 @@ env:
   - secure: NOj+jOjhrJlRmPeHE1H6DoeU7cI4CK+BpgM+7//AYwC9Wmy+ILMcqBl4mepWO1ox1utEPttknjqSD7TnBdhU8GYcenagCfCWXF89AIyQYt8SS+INlxKshL8P/2WSVAhHry62xcV2H6WhnXKmCDxXcv0+Sz3mEt0azkbRBMdX5wAP6twNrlk2QyuMmTdIcyAIvVHIwNFyu2Zf06LYOMsC7uSK4G+WtTOOy1hozM7F/e31MJA3B0ditKnFHGXUBbq5748ytUsgojOrf75woKTGV+nVcRqjAVfdblmZdWTa8sGnNr2lbeNSQRGwsTQklOWfqcusWSugXJDhhEMzrRMJQAzlMtjiejk9Dm4pTLNIrFbO7WOkfwMawKm9YnUYiGxl72JxvY1uWKa39OGE0f6et9A0WDARj2pR7Pf4yJTAtUQyHv9KJGgBvMtJVzI2ujQN1duHKWsRAjtinYtGh9+6EQi2pEwpELOIVx+LfAbRClNtD2GOf/rLrsaxV+sbRUqzTdrACt3N8OjDeqQSh5kWH9224C+dT9B1WDLcNTJyUvreeby6FXvRFz/+tQZBMi6xhTw2N1obq3OFxpGZYc0yZfcOzhe7L3YHO4jCncP5XeabtZmvK8UgX/z4P7u/y4jX3ZPg4kgejG2iXku2gPkJPFICfIHs0/ei/toxn1+WRHI=
 matrix:
   include:
-  - python: '3.6'
+  - python: '3.7'
     env:
     - TOXENV=check
-  - python: '3.6'
+  - python: '3.7'
     env:
     - TOXENV=docs
-  - env:
-    - TOXENV=py36,codecov
-    python: '3.6'
   - env:
     - TOXENV=py37,codecov
     python: '3.7'

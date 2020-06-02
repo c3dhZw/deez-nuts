@@ -6,7 +6,7 @@ authors = ["Rendy Arya Kemal <rendyarya22@gmail.com>"]
 license = "GPL-3.0"
 
 [tool.poetry.dependencies]
-python = ">=3.6"
+python = ">=3.7"
 requests = "^2.23.0"
 aiohttp = "^3.6.2"
 
