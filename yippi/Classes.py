@@ -261,7 +261,7 @@ class Post:
             post_data["post[parent_id]"] = self.relationships["parent_id"]
             post_data["post[old_parent_id]"] = original.relationships["parent_id"]
 
-        if self["description"] != original["description"]:
+        if self.description != original["description"]:
             post_data["post[description]"] = self.description
             post_data["post[old_description]"] = original["description"]
 
