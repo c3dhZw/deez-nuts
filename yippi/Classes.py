@@ -281,7 +281,7 @@ class Post:
         if not post_data:
             raise UserError("No changes has been made to the object.")
 
-        post_data.extend(
+        post_data.update(
             {
                 "post[edit_reason]": reason,
                 "post[has_embedded_notes]": str(has_notes).lower(),
