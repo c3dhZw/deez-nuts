@@ -1,6 +1,9 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Awaitable
 from typing import List
+from typing import Tuple
+from typing import TypeVar
 from typing import Union
 from urllib.parse import urlencode
 
@@ -18,6 +21,11 @@ from .Constants import POOLS_URL
 from .Constants import POST_URL
 from .Constants import POSTS_URL
 from .Exceptions import UserError
+
+T = TypeVar("T")
+MaybeAwaitable = Union[T, Awaitable[T]]
+RequestResponse = MaybeAwaitable[dict]
+ArrayRequestResponse = MaybeAwaitable[List[dict]]
 
 
 class AbstractYippi(ABC):
@@ -43,20 +51,16 @@ class AbstractYippi(ABC):
         project_name: str,
         version: str,
         creator: str,
-        session: Union[aiohttp.ClientSession, requests.Session],
-        loop=None,
     ):
         self.headers = {
             "User-Agent": f"{project_name}/{version} (by {creator} on e621)"
         }
-        self._loop = loop
-        self._session = session
-        self._login = None
+        self._login: Tuple[str, str]
 
     @abstractmethod
     def _call_api(
         self, method: str, url: str, data: dict = None, **kwargs
-    ) -> Union[requests.Response, aiohttp.ClientResponse]:
+    ) -> Union[List[dict], dict]:
         """Calls the API with specified method and url.
 
         Args:
@@ -126,7 +130,7 @@ class AbstractYippi(ABC):
         tags: Union[List, str] = None,
         limit: int = None,
         page: Union[int, str] = None,
-    ) -> dict:
+    ) -> RequestResponse:
         """Internal fetch of posts search.
 
         In general you don't need to touch this. If you want to override
@@ -143,9 +147,9 @@ class AbstractYippi(ABC):
         """
         if isinstance(tags, list):
             tags = " ".join(tags)
-        return self._call_api("GET", POSTS_URL, tags=tags, limit=limit, page=page)
+        return self._call_api("GET", POSTS_URL, tags=tags, limit=limit, page=page)  # type: ignore
 
-    def _get_post(self, post_id: int) -> dict:
+    def _get_post(self, post_id: int) -> RequestResponse:
         """Internal fetch of posts search.
 
         In general you don't need to touch this. If you want to override
@@ -159,7 +163,7 @@ class AbstractYippi(ABC):
 
         """
         url = POST_URL + str(post_id) + ".json"
-        return self._call_api("GET", url)
+        return self._call_api("GET", url)  # type: ignore
 
     def _get_flags(
         self,
@@ -167,7 +171,7 @@ class AbstractYippi(ABC):
         creator_id: int = None,
         creator_name: str = None,
         limit: int = None,
-    ) -> dict:
+    ) -> ArrayRequestResponse:
         """Internal fetch of flags search.
 
         In general you don't need to touch this. If you want to override
@@ -188,7 +192,7 @@ class AbstractYippi(ABC):
         )
         queries["limit"] = limit
 
-        return self._call_api("GET", FLAGS_URL, **queries)
+        return self._call_api("GET", FLAGS_URL, **queries)  # type: ignore
 
     def _get_notes(
         self,
@@ -199,7 +203,7 @@ class AbstractYippi(ABC):
         creator_id: str = None,
         is_active: bool = None,
         limit: int = None,
-    ) -> dict:
+    ) -> ArrayRequestResponse:
         """Internal fetch of notes search.
 
         In general you don't need to touch this. If you want to override
@@ -235,7 +239,7 @@ class AbstractYippi(ABC):
         )
         queries["limit"] = limit
 
-        return self._call_api("GET", NOTES_URL, **queries)
+        return self._call_api("GET", NOTES_URL, **queries)  # type: ignore
 
     def _get_pools(
         self,
@@ -249,7 +253,7 @@ class AbstractYippi(ABC):
         category: str = None,
         order: str = None,
         limit: int = None,
-    ) -> dict:
+    ) -> ArrayRequestResponse:
         """Internal fetch of pools search.
 
         In general you don't need to touch this. If you want to override
@@ -303,9 +307,9 @@ class AbstractYippi(ABC):
             order=order,
         )
         queries["limit"] = limit
-        return self._call_api("GET", POOLS_URL, **queries)
+        return self._call_api("GET", POOLS_URL, **queries)  # type: ignore
 
-    def _get_pool(self, pool_id: int) -> dict:
+    def _get_pool(self, pool_id: int) -> RequestResponse:
         """Internal fetch of pool lookup.
 
         In general you don't need to touch this. If you want to override
@@ -319,7 +323,7 @@ class AbstractYippi(ABC):
 
         """
         url = POOL_URL + str(pool_id) + ".json"
-        return self._call_api("GET", url)
+        return self._call_api("GET", url)  # type: ignore
 
     def login(self, username: str, api_key: str):
         """Supply login credentials to client.
@@ -336,7 +340,7 @@ class AbstractYippi(ABC):
         tags: Union[List, str] = None,
         limit: int = None,
         page: Union[int, str] = None,
-    ) -> List[Post]:
+    ) -> MaybeAwaitable[List[Post]]:
         """Search for posts.
 
         Args:
@@ -351,7 +355,7 @@ class AbstractYippi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def post(self, post_id: int) -> Post:
+    def post(self, post_id: int) -> MaybeAwaitable[Post]:
         """Fetch for a post.
 
         Args:
@@ -366,7 +370,7 @@ class AbstractYippi(ABC):
     @abstractmethod
     def flags(
         self, post_id: int = None, creator_id: int = None, creator_name: str = None
-    ) -> List[Flag]:
+    ) -> MaybeAwaitable[List[Flag]]:
         """Search for flags
 
         Args:
@@ -391,7 +395,7 @@ class AbstractYippi(ABC):
         creator_id: str = None,
         is_active: bool = None,
         limit: int = None,
-    ) -> List[Note]:
+    ) -> MaybeAwaitable[List[Note]]:
         """Search for notes.
 
         Args:
@@ -424,7 +428,7 @@ class AbstractYippi(ABC):
         category: str = None,
         order: str = None,
         limit: int = None,
-    ) -> List[Pool]:
+    ) -> MaybeAwaitable[List[Pool]]:
         """Search for pools.
 
         Args:
@@ -449,7 +453,7 @@ class AbstractYippi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def pool(self, pool_id: int) -> Pool:
+    def pool(self, pool_id: int) -> MaybeAwaitable[Pool]:
         """Fetch for a pool.
 
         Args:

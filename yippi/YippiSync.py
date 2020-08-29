@@ -1,6 +1,7 @@
 from typing import List
 from typing import Union
 
+import requests
 from requests.auth import HTTPBasicAuth
 
 from .AbstractYippi import AbstractYippi
@@ -13,6 +14,9 @@ from .Exceptions import UserError
 
 
 class YippiClient(AbstractYippi):
+    def __init__(self, session: requests.Session = None, *args, **kwargs):
+        self._session: requests.Session = session or requests.Session()
+
     def _call_api(self, method, url, data=None, file=None, **kwargs):
         auth = None
         if self._login:
@@ -52,12 +56,12 @@ class YippiClient(AbstractYippi):
         page: Union[int, str] = None,
     ):
         response = self._get_posts(tags, limit, page)
-        result = [Post(self, **p) for p in response["posts"]]
+        result = [Post(self, **p) for p in response["posts"]]  # type: ignore
         return result
 
     def post(self, post_id: int):
         response = self._get_post(post_id)
-        return Post(self, **response["post"])
+        return Post(self, **response["post"])  # type: ignore
 
     def notes(
         self,
@@ -78,7 +82,7 @@ class YippiClient(AbstractYippi):
             is_active,
             limit,
         )
-        result = [Note(self, **n) for n in response]
+        result = [Note(self, **n) for n in response]  # type: ignore
         return result
 
     def flags(
@@ -89,7 +93,7 @@ class YippiClient(AbstractYippi):
         limit: int = None,
     ):
         response = self._get_flags(post_id, creator_id, creator_name)
-        result = [Flag(self, **f) for f in response]
+        result = [Flag(self, **f) for f in response]  # type: ignore
         return result
 
     def pools(
@@ -117,9 +121,9 @@ class YippiClient(AbstractYippi):
             order,
             limit,
         )
-        result = [Pool(self, **p) for p in response]
+        result = [Pool(self, **p) for p in response]  # type: ignore
         return result
 
     def pool(self, pool_id: int):
         response = self._get_pool(pool_id)
-        return Pool(self, **response)
+        return Pool(self, **response)  # type: ignore

@@ -1,6 +1,7 @@
 from typing import List
 from typing import Union
 
+import aiohttp
 from aiohttp import BasicAuth
 from aiohttp import FormData
 
@@ -14,6 +15,13 @@ from .Exceptions import UserError
 
 
 class AsyncYippiClient(AbstractYippi):
+    def __init__(
+        self, loop=None, session: aiohttp.ClientSession = None, *args, **kwargs
+    ):
+        self._loop = loop
+        self._session: aiohttp.ClientSession = session or aiohttp.ClientSession()
+        super().__init__(*args, **kwargs)
+
     async def close(self) -> None:
         await self._session.close()
 
@@ -67,12 +75,12 @@ class AsyncYippiClient(AbstractYippi):
         limit: int = None,
         page: Union[int, str] = None,
     ):
-        response = await self._get_posts(tags, limit, page)
+        response = await self._get_posts(tags, limit, page)  # type: ignore
         posts = [Post(self, **p) for p in response["posts"]]
         return posts
 
     async def post(self, post_id: int):
-        api_res = await self._get_post(post_id)
+        api_res = await self._get_post(post_id)  # type: ignore
         return Post(self, **api_res["post"])
 
     async def notes(
@@ -93,7 +101,7 @@ class AsyncYippiClient(AbstractYippi):
             creator_id,
             is_active,
             limit,
-        )
+        )  # type: ignore
         result = [Note(self, **n) for n in response]
         return result
 
@@ -104,7 +112,7 @@ class AsyncYippiClient(AbstractYippi):
         creator_name: str = None,
         limit: int = None,
     ):
-        response = await self._get_flags(post_id, creator_id, creator_name)
+        response = await self._get_flags(post_id, creator_id, creator_name)  # type: ignore
         result = [Flag(self, **f) for f in response]
         return result
 
@@ -132,10 +140,10 @@ class AsyncYippiClient(AbstractYippi):
             category,
             order,
             limit,
-        )
+        )  # type: ignore
         result = [Pool(self, **p) for p in response]
         return result
 
     async def pool(self, pool_id: int):
-        response = await self._get_pool(pool_id)
+        response = await self._get_pool(pool_id)  # type: ignore
         return Pool(self, **response)

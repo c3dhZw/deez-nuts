@@ -4,8 +4,10 @@ import inspect
 import mimetypes
 import os.path
 import re
+import typing
 import warnings
 from copy import deepcopy
+from enum import IntEnum
 from typing import List
 from typing import Union
 
@@ -19,9 +21,9 @@ from .Enums import Rating
 from .Exceptions import UserError
 
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
-    from .AsyncYippi import AsyncYippiClient
-    from .YippiSync import YippiClient
+    from .AbstractYippi import AbstractYippi
 
 regex = re.compile(
     r"^(?:http|ftp)s?://"
@@ -48,9 +50,8 @@ class Post:
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(
-        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
-    ):
+    @typing.no_type_check
+    def __init__(self, client: AbstractYippi = None, **kwargs):
         self._original_data = deepcopy(kwargs)
         self.id: int = kwargs.get("id")
         self.created_at: str = kwargs.get("created_at")
@@ -317,9 +318,8 @@ class Note:
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(
-        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
-    ):
+    @typing.no_type_check
+    def __init__(self, client: AbstractYippi = None, **kwargs):
         self.id: int = kwargs.get("id")
         self.created_at: str = kwargs.get("created_at")
         self.updated_at: str = kwargs.get("updated_at")
@@ -355,7 +355,7 @@ class Note:
         width: int,
         height: int,
         body: str,
-        client: Union[AsyncYippiClient, YippiClient],
+        client: AbstractYippi,
     ) -> "Note":
         new_post = cls(client=client)
         new_post.post_id = int(post)
@@ -444,9 +444,8 @@ class Pool:
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(
-        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
-    ):
+    @typing.no_type_check
+    def __init__(self, client: AbstractYippi = None, **kwargs):
         self.id: int = kwargs.get("id")
         self.name: str = kwargs.get("name")
         self.created_at: str = kwargs.get("created_at")
@@ -580,9 +579,8 @@ class Flag:
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(
-        self, client: Union[AsyncYippiClient, YippiClient] = None, **kwargs
-    ):
+    @typing.no_type_check
+    def __init__(self, client: AbstractYippi = None, **kwargs):
         self.id: int = kwargs.get("id")
         self.created_at: str = kwargs.get("created_at")
         self.post_id: int = kwargs.get("post_id")
@@ -607,3 +605,29 @@ class Flag:
     @classmethod
     def create(cls):
         raise NotImplementedError
+
+
+class TagCategory(IntEnum):
+    GENERAL = 0
+    ARTIST = 1
+    COPYRIGHT = 3
+    CHARACTER = 4
+    SPECIES = 5
+    INVALID = 6
+    META = 7
+    LORE = 8
+
+
+class Tag:
+    @typing.no_type_check
+    def __init__(self, client: AbstractYippi = None, **kwargs):
+        self.id: int = kwargs.get("id")
+        self.name: str = kwargs.get("name")
+        self.post_count: int = kwargs.get("post_count")
+        self.related_tags: List[str] = kwargs.get("related_tags")
+        self.related_tags_updated_at = kwargs.get("related_tags_updated_at")
+        self.category: TagCategory = TagCategory(kwargs.get("category"))
+        self.is_locked: bool = kwargs.get("is_locked")
+        self.created_at = kwargs.get("created_at")
+        self.updated_at = kwargs.get("updated_at")
+        self._client = client
