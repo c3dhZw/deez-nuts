@@ -1,6 +1,0 @@
-{
-    "python.testing.unittestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.testing.pytestEnabled": true,
-    "python.pythonPath": "C:\\Users\\Ren\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
-}
