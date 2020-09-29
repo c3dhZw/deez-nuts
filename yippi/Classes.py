@@ -36,7 +36,16 @@ regex = re.compile(
 )
 
 
-class Post:
+class _BaseMixin:
+    def __init__(self, client: AbstractYippi = None, **kwargs: dict):
+        self._original_data: dict = deepcopy(kwargs)
+        self.id: int = kwargs.get("id")
+        self.created_at: str = kwargs.get("created_at")
+        self.updated_at: str = kwargs.get("updated_at")
+        self._client = client
+
+
+class Post(_BaseMixin):
     """Representation of e621's Post object.
 
     Args:
@@ -51,11 +60,8 @@ class Post:
     """
 
     @typing.no_type_check
-    def __init__(self, client: AbstractYippi = None, **kwargs):
-        self._original_data = deepcopy(kwargs)
-        self.id: int = kwargs.get("id")
-        self.created_at: str = kwargs.get("created_at")
-        self.updated_at: str = kwargs.get("updated_at")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.file: dict = kwargs.get("file")
         self.preview: dict = kwargs.get("preview")
         self.sample: dict = kwargs.get("sample")
@@ -74,7 +80,6 @@ class Post:
         self.description: str = kwargs.get("description")
         self.comment_count: int = kwargs.get("comment_count")
         self.is_favorited: bool = kwargs.get("is_favorited")
-        self._client = client
 
     def __repr__(self):
         if self.id:
@@ -304,7 +309,7 @@ class Post:
         return self._client._call_api("DELETE", f"{FAVORITES_URL}/{str(self.id)}.json")
 
 
-class Note:
+class Note(_BaseMixin):
     """Representation of e621's Note object.
 
     Args:
@@ -319,10 +324,8 @@ class Note:
     """
 
     @typing.no_type_check
-    def __init__(self, client: AbstractYippi = None, **kwargs):
-        self.id: int = kwargs.get("id")
-        self.created_at: str = kwargs.get("created_at")
-        self.updated_at: str = kwargs.get("updated_at")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.creator_id: int = kwargs.get("creator_id")
         self.x: int = kwargs.get("x")
         self.y: int = kwargs.get("y")
@@ -333,7 +336,6 @@ class Note:
         self.post_id: int = kwargs.get("post_id")
         self.body: str = kwargs.get("body")
         self.creator_name: str = kwargs.get("creator_name")
-        self._client = client
 
     def __repr__(self):
         return "Note(id=%s)" % (self.id)
@@ -430,7 +432,7 @@ class Note:
         return self._client._call_api("DELETE", NOTE_URL + str(self.id))
 
 
-class Pool:
+class Pool(_BaseMixin):
     """Representation of e621's Pool object.
 
     Args:
@@ -445,11 +447,9 @@ class Pool:
     """
 
     @typing.no_type_check
-    def __init__(self, client: AbstractYippi = None, **kwargs):
-        self.id: int = kwargs.get("id")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.name: str = kwargs.get("name")
-        self.created_at: str = kwargs.get("created_at")
-        self.updated_at: str = kwargs.get("updated_at")
         self.creator_id: int = kwargs.get("creator_id")
         self.description: str = kwargs.get("description")
         self.is_active: bool = kwargs.get("is_active")
@@ -458,7 +458,6 @@ class Pool:
         self.post_ids: list = kwargs.get("post_ids")
         self.creator_name: str = kwargs.get("creator_name")
         self.post_count: int = kwargs.get("post_count")
-        self._client = client
 
     def __repr__(self):
         return "Pool(id=%s, name=%s)" % (self.id, self.name)
@@ -565,7 +564,7 @@ class Pool:
         )
 
 
-class Flag:
+class Flag(_BaseMixin):
     """Representation of e621's Flag object.
 
     Args:
@@ -580,16 +579,13 @@ class Flag:
     """
 
     @typing.no_type_check
-    def __init__(self, client: AbstractYippi = None, **kwargs):
-        self.id: int = kwargs.get("id")
-        self.created_at: str = kwargs.get("created_at")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.post_id: int = kwargs.get("post_id")
         self.reason: str = kwargs.get("reason")
         self.is_resolved: bool = kwargs.get("is_resolved")
-        self.updated_at: str = kwargs.get("updated_at")
         self.is_deletion: bool = kwargs.get("is_deletion")
         self.category: str = kwargs.get("category")
-        self._client = client
 
     def __repr__(self):
         return "Flag(id=%s)" % (self.id)
@@ -618,16 +614,13 @@ class TagCategory(IntEnum):
     LORE = 8
 
 
-class Tag:
+class Tag(_BaseMixin):
     @typing.no_type_check
-    def __init__(self, client: AbstractYippi = None, **kwargs):
-        self.id: int = kwargs.get("id")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.name: str = kwargs.get("name")
         self.post_count: int = kwargs.get("post_count")
         self.related_tags: List[str] = kwargs.get("related_tags")
         self.related_tags_updated_at = kwargs.get("related_tags_updated_at")
         self.category: TagCategory = TagCategory(kwargs.get("category"))
         self.is_locked: bool = kwargs.get("is_locked")
-        self.created_at = kwargs.get("created_at")
-        self.updated_at = kwargs.get("updated_at")
-        self._client = client
