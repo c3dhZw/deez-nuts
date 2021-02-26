@@ -26,7 +26,7 @@ def client():
     username = os.environ.get("ESIX_USERNAME")
     key = os.environ.get("ESIX_APIKEY")
     session = requests.Session()
-    client = YippiClient("Yippi", "0.1", "Error-", session)
+    client = YippiClient("Yippi", "0.1", "Error-", session=session)
     if username and key:
         client.login(username, key)
     return client
@@ -35,39 +35,39 @@ def client():
 @pytest.fixture
 async def async_client(event_loop):
     async with aiohttp.ClientSession(loop=event_loop) as session:
-        async_client = AsyncYippiClient("Yippi", "0.1", "Error-", session)
+        async_client = AsyncYippiClient("Yippi", "0.1", "Error-", session=session)
         yield async_client
         await async_client.close()
 
 
 @pytest.mark.vcr()
-def test_note(client):
+def test_note(client: YippiClient):
     note = client.notes(limit=1)[0]
     assert note.get_post()
 
 
 @pytest.mark.vcr()
-def test_pool_sync(client):
+def test_pool_sync(client: YippiClient):
     pool = client.pools("Weekend 2")[0]
     posts = pool.get_posts()
     assert len(posts) == 48
 
 
 @pytest.mark.asyncio
-async def test_pool_async(async_client):
+async def test_pool_async(async_client: AsyncYippiClient):
     pool = (await async_client.pools("Weekend 2"))[0]
     posts = await pool.get_posts()
     assert len(posts) == 48
 
 
 @pytest.mark.vcr()
-def test_flag(client):
+def test_flag(client: YippiClient):
     flag = client.flags(limit=1)[0]
     assert flag.get_post()
 
 
 @pytest.mark.vcr()
-def test_post_vote(client):
+def test_post_vote(client: YippiClient):
     if not client._login:
         pytest.skip("No login credentials provided.")
 

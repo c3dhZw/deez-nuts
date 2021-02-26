@@ -15,7 +15,7 @@ def vcr_cassette_dir(request):
 @pytest.fixture
 def client():
     session = requests.Session()
-    return YippiClient("Yippi", "0.1", "Error-", session)
+    return YippiClient("Yippi", "0.1", "Error-", session=session)
 
 
 @pytest.mark.vcr()

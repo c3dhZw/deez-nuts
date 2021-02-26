@@ -47,15 +47,12 @@ class AbstractYippi(ABC):
     VALID_ORDER = ("name", "created_at", "updated_at", "post_count")
 
     def __init__(
-        self,
-        project_name: str,
-        version: str,
-        creator: str,
+        self, project_name: str, version: str, creator: str,
     ):
         self.headers = {
             "User-Agent": f"{project_name}/{version} (by {creator} on e621)"
         }
-        self._login: Tuple[str, str]
+        self._login: Tuple[str, str] = ("", "")
 
     @abstractmethod
     def _call_api(
@@ -226,8 +223,12 @@ class AbstractYippi(ABC):
         """
         if isinstance(post_tags_match, list):
             post_tags_match = " ".join(post_tags_match)
+
+        is_active_str: str
         if is_active is not None:
-            is_active = str(is_active).lower()
+            is_active_str = str(is_active).lower()
+        else:
+            is_active_str = ""
 
         queries: dict = self._convert_search_query(
             body_matches=body_matches,
@@ -235,7 +236,7 @@ class AbstractYippi(ABC):
             post_tags_match=post_tags_match,
             creator_name=creator_name,
             creator_id=creator_id,
-            is_active=is_active,
+            is_active=is_active_str if is_active_str else None,
         )
         queries["limit"] = limit
 
@@ -244,7 +245,7 @@ class AbstractYippi(ABC):
     def _get_pools(
         self,
         name_matches: str = None,
-        id_: Union[int, List[int]] = None,
+        id_: Union[str, int, List[int]] = None,
         description_matches: str = None,
         creator_name: str = None,
         creator_id: int = None,
@@ -279,12 +280,19 @@ class AbstractYippi(ABC):
 
         """
         if isinstance(id_, list):
-            id_ = ",".join(id_)
+            id_ = ",".join(map(str, id_))
 
+        is_active_str: str
         if is_active is not None:
-            is_active = str(is_active).lower()
+            is_active_str = str(is_active).lower()
+        else:
+            is_active_str = ""
+
+        is_deleted_str: str
         if is_deleted is not None:
-            is_deleted = str(is_deleted).lower()
+            is_deleted_str = str(is_deleted).lower()
+        else:
+            is_deleted_str = ""
 
         if category and category not in self.VALID_CATEGORY:
             raise UserError(
@@ -301,8 +309,8 @@ class AbstractYippi(ABC):
             description_matches=description_matches,
             creator_name=creator_name,
             creator_id=creator_id,
-            is_active=is_active,
-            is_deleted=is_deleted,
+            is_active=is_active_str if is_active_str else None,
+            is_deleted=is_deleted_str if is_deleted_str else None,
             category=category,
             order=order,
         )

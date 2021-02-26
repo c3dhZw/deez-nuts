@@ -4,7 +4,7 @@ import inspect
 import mimetypes
 import os.path
 import re
-import typing
+from typing import Optional
 import warnings
 from copy import deepcopy
 from enum import IntEnum
@@ -37,11 +37,12 @@ regex = re.compile(
 
 
 class _BaseMixin:
-    def __init__(self, client: AbstractYippi = None, **kwargs: dict):
-        self._original_data: dict = deepcopy(kwargs)
-        self.id: int = kwargs.get("id")
-        self.created_at: str = kwargs.get("created_at")
-        self.updated_at: str = kwargs.get("updated_at")
+    def __init__(self, json_data: dict, client: AbstractYippi = None):
+        if json_data:
+            self._original_data: dict = deepcopy(json_data)
+            self.id: Optional[int] = json_data.get("id")
+            self.created_at: Optional[str] = json_data.get("created_at")
+            self.updated_at: Optional[str] = json_data.get("updated_at")
         self._client = client
 
 
@@ -59,27 +60,27 @@ class Post(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    @typing.no_type_check
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.file: dict = kwargs.get("file")
-        self.preview: dict = kwargs.get("preview")
-        self.sample: dict = kwargs.get("sample")
-        self.score: dict = kwargs.get("score")
-        self.tags: dict = kwargs.get("tags")
-        self.locked_tags: list = kwargs.get("locked_tags")
-        self.change_seq: int = kwargs.get("change_seq")
-        self.flags: dict = kwargs.get("flags")
-        self.rating: Rating = Rating(kwargs.get("rating"))
-        self.fav_count: int = kwargs.get("fav_count")
-        self.sources: list = kwargs.get("sources")
-        self.pools: list = kwargs.get("pools")
-        self.relationships: dict = kwargs.get("relationships")
-        self.approver_id: int = kwargs.get("approver_id")
-        self.uploader_id: int = kwargs.get("uploader_id")
-        self.description: str = kwargs.get("description")
-        self.comment_count: int = kwargs.get("comment_count")
-        self.is_favorited: bool = kwargs.get("is_favorited")
+    def __init__(self, json_data=None, *args, **kwargs):
+        super().__init__(json_data, *args, **kwargs)
+        if json_data:
+            self.file: dict = json_data.get("file")
+            self.preview: dict = json_data.get("preview")
+            self.sample: dict = json_data.get("sample")
+            self.score: dict = json_data.get("score")
+            self.tags: dict = json_data.get("tags")
+            self.locked_tags: list = json_data.get("locked_tags")
+            self.change_seq: int = json_data.get("change_seq")
+            self.flags: dict = json_data.get("flags")
+            self.rating: Rating = Rating(json_data.get("rating"))
+            self.fav_count: int = json_data.get("fav_count")
+            self.sources: list = json_data.get("sources")
+            self.pools: list = json_data.get("pools")
+            self.relationships: dict = json_data.get("relationships")
+            self.approver_id: int = json_data.get("approver_id")
+            self.uploader_id: int = json_data.get("uploader_id")
+            self.description: str = json_data.get("description")
+            self.comment_count: int = json_data.get("comment_count")
+            self.is_favorited: bool = json_data.get("is_favorited")
 
     def __repr__(self):
         if self.id:
@@ -124,23 +125,27 @@ class Post(_BaseMixin):
         if type(original) != type(new):
             raise ValueError("Original and new must have same type.")
 
-        deleted = []
-        added = []
-        if isinstance(original, dict):
-            joined_original = []
-            joined_new = []
+        # Transform dict and str into list of differences.
+        if isinstance(original, dict) and isinstance(new, dict):
+            joined_original = []  # type: List[str]
+            joined_new = []  # type: List[str]
             for k in original.keys():
                 joined_original.extend(original[k])
                 joined_new.extend(new[k])
 
             original = joined_original
             new = joined_new
-        elif isinstance(original, str):
+        elif isinstance(original, str) and isinstance(new, str):
             original = original.split()
             new = new.split()
 
-        deleted += self._diff_list(original, new)
-        added += self._diff_list(new, original)
+        # By this point original and new is already a list, so this will always run.
+        # I don't know how to make mypy not complain about this.
+        added = []  # type: List[str]
+        deleted = []  # type: List[str]
+        if isinstance(original, list) and isinstance(new, list):
+            deleted = self._diff_list(original, new)
+            added = self._diff_list(new, original)
 
         output = ""
         if added:
@@ -323,19 +328,18 @@ class Note(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    @typing.no_type_check
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.creator_id: int = kwargs.get("creator_id")
-        self.x: int = kwargs.get("x")
-        self.y: int = kwargs.get("y")
-        self.width: int = kwargs.get("width")
-        self.height: int = kwargs.get("height")
-        self.version: int = kwargs.get("version")
-        self.is_active: bool = kwargs.get("is_active")
-        self.post_id: int = kwargs.get("post_id")
-        self.body: str = kwargs.get("body")
-        self.creator_name: str = kwargs.get("creator_name")
+    def __init__(self, json_data=None, *args, **kwargs):
+        super().__init__(json_data, *args, **kwargs)
+        self.creator_id: int = json_data.get("creator_id")
+        self.x: int = json_data.get("x")
+        self.y: int = json_data.get("y")
+        self.width: int = json_data.get("width")
+        self.height: int = json_data.get("height")
+        self.version: int = json_data.get("version")
+        self.is_active: bool = json_data.get("is_active")
+        self.post_id: int = json_data.get("post_id")
+        self.body: str = json_data.get("body")
+        self.creator_name: str = json_data.get("creator_name")
 
     def __repr__(self):
         return "Note(id=%s)" % (self.id)
@@ -346,6 +350,9 @@ class Note(_BaseMixin):
         Returns:
             :class:`yippi.Classes.Post`: The post linked with this note.
         """
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
         return self._client.post(self.post_id)
 
     @classmethod
@@ -410,7 +417,7 @@ class Note(_BaseMixin):
         Raises:
             UserError: Raised if
                 - Note does not come from :meth:`~yippi.AbstractMethod.notes`.
-                - ``client`` kwargs was not supplied.
+                - ``client`` kwags was not supplied.
 
         Returns:
             dict: JSON status response from API.
@@ -446,18 +453,18 @@ class Pool(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    @typing.no_type_check
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.name: str = kwargs.get("name")
-        self.creator_id: int = kwargs.get("creator_id")
-        self.description: str = kwargs.get("description")
-        self.is_active: bool = kwargs.get("is_active")
-        self.category: str = kwargs.get("category")
-        self.is_deleted: bool = kwargs.get("is_deleted")
-        self.post_ids: list = kwargs.get("post_ids")
-        self.creator_name: str = kwargs.get("creator_name")
-        self.post_count: int = kwargs.get("post_count")
+    def __init__(self, json_data=None, *args, **kwargs):
+        super().__init__(json_data, *args, **kwargs)
+        if json_data:
+            self.name: str = json_data.get("name")
+            self.creator_id: int = json_data.get("creator_id")
+            self.description: str = json_data.get("description")
+            self.is_active: bool = json_data.get("is_active")
+            self.category: str = json_data.get("category")
+            self.is_deleted: bool = json_data.get("is_deleted")
+            self.post_ids: list = json_data.get("post_ids")
+            self.creator_name: str = json_data.get("creator_name")
+            self.post_count: int = json_data.get("post_count")
 
     def __repr__(self):
         return "Pool(id=%s, name=%s)" % (self.id, self.name)
@@ -578,14 +585,14 @@ class Flag(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    @typing.no_type_check
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.post_id: int = kwargs.get("post_id")
-        self.reason: str = kwargs.get("reason")
-        self.is_resolved: bool = kwargs.get("is_resolved")
-        self.is_deletion: bool = kwargs.get("is_deletion")
-        self.category: str = kwargs.get("category")
+    def __init__(self, json_data=None, *args, **kwargs):
+        super().__init__(json_data, *args, **kwargs)
+        if json_data:
+            self.post_id: int = json_data.get("post_id")
+            self.reason: str = json_data.get("reason")
+            self.is_resolved: bool = json_data.get("is_resolved")
+            self.is_deletion: bool = json_data.get("is_deletion")
+            self.category: str = json_data.get("category")
 
     def __repr__(self):
         return "Flag(id=%s)" % (self.id)
@@ -615,12 +622,12 @@ class TagCategory(IntEnum):
 
 
 class Tag(_BaseMixin):
-    @typing.no_type_check
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.name: str = kwargs.get("name")
-        self.post_count: int = kwargs.get("post_count")
-        self.related_tags: List[str] = kwargs.get("related_tags")
-        self.related_tags_updated_at = kwargs.get("related_tags_updated_at")
-        self.category: TagCategory = TagCategory(kwargs.get("category"))
-        self.is_locked: bool = kwargs.get("is_locked")
+    def __init__(self, json_data=None, *args, **kwargs):
+        super().__init__(json_data, *args, **kwargs)
+        if json_data:
+            self.name: str = json_data.get("name")
+            self.post_count: int = json_data.get("post_count")
+            self.related_tags: List[str] = json_data.get("related_tags")
+            self.related_tags_updated_at = json_data.get("related_tags_updated_at")
+            self.category: TagCategory = TagCategory(json_data.get("category"))
+            self.is_locked: bool = json_data.get("is_locked")

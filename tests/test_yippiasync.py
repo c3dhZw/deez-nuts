@@ -15,7 +15,7 @@ def vcr_cassette_dir(request):
 @pytest.fixture
 async def client(event_loop):
     async with aiohttp.ClientSession(loop=event_loop) as session:
-        client = AsyncYippiClient("Yippi", "0.1", "Error-", session)
+        client = AsyncYippiClient("Yippi", "0.1", "Error-", session=session)
         yield client
         await client.close()
 
@@ -23,7 +23,7 @@ async def client(event_loop):
 @pytest.mark.asyncio
 async def test_context(event_loop):
     async with aiohttp.ClientSession(loop=event_loop) as session:
-        async with AsyncYippiClient("Yippi", "0.1", "Error-", session):
+        async with AsyncYippiClient("Yippi", "0.1", "Error-", session=session):
             pass
 
 
