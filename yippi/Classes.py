@@ -4,11 +4,12 @@ import inspect
 import mimetypes
 import os.path
 import re
-from typing import Optional
 import warnings
 from copy import deepcopy
 from enum import IntEnum
+from typing import TYPE_CHECKING
 from typing import List
+from typing import Optional
 from typing import Union
 
 from .Constants import BASE_URL
@@ -19,8 +20,6 @@ from .Constants import POST_URL
 from .Constants import UPLOAD_URL
 from .Enums import Rating
 from .Exceptions import UserError
-
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .AbstractYippi import AbstractYippi
