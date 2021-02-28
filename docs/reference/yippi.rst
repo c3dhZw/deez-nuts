@@ -17,6 +17,14 @@ yippi.AsyncYippi module
    :undoc-members:
    :show-inheritance:
 
+yippi.YippiSync module
+----------------------
+
+.. automodule:: yippi.YippiSync
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 yippi.Classes module
 --------------------
 
@@ -29,14 +37,6 @@ yippi.Exceptions module
 -----------------------
 
 .. automodule:: yippi.Exceptions
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-yippi.YippiSync module
-----------------------
-
-.. automodule:: yippi.YippiSync
    :members:
    :undoc-members:
    :show-inheritance:

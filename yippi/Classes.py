@@ -57,7 +57,7 @@ class Post(_BaseMixin):
         client (optional): The yippi client, used for api calls.
 
     Attributes:
-        Refer to `e621 API docs`_ for available attributes.
+        All (Any): Refer to `e621 API docs`_ for available attributes.
 
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
@@ -178,7 +178,8 @@ class Post(_BaseMixin):
                 - ``client`` kwargs was not supplied.
 
         Returns:
-            dict: JSON response with keys ``score``, ``up``, ``down``, and ``our_score``.
+            dict:
+                JSON response with keys ``score``, ``up``, ``down``, and ``our_score``.
                 Where ``dict['our_score']`` is 1, 0, -1 depending on the action.
         """
         if not self._client:
@@ -332,7 +333,7 @@ class Note(_BaseMixin):
         client (optional): The yippi client, used for api calls.
 
     Attributes:
-        Refer to `e621 API docs`_ for available attributes.
+        All (Any): Refer to `e621 API docs`_ for available attributes.
 
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
@@ -472,7 +473,7 @@ class Pool(_BaseMixin):
         client (optional): The yippi client, used for api calls.
 
     Attributes:
-        Refer to `e621 API docs`_ for available attributes.
+        All (Any): Refer to `e621 API docs`_ for available attributes.
 
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
@@ -616,7 +617,7 @@ class Flag(_BaseMixin):
         client (optional): The yippi client, used for api calls.
 
     Attributes:
-        Refer to `e621 API docs`_ for available attributes.
+        All (Any): Refer to `e621 API docs`_ for available attributes.
 
     .. _e621 API docs:
         https://e621.net/wiki_pages/2425
