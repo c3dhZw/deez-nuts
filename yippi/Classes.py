@@ -7,6 +7,7 @@ import re
 import warnings
 from copy import deepcopy
 from enum import IntEnum
+from typing import cast, TypeVar, Awaitable, Callable
 from typing import TYPE_CHECKING
 from typing import List
 from typing import Optional
@@ -23,6 +24,9 @@ from .Exceptions import UserError
 
 if TYPE_CHECKING:
     from .AbstractYippi import AbstractYippi
+
+T = TypeVar("T")
+MaybeAwaitable = Union[T, Awaitable[T]]
 
 regex = re.compile(
     r"^(?:http|ftp)s?://"
@@ -61,6 +65,8 @@ class Post(_BaseMixin):
 
     def __init__(self, json_data=None, *args, **kwargs):
         super().__init__(json_data, *args, **kwargs)
+        self.file_path: Optional[str] = None
+        self.file_url: Optional[str] = None
         if json_data:
             self.file: dict = json_data.get("file")
             self.preview: dict = json_data.get("preview")
@@ -81,7 +87,7 @@ class Post(_BaseMixin):
             self.comment_count: int = json_data.get("comment_count")
             self.is_favorited: bool = json_data.get("is_favorited")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self.id:
             name = "Post(id=%s)" % (self.id)
         elif self.file_path:
@@ -91,6 +97,9 @@ class Post(_BaseMixin):
         else:
             name = "Post()"
         return name
+
+    def __int__(self) -> int:
+        return getattr(self, "id", -1)
 
     def _diff_list(self, this: List, that: List) -> List[str]:
         """Find differences between two list.
@@ -138,13 +147,10 @@ class Post(_BaseMixin):
             original = original.split()
             new = new.split()
 
-        # By this point original and new is already a list, so this will always run.
-        # I don't know how to make mypy not complain about this.
-        added = []  # type: List[str]
-        deleted = []  # type: List[str]
-        if isinstance(original, list) and isinstance(new, list):
-            deleted = self._diff_list(original, new)
-            added = self._diff_list(new, original)
+        # At this point, original and new has been transformed into list of tags.
+        assert isinstance(original, list) and isinstance(new, list)
+        deleted = self._diff_list(original, new)
+        added = self._diff_list(new, original)
 
         output = ""
         if added:
@@ -185,9 +191,11 @@ class Post(_BaseMixin):
             raise UserError("Score must either be 1 or -1.")
 
         data = {"score": score, "no_unvote": replace}
-        return self._client._call_api(
+        api_response = self._client._call_api(
             "POST", POST_URL + f"/{self.id}/votes.json", data=data
         )
+        api_response = cast(dict, api_response)
+        return api_response
 
     @classmethod
     def from_file(cls, path):
@@ -251,6 +259,9 @@ class Post(_BaseMixin):
             UserError: If the post did not come from any Post endpoint or if no changes has been made.
         """
         warnings.warn("This function has not been tested and should not be used.")
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
 
@@ -267,9 +278,9 @@ class Post(_BaseMixin):
         if delta_source:
             post_data["post[source_diff]"] = delta_source
 
-        if self.relationships["parent_id"] != original.relationships["parent_id"]:
+        if self.relationships["parent_id"] != original["relationships"]["parent_id"]:
             post_data["post[parent_id]"] = self.relationships["parent_id"]
-            post_data["post[old_parent_id]"] = original.relationships["parent_id"]
+            post_data["post[old_parent_id]"] = original["relationships"]["parent_id"]
 
         if self.description != original["description"]:
             post_data["post[description]"] = self.description
@@ -292,7 +303,7 @@ class Post(_BaseMixin):
 
         post_data.update(
             {
-                "post[edit_reason]": reason,
+                "post[edit_reason]": reason or "",
                 "post[has_embedded_notes]": str(has_notes).lower(),
             }
         )
@@ -343,7 +354,7 @@ class Note(_BaseMixin):
     def __repr__(self):
         return "Note(id=%s)" % (self.id)
 
-    def get_post(self) -> "Post":
+    def get_post(self) -> MaybeAwaitable["Post"]:
         """Fetch the post linked with this note.
 
         Returns:
@@ -380,7 +391,11 @@ class Note(_BaseMixin):
         Returns:
             dict: JSON status response from API.
         """
+
         warnings.warn("This function has not been tested and should not be used.")
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
         post_data = {
             "note[x]": self.x,
             "note[y]": self.y,
@@ -388,7 +403,11 @@ class Note(_BaseMixin):
             "note[height]": self.height,
             "note[body]": self.body,
         }
-        return self._client._call_api("PUT", NOTE_URL + str(self.id), data=post_data)
+        api_response = self._client._call_api(
+            "PUT", NOTE_URL + str(self.id), data=post_data
+        )
+        api_response = cast(dict, api_response)
+        return api_response
 
     def upload(self) -> dict:
         """Uploads the note. **This function has not been tested.**
@@ -397,6 +416,9 @@ class Note(_BaseMixin):
             dict: JSON status response from API.
         """
         warnings.warn("This function has not been tested and should not be used.")
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
         post_data = {
             "note[post_id]": self.post_id,
             "note[x]": self.x,
@@ -405,7 +427,9 @@ class Note(_BaseMixin):
             "note[height]": self.height,
             "note[body]": self.body,
         }
-        return self._client._call_api("PUT", NOTES_URL, data=post_data)
+        api_response = self._client._call_api("PUT", NOTES_URL, data=post_data)
+        api_response = cast(dict, api_response)
+        return api_response
 
     def revert(self, version_id: str) -> dict:
         """Reverts note to specified version_id. **This function has not been tested.**
@@ -429,9 +453,11 @@ class Note(_BaseMixin):
             raise UserError("Post does not come from e621 API.")
 
         data = {"version_id": version_id}
-        return self._client._call_api(
+        api_response = self._client._call_api(
             "PUT", NOTE_URL + f"{self.id}/revert.json", data=data
         )
+        api_response = cast(dict, api_response)
+        return api_response
 
     def delete(self):
         warnings.warn("This function has not been tested and should not be used.")
@@ -468,7 +494,7 @@ class Pool(_BaseMixin):
     def __repr__(self):
         return "Pool(id=%s, name=%s)" % (self.id, self.name)
 
-    def _sort_posts(self, arr: List["Post"]):
+    def _sort_posts(self, arr: List["Post"]) -> List["Post"]:
         """Sort a list of post based on page numbering.
 
         The way it works is to sort it based on what has been provided on ``.post_ids``.
@@ -503,11 +529,16 @@ class Pool(_BaseMixin):
         Returns:
             :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
         """
-        result = []
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
+        result: List["Post"] = []
+        get_posts_func = cast(Callable[..., Awaitable[List[Post]]], self._client.posts)
+
         current_page = 1
         while len(result) < len(self.post_ids):
             result.extend(
-                await self._client.posts("pool:" + str(self.id), page=current_page)
+                await get_posts_func("pool:" + str(self.id), page=current_page)
             )
             current_page += 1
 
@@ -515,7 +546,7 @@ class Pool(_BaseMixin):
         self._register_linked(result)
         return result
 
-    def get_posts(self) -> List["Post"]:
+    def get_posts(self) -> MaybeAwaitable[List["Post"]]:
         """Fetch all posts linked with this pool.
 
         If the client is an async client, it will automatically call :meth:`.get_posts_async()`.
@@ -523,13 +554,18 @@ class Pool(_BaseMixin):
         Returns:
             :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
         """
+        if not self._client:
+            raise UserError("Yippi client isn't initialized.")
+
         if inspect.iscoroutinefunction(self._client.post):
             return self.get_posts_async()
 
-        result = []
+        result: List["Post"] = []
+        get_posts_func = cast(Callable[..., List[Post]], self._client.posts)
+
         current_page = 1
         while len(result) < len(self.post_ids):
-            result.extend(self._client.posts("pool:" + str(self.id), page=current_page))
+            result.extend(get_posts_func("pool:" + str(self.id), page=current_page))
             current_page += 1
 
         result = self._sort_posts(result)
@@ -565,9 +601,11 @@ class Pool(_BaseMixin):
             raise UserError("Post does not come from e621 API.")
 
         data = {"version_id": version_id}
-        return self._client._call_api(
+        api_response = self._client._call_api(
             "PUT", BASE_URL + f"/notes/{self.id}/revert.json", data=data
         )
+        api_response = cast(dict, api_response)
+        return api_response
 
 
 class Flag(_BaseMixin):
