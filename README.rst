@@ -1,19 +1,6 @@
 ========
 Overview
 ========
-.. image:: https://travis-ci.org/rorre/Yippi.svg?branch=master
-    :target: https://travis-ci.org/rorre/Yippi
-.. image:: https://codecov.io/gh/rorre/yippi/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/rorre/yippi
-.. image:: https://img.shields.io/pypi/pyversions/Yippi
-.. image:: https://img.shields.io/github/license/rorre/Yippi
-    :target: https://github.com/rorre/Yippi/blob/master/LICENSE
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
-.. image:: https://img.shields.io/pypi/v/yippi
-    :target: https://pypi.org/project/yippi
-.. image:: https://img.shields.io/github/issues/rorre/Yippi
-    :alt: GitHub issues
 
 An (a)sync e621 API wrapper library.
 
