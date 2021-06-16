@@ -3,6 +3,7 @@ from typing import Union
 
 import requests
 from requests.auth import HTTPBasicAuth
+from ratelimit import limits, sleep_and_retry
 
 from .AbstractYippi import AbstractYippi
 from .Classes import Flag
@@ -18,6 +19,8 @@ class YippiClient(AbstractYippi):
         super().__init__(*args, **kwargs)
         self._session: requests.Session = session or requests.Session()
 
+    @sleep_and_retry
+    @limits(calls=2, period=1)
     def _call_api(self, method, url, data=None, file=None, **kwargs):
         auth = None
         if self._login != ("", ""):

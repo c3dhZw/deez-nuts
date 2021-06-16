@@ -4,6 +4,7 @@ from typing import Union
 import aiohttp
 from aiohttp import BasicAuth
 from aiohttp import FormData
+from ratelimit import limits, sleep_and_retry
 
 from .AbstractYippi import AbstractYippi
 from .Classes import Flag
@@ -31,6 +32,8 @@ class AsyncYippiClient(AbstractYippi):
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
         await self.close()
 
+    @sleep_and_retry
+    @limits(calls=2, period=1)
     async def _call_api(self, method, url, data=None, file=None, **kwargs):
         auth = None
         if self._login != ("", ""):
