@@ -3,7 +3,7 @@ name = "yippi"
 version = "0.1.1"
 description = "An (a)sync e621 API wrapper for Python."
 authors = ["Rendy Arya Kemal <rendyarya22@gmail.com>"]
-license = "GPL-3.0"
+license = "LGPL-3.0-only"
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
