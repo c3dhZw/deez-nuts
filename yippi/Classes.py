@@ -244,8 +244,8 @@ class Post(_BaseMixin):
         if hasattr(self, "file_url"):
             post_data["upload[direct_url]"] = self.file_url
         else:
-            file_mime = mimetypes.guess_type(self.file_name)[0]
-            file = {"upload[file]": (self.file_name, self.file, file_mime, {})}
+            file_mime = mimetypes.guess_type(self.file_path)[0]
+            file = {"upload[file]": (self.file_path, self.file, file_mime, {})}
 
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
