@@ -287,8 +287,8 @@ class Post(_BaseMixin):
             post_data["post[description]"] = self.description
             post_data["post[old_description]"] = original["description"]
 
-        if self.rating._value_ != original["rating"]:
-            post_data["post[rating]"] = self.rating._value_
+        if self.rating.value != original["rating"]:
+            post_data["post[rating]"] = self.rating.value
             post_data["post[old_rating]"] = original["rating"]
 
         if self.flags["rating_locked"] != original["flags"]["rating_locked"]:
