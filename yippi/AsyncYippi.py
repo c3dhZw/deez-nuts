@@ -58,7 +58,7 @@ class AsyncYippiClient(AbstractYippi):
             return await r.json()
 
     async def _verify_response(self, r) -> None:
-        if r.status >= 300 and r.status < 500:
+        if 300 <= r.status < 500:
             res = await r.json()
             if r.status >= 400:
                 raise UserError(res.get("message") or res.get("reason"), json=res)
