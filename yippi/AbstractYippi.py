@@ -377,7 +377,11 @@ class AbstractYippi(ABC):
 
     @abstractmethod
     def flags(
-        self, post_id: int = None, creator_id: int = None, creator_name: str = None
+        self,
+        post_id: int = None,
+        creator_id: int = None,
+        creator_name: str = None,
+        limit: int = None,
     ) -> MaybeAwaitable[List[Flag]]:
         """Search for flags
 
