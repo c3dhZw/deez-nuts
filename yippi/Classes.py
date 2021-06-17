@@ -89,11 +89,11 @@ class Post(_BaseMixin):
 
     def __repr__(self) -> str:
         if self.id:
-            name = "Post(id=%s)" % (self.id)
+            name = f"Post(id={self.id})"
         elif self.file_path:
-            name = "Post(file_path=%s)" % (self.file_path)
+            name = f"Post(file_path={self.file_path})"
         elif self.file_url:
-            name = "Post(file_url=%s)" % (self.file_url)
+            name = f"Post(file_url={self.file_url})"
         else:
             name = "Post()"
         return name
@@ -352,7 +352,7 @@ class Note(_BaseMixin):
         self.creator_name: str = json_data.get("creator_name")
 
     def __repr__(self) -> str:
-        return "Note(id=%s)" % (self.id)
+        return f"Note(id={self.id})"
 
     def get_post(self) -> MaybeAwaitable["Post"]:
         """Fetch the post linked with this note.
@@ -492,7 +492,7 @@ class Pool(_BaseMixin):
             self.post_count: int = json_data.get("post_count")
 
     def __repr__(self) -> str:
-        return "Pool(id=%s, name=%s)" % (self.id, self.name)
+        return f"Pool(id={self.id}, name={self.name})"
 
     def _sort_posts(self, arr: List["Post"]) -> List["Post"]:
         """Sort a list of post based on page numbering.
@@ -632,7 +632,7 @@ class Flag(_BaseMixin):
             self.category: str = json_data.get("category")
 
     def __repr__(self) -> str:
-        return "Flag(id=%s)" % (self.id)
+        return f"Flag(id={self.id})"
 
     def get_post(self) -> 'Post':
         """Fetch the post linked with this flag.
