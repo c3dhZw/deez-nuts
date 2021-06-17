@@ -66,7 +66,13 @@ class AsyncYippiClient(AbstractYippi):
         elif r.status >= 500:
             raise APIError(r.reason)
 
-        if "application/json" not in r.headers.get("Content-Type") and r.status != 204:
+        if (
+            r.status != 204
+            and (
+                not r.headers.get("Content-Type")
+                or "application/json" not in r.headers.get("Content-Type")
+            )
+        ):
             res = await r.text()
             if "Not found." in res:
                 raise UserError("Not found.")

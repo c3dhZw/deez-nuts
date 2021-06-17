@@ -45,8 +45,11 @@ class YippiClient(AbstractYippi):
             raise APIError(r.reason)
 
         if (
-            "application/json" not in r.headers.get("Content-Type")
-            and r.status_code != 204
+            r.status_code != 204
+            and (
+                not r.headers.get("Content-Type")
+                or "application/json" not in r.headers.get("Content-Type")
+            )
         ):
             res = r.text
             if "Not found." in res:
