@@ -214,7 +214,7 @@ class Post(_BaseMixin):
         new_post.file_url = url
         return new_post
 
-    def upload(self) -> None:
+    def upload(self) -> dict:
         warnings.warn("This function has not been tested and should not be used.")
         if isinstance(self.tags, str):
             tags = self.tags
