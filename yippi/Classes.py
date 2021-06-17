@@ -318,11 +318,10 @@ class Post(_BaseMixin):
         post_data = {"post_id": str(self.id)}
         return self._client._call_api("POST", FAVORITES_URL + ".json", data=post_data)
 
-    def unfavorite(self) -> dict:
+    def unfavorite(self) -> None:
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
-
-        return self._client._call_api("DELETE", f"{FAVORITES_URL}/{str(self.id)}.json")
+        self._client._call_api("DELETE", f"{FAVORITES_URL}/{str(self.id)}.json")
 
 
 class Note(_BaseMixin):
@@ -462,7 +461,7 @@ class Note(_BaseMixin):
 
     def delete(self) -> None:
         warnings.warn("This function has not been tested and should not be used.")
-        return self._client._call_api("DELETE", NOTE_URL + str(self.id))
+        self._client._call_api("DELETE", NOTE_URL + str(self.id))
 
 
 class Pool(_BaseMixin):
