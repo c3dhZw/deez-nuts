@@ -34,7 +34,7 @@ class AsyncYippiClient(AbstractYippi):
 
     @sleep_and_retry
     @limits(calls=2, period=1)
-    async def _call_api(self, method, url, data=None, file=None, **kwargs):
+    async def _call_api(self, method: str, url: str, data: dict = None, file=None, **kwargs):
         auth = None
         if self._login != ("", ""):
             auth = BasicAuth(*self._login)
