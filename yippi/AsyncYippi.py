@@ -98,7 +98,7 @@ class AsyncYippiClient(AbstractYippi):
         post_id: int = None,
         post_tags_match: Union[List, str] = None,
         creator_name: str = None,
-        creator_id: str = None,
+        creator_id: int = None,
         is_active: bool = None,
         limit: int = None,
     ) -> List[Note]:
