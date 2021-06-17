@@ -48,7 +48,7 @@ class AbstractYippi(ABC):
 
     def __init__(
         self, project_name: str, version: str, creator: str,
-    ):
+    ) -> None:
         self.headers = {
             "User-Agent": f"{project_name}/{version} (by {creator} on e621)"
         }
@@ -73,7 +73,7 @@ class AbstractYippi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]):
+    def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]) -> None:
         """Verifies response from server.
 
         Args:
@@ -333,7 +333,7 @@ class AbstractYippi(ABC):
         url = POOL_URL + str(pool_id) + ".json"
         return self._call_api("GET", url)  # type: ignore
 
-    def login(self, username: str, api_key: str):
+    def login(self, username: str, api_key: str) -> None:
         """Supply login credentials to client.
 
         Args:

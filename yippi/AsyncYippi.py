@@ -57,7 +57,7 @@ class AsyncYippiClient(AbstractYippi):
         if not r.status == 204:
             return await r.json()
 
-    async def _verify_response(self, r):
+    async def _verify_response(self, r) -> None:
         if r.status >= 300 and r.status < 500:
             res = await r.json()
             if r.status >= 400:
@@ -77,12 +77,12 @@ class AsyncYippiClient(AbstractYippi):
         tags: Union[List, str] = None,
         limit: int = None,
         page: Union[int, str] = None,
-    ):
+    ) -> List[Post]:
         response = await self._get_posts(tags, limit, page)  # type: ignore
         posts = [Post(p, client=self) for p in response["posts"]]
         return posts
 
-    async def post(self, post_id: int):
+    async def post(self, post_id: int) -> Post:
         api_res = await self._get_post(post_id)  # type: ignore
         return Post(api_res["post"], client=self)
 
@@ -95,7 +95,7 @@ class AsyncYippiClient(AbstractYippi):
         creator_id: str = None,
         is_active: bool = None,
         limit: int = None,
-    ):
+    ) -> List[Note]:
         response = await self._get_notes(
             body_matches,
             post_id,
@@ -114,7 +114,7 @@ class AsyncYippiClient(AbstractYippi):
         creator_id: int = None,
         creator_name: str = None,
         limit: int = None,
-    ):
+    ) -> List[Flag]:
         response = await self._get_flags(post_id, creator_id, creator_name)  # type: ignore
         result = [Flag(f, client=self) for f in response]
         return result
@@ -131,7 +131,7 @@ class AsyncYippiClient(AbstractYippi):
         category: str = None,
         order: str = None,
         limit: int = None,
-    ):
+    ) -> List[Pool]:
         response = await self._get_pools(
             name_matches,
             id_,
@@ -147,6 +147,6 @@ class AsyncYippiClient(AbstractYippi):
         result = [Pool(p, client=self) for p in response]
         return result
 
-    async def pool(self, pool_id: int):
+    async def pool(self, pool_id: int) -> Pool:
         response = await self._get_pool(pool_id)  # type: ignore
         return Pool(response, client=self)
