@@ -9,6 +9,8 @@ from urllib.parse import urlencode
 
 import aiohttp
 import requests
+from pyrate_limiter import Limiter
+from pyrate_limiter import RequestRate
 
 from .Classes import Flag
 from .Classes import Note
@@ -26,6 +28,7 @@ T = TypeVar("T")
 MaybeAwaitable = Union[T, Awaitable[T]]
 RequestResponse = MaybeAwaitable[dict]
 ArrayRequestResponse = MaybeAwaitable[List[dict]]
+limiter = Limiter(RequestRate(2, 1))
 
 
 class AbstractYippi(ABC):

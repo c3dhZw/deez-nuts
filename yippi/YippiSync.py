@@ -3,9 +3,9 @@ from typing import Union
 
 import requests
 from requests.auth import HTTPBasicAuth
-from ratelimit import limits, sleep_and_retry
 
 from .AbstractYippi import AbstractYippi
+from .AbstractYippi import limiter
 from .Classes import Flag
 from .Classes import Note
 from .Classes import Pool
@@ -19,8 +19,7 @@ class YippiClient(AbstractYippi):
         super().__init__(*args, **kwargs)
         self._session: requests.Session = session or requests.Session()
 
-    @sleep_and_retry
-    @limits(calls=2, period=1)
+    @limiter.ratelimit("call_api", delay=True)
     def _call_api(
         self, method: str, url: str, data: dict = None, file=None, **kwargs
     ) -> Optional[Union[List[dict], dict]]:

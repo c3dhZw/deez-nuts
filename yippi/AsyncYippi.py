@@ -4,9 +4,9 @@ from typing import Union
 import aiohttp
 from aiohttp import BasicAuth
 from aiohttp import FormData
-from ratelimit import limits, sleep_and_retry
 
 from .AbstractYippi import AbstractYippi
+from .AbstractYippi import limiter
 from .Classes import Flag
 from .Classes import Note
 from .Classes import Pool
@@ -32,8 +32,7 @@ class AsyncYippiClient(AbstractYippi):
     async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
         await self.close()
 
-    @sleep_and_retry
-    @limits(calls=2, period=1)
+    @limiter.ratelimit("call_api", delay=True)
     async def _call_api(
         self, method: str, url: str, data: dict = None, file=None, **kwargs
     ) -> Optional[Union[List[dict], dict]]:
