@@ -1,6 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import Awaitable
+from typing import Awaitable, Optional
 from typing import List
 from typing import Tuple
 from typing import TypeVar
@@ -47,8 +47,11 @@ class AbstractYippi(ABC):
     VALID_ORDER = ("name", "created_at", "updated_at", "post_count")
 
     def __init__(
-        self, project_name: str, version: str, creator: str,
-    ):
+        self,
+        project_name: str,
+        version: str,
+        creator: str,
+    ) -> None:
         self.headers = {
             "User-Agent": f"{project_name}/{version} (by {creator} on e621)"
         }
@@ -57,7 +60,7 @@ class AbstractYippi(ABC):
     @abstractmethod
     def _call_api(
         self, method: str, url: str, data: dict = None, **kwargs
-    ) -> Union[List[dict], dict]:
+    ) -> MaybeAwaitable[Optional[Union[List[dict], dict]]]:
         """Calls the API with specified method and url.
 
         Args:
@@ -73,7 +76,9 @@ class AbstractYippi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]):
+    def _verify_response(
+        self, r: Union[requests.Response, aiohttp.ClientResponse]
+    ) -> MaybeAwaitable[None]:
         """Verifies response from server.
 
         Args:
@@ -197,7 +202,7 @@ class AbstractYippi(ABC):
         post_id: int = None,
         post_tags_match: Union[List, str] = None,
         creator_name: str = None,
-        creator_id: str = None,
+        creator_id: int = None,
         is_active: bool = None,
         limit: int = None,
     ) -> ArrayRequestResponse:
@@ -333,7 +338,7 @@ class AbstractYippi(ABC):
         url = POOL_URL + str(pool_id) + ".json"
         return self._call_api("GET", url)  # type: ignore
 
-    def login(self, username: str, api_key: str):
+    def login(self, username: str, api_key: str) -> None:
         """Supply login credentials to client.
 
         Args:
@@ -377,7 +382,11 @@ class AbstractYippi(ABC):
 
     @abstractmethod
     def flags(
-        self, post_id: int = None, creator_id: int = None, creator_name: str = None
+        self,
+        post_id: int = None,
+        creator_id: int = None,
+        creator_name: str = None,
+        limit: int = None,
     ) -> MaybeAwaitable[List[Flag]]:
         """Search for flags
 
@@ -400,7 +409,7 @@ class AbstractYippi(ABC):
         post_id: int = None,
         post_tags_match: Union[List, str] = None,
         creator_name: str = None,
-        creator_id: str = None,
+        creator_id: int = None,
         is_active: bool = None,
         limit: int = None,
     ) -> MaybeAwaitable[List[Note]]:

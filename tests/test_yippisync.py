@@ -178,7 +178,7 @@ def test_pools(client):
     assert not pool.is_active
     assert pool.category == "series"
     assert not pool.is_deleted
-    assert set([653514, 653515, 653820]).issubset(pool.post_ids)
+    assert {653514, 653515, 653820}.issubset(pool.post_ids)
     assert pool.creator_name == "Emserdalf"
     assert pool.post_count == 48
 

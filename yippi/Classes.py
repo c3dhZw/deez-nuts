@@ -40,7 +40,7 @@ regex = re.compile(
 
 
 class _BaseMixin:
-    def __init__(self, json_data: dict, client: AbstractYippi = None):
+    def __init__(self, json_data: dict, client: AbstractYippi = None) -> None:
         if json_data:
             self._original_data: dict = deepcopy(json_data)
             self.id: Optional[int] = json_data.get("id")
@@ -63,7 +63,7 @@ class Post(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(self, json_data=None, *args, **kwargs):
+    def __init__(self, json_data=None, *args, **kwargs) -> None:
         super().__init__(json_data, *args, **kwargs)
         self.file_path: Optional[str] = None
         self.file_url: Optional[str] = None
@@ -89,11 +89,11 @@ class Post(_BaseMixin):
 
     def __repr__(self) -> str:
         if self.id:
-            name = "Post(id=%s)" % (self.id)
+            name = f"Post(id={self.id})"
         elif self.file_path:
-            name = "Post(file_path=%s)" % (self.file_path)
+            name = f"Post(file_path={self.file_path})"
         elif self.file_url:
-            name = "Post(file_url=%s)" % (self.file_url)
+            name = f"Post(file_url={self.file_url})"
         else:
             name = "Post()"
         return name
@@ -199,7 +199,7 @@ class Post(_BaseMixin):
         return api_response
 
     @classmethod
-    def from_file(cls, path):
+    def from_file(cls, path) -> "Post":
         new_post = cls()
         new_post.file = open(path, "rb")
         new_post.file_path = path
@@ -207,14 +207,14 @@ class Post(_BaseMixin):
         return new_post
 
     @classmethod
-    def from_url(cls, url):
+    def from_url(cls, url) -> "Post":
         if not regex.match(url):
             raise ValueError(f'URL "{url}" is invalid.')
         new_post = cls()
         new_post.file_url = url
         return new_post
 
-    def upload(self):
+    def upload(self) -> dict:
         warnings.warn("This function has not been tested and should not be used.")
         if isinstance(self.tags, str):
             tags = self.tags
@@ -244,12 +244,12 @@ class Post(_BaseMixin):
         if hasattr(self, "file_url"):
             post_data["upload[direct_url]"] = self.file_url
         else:
-            file_mime = mimetypes.guess_type(self.file_name)[0]
-            file = {"upload[file]": (self.file_name, self.file, file_mime, {})}
+            file_mime = mimetypes.guess_type(self.file_path)[0]
+            file = {"upload[file]": (self.file_path, self.file, file_mime, {})}
 
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
-    def update(self, has_notes: bool, reason: str = None):
+    def update(self, has_notes: bool, reason: str = None) -> Union[List[dict], dict]:
         """Updates the post. **This function has not been tested.**
 
         Args:
@@ -287,8 +287,8 @@ class Post(_BaseMixin):
             post_data["post[description]"] = self.description
             post_data["post[old_description]"] = original["description"]
 
-        if self.rating._value_ != original["rating"]:
-            post_data["post[rating]"] = self.rating._value_
+        if self.rating.value != original["rating"]:
+            post_data["post[rating]"] = self.rating.value
             post_data["post[old_rating]"] = original["rating"]
 
         if self.flags["rating_locked"] != original["flags"]["rating_locked"]:
@@ -311,18 +311,17 @@ class Post(_BaseMixin):
 
         return self._client._call_api("PATCH", POST_URL + str(self.id), data=post_data)
 
-    def favorite(self):
+    def favorite(self) -> dict:
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
 
         post_data = {"post_id": str(self.id)}
         return self._client._call_api("POST", FAVORITES_URL + ".json", data=post_data)
 
-    def unfavorite(self):
+    def unfavorite(self) -> None:
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
-
-        return self._client._call_api("DELETE", f"{FAVORITES_URL}/{str(self.id)}.json")
+        self._client._call_api("DELETE", f"{FAVORITES_URL}/{str(self.id)}.json")
 
 
 class Note(_BaseMixin):
@@ -339,7 +338,7 @@ class Note(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(self, json_data=None, *args, **kwargs):
+    def __init__(self, json_data=None, *args, **kwargs) -> None:
         super().__init__(json_data, *args, **kwargs)
         self.creator_id: int = json_data.get("creator_id")
         self.x: int = json_data.get("x")
@@ -352,8 +351,8 @@ class Note(_BaseMixin):
         self.body: str = json_data.get("body")
         self.creator_name: str = json_data.get("creator_name")
 
-    def __repr__(self):
-        return "Note(id=%s)" % (self.id)
+    def __repr__(self) -> str:
+        return f"Note(id={self.id})"
 
     def get_post(self) -> MaybeAwaitable["Post"]:
         """Fetch the post linked with this note.
@@ -460,9 +459,9 @@ class Note(_BaseMixin):
         api_response = cast(dict, api_response)
         return api_response
 
-    def delete(self):
+    def delete(self) -> None:
         warnings.warn("This function has not been tested and should not be used.")
-        return self._client._call_api("DELETE", NOTE_URL + str(self.id))
+        self._client._call_api("DELETE", NOTE_URL + str(self.id))
 
 
 class Pool(_BaseMixin):
@@ -479,7 +478,7 @@ class Pool(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(self, json_data=None, *args, **kwargs):
+    def __init__(self, json_data=None, *args, **kwargs) -> None:
         super().__init__(json_data, *args, **kwargs)
         if json_data:
             self.name: str = json_data.get("name")
@@ -492,8 +491,8 @@ class Pool(_BaseMixin):
             self.creator_name: str = json_data.get("creator_name")
             self.post_count: int = json_data.get("post_count")
 
-    def __repr__(self):
-        return "Pool(id=%s, name=%s)" % (self.id, self.name)
+    def __repr__(self) -> str:
+        return f"Pool(id={self.id}, name={self.name})"
 
     def _sort_posts(self, arr: List["Post"]) -> List["Post"]:
         """Sort a list of post based on page numbering.
@@ -509,7 +508,7 @@ class Pool(_BaseMixin):
             sorted_array.append(next(p for p in arr if p.id == post_id))
         return sorted_array
 
-    def _register_linked(self, arr: List["Post"]):
+    def _register_linked(self, arr: List["Post"]) -> None:
         """Register a series of posts to have ``.continue`` and ``.previous`` attribute.
 
         Useful for those who are lazy to track down index number.
@@ -623,7 +622,7 @@ class Flag(_BaseMixin):
         https://e621.net/wiki_pages/2425
     """
 
-    def __init__(self, json_data=None, *args, **kwargs):
+    def __init__(self, json_data=None, *args, **kwargs) -> None:
         super().__init__(json_data, *args, **kwargs)
         if json_data:
             self.post_id: int = json_data.get("post_id")
@@ -632,10 +631,10 @@ class Flag(_BaseMixin):
             self.is_deletion: bool = json_data.get("is_deletion")
             self.category: str = json_data.get("category")
 
-    def __repr__(self):
-        return "Flag(id=%s)" % (self.id)
+    def __repr__(self) -> str:
+        return f"Flag(id={self.id})"
 
-    def get_post(self):
+    def get_post(self) -> "Post":
         """Fetch the post linked with this flag.
 
         Returns:
@@ -660,7 +659,7 @@ class TagCategory(IntEnum):
 
 
 class Tag(_BaseMixin):
-    def __init__(self, json_data=None, *args, **kwargs):
+    def __init__(self, json_data=None, *args, **kwargs) -> None:
         super().__init__(json_data, *args, **kwargs)
         if json_data:
             self.name: str = json_data.get("name")
