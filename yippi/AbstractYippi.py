@@ -47,7 +47,10 @@ class AbstractYippi(ABC):
     VALID_ORDER = ("name", "created_at", "updated_at", "post_count")
 
     def __init__(
-        self, project_name: str, version: str, creator: str,
+        self,
+        project_name: str,
+        version: str,
+        creator: str,
     ) -> None:
         self.headers = {
             "User-Agent": f"{project_name}/{version} (by {creator} on e621)"
@@ -73,7 +76,9 @@ class AbstractYippi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]) -> MaybeAwaitable[None]:
+    def _verify_response(
+        self, r: Union[requests.Response, aiohttp.ClientResponse]
+    ) -> MaybeAwaitable[None]:
         """Verifies response from server.
 
         Args:

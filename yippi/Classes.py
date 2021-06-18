@@ -199,7 +199,7 @@ class Post(_BaseMixin):
         return api_response
 
     @classmethod
-    def from_file(cls, path) -> 'Post':
+    def from_file(cls, path) -> "Post":
         new_post = cls()
         new_post.file = open(path, "rb")
         new_post.file_path = path
@@ -207,7 +207,7 @@ class Post(_BaseMixin):
         return new_post
 
     @classmethod
-    def from_url(cls, url) -> 'Post':
+    def from_url(cls, url) -> "Post":
         if not regex.match(url):
             raise ValueError(f'URL "{url}" is invalid.')
         new_post = cls()
@@ -634,7 +634,7 @@ class Flag(_BaseMixin):
     def __repr__(self) -> str:
         return f"Flag(id={self.id})"
 
-    def get_post(self) -> 'Post':
+    def get_post(self) -> "Post":
         """Fetch the post linked with this flag.
 
         Returns:

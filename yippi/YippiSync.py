@@ -22,12 +22,7 @@ class YippiClient(AbstractYippi):
     @sleep_and_retry
     @limits(calls=2, period=1)
     def _call_api(
-        self,
-        method: str,
-        url: str,
-        data: dict = None,
-        file=None,
-        **kwargs
+        self, method: str, url: str, data: dict = None, file=None, **kwargs
     ) -> Optional[Union[List[dict], dict]]:
         auth = None
         if self._login != ("", ""):
@@ -51,12 +46,9 @@ class YippiClient(AbstractYippi):
         elif r.status_code >= 500:
             raise APIError(r.reason)
 
-        if (
-            r.status_code != 204
-            and (
-                not r.headers.get("Content-Type")
-                or "application/json" not in r.headers.get("Content-Type")
-            )
+        if r.status_code != 204 and (
+            not r.headers.get("Content-Type")
+            or "application/json" not in r.headers.get("Content-Type")
         ):
             res = r.text
             if "Not found." in res:
