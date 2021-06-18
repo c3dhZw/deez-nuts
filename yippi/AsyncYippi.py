@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from typing import Union
 
 import aiohttp
@@ -18,7 +18,7 @@ from .Exceptions import UserError
 class AsyncYippiClient(AbstractYippi):
     def __init__(
         self, *args, loop=None, session: aiohttp.ClientSession = None, **kwargs
-    ):
+    ) -> None:
         self._loop = loop
         self._session: aiohttp.ClientSession = session or aiohttp.ClientSession()
         super().__init__(*args, **kwargs)
@@ -34,7 +34,14 @@ class AsyncYippiClient(AbstractYippi):
 
     @sleep_and_retry
     @limits(calls=2, period=1)
-    async def _call_api(self, method: str, url: str, data: dict = None, file=None, **kwargs):
+    async def _call_api(
+        self,
+        method: str,
+        url: str,
+        data: dict = None,
+        file=None,
+        **kwargs
+    ) -> Optional[Union[List[dict], dict]]:
         auth = None
         if self._login != ("", ""):
             auth = BasicAuth(*self._login)

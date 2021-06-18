@@ -1,6 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import Awaitable
+from typing import Awaitable, Optional
 from typing import List
 from typing import Tuple
 from typing import TypeVar
@@ -57,7 +57,7 @@ class AbstractYippi(ABC):
     @abstractmethod
     def _call_api(
         self, method: str, url: str, data: dict = None, **kwargs
-    ) -> MaybeAwaitable[Union[List[dict], dict]]:
+    ) -> MaybeAwaitable[Optional[Union[List[dict], dict]]]:
         """Calls the API with specified method and url.
 
         Args:

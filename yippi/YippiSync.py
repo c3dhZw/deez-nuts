@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from typing import Union
 
 import requests
@@ -21,7 +21,14 @@ class YippiClient(AbstractYippi):
 
     @sleep_and_retry
     @limits(calls=2, period=1)
-    def _call_api(self, method: str, url: str, data: dict = None, file=None, **kwargs) -> dict:
+    def _call_api(
+        self,
+        method: str,
+        url: str,
+        data: dict = None,
+        file=None,
+        **kwargs
+    ) -> Optional[Union[List[dict], dict]]:
         auth = None
         if self._login != ("", ""):
             auth = HTTPBasicAuth(*self._login)
