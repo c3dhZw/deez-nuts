@@ -68,7 +68,7 @@ setup(
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     python_requires=">=3.7.*",
-    install_requires=["requests>=2.23.0", "aiohttp>=3.6.2"],
+    install_requires=["requests>=2.23.0", "aiohttp>=3.6.2", "pyrate-limiter>=2.3.4"],
     tests_require=[
         "pytest>=5.4.1",
         "pytest-recording>=0.7.0",
