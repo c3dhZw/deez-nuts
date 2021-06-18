@@ -57,7 +57,7 @@ class AbstractYippi(ABC):
     @abstractmethod
     def _call_api(
         self, method: str, url: str, data: dict = None, **kwargs
-    ) -> Union[List[dict], dict]:
+    ) -> MaybeAwaitable[Union[List[dict], dict]]:
         """Calls the API with specified method and url.
 
         Args:
@@ -73,7 +73,7 @@ class AbstractYippi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]) -> None:
+    def _verify_response(self, r: Union[requests.Response, aiohttp.ClientResponse]) -> MaybeAwaitable[None]:
         """Verifies response from server.
 
         Args:
