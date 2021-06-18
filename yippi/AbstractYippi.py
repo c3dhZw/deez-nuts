@@ -1,7 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import Awaitable, Optional
+from typing import Awaitable
 from typing import List
+from typing import Optional
 from typing import Tuple
 from typing import TypeVar
 from typing import Union

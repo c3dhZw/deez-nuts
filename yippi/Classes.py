@@ -7,11 +7,14 @@ import re
 import warnings
 from copy import deepcopy
 from enum import IntEnum
-from typing import cast, TypeVar, Awaitable, Callable
 from typing import TYPE_CHECKING
+from typing import Awaitable
+from typing import Callable
 from typing import List
 from typing import Optional
+from typing import TypeVar
 from typing import Union
+from typing import cast
 
 from .Constants import BASE_URL
 from .Constants import FAVORITES_URL
