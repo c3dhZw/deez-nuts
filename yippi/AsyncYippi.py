@@ -18,11 +18,16 @@ from .Exceptions import UserError
 
 class AsyncYippiClient(AbstractYippi):
     def __init__(
-        self, *args, loop=None, session: aiohttp.ClientSession = None, **kwargs
+        self,
+        project_name: str,
+        version: str,
+        creator: str,
+        loop=None,
+        session: aiohttp.ClientSession = None,
     ) -> None:
         self._loop = loop
         self._session: aiohttp.ClientSession = session or aiohttp.ClientSession()
-        super().__init__(*args, **kwargs)
+        super().__init__(project_name, version, creator)
 
     async def close(self) -> None:
         await self._session.close()
