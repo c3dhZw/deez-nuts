@@ -21,7 +21,7 @@ def read(*names, **kwargs):
 setup(
     name="yippi",
     version="0.1.1",
-    license="GPL-3.0",
+    license="LGPL-3.0-only",
     description="An (a)sync e621 API wrapper for Python.",
     long_description="%s\n%s"
     % (
