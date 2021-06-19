@@ -40,3 +40,11 @@ yippi.Exceptions module
    :members:
    :undoc-members:
    :show-inheritance:
+
+yippi.Enums module
+-----------------------
+
+.. automodule:: yippi.Enums
+   :members:
+   :undoc-members:
+   :show-inheritance:

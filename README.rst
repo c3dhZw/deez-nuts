@@ -63,10 +63,11 @@ Async
      'lore': [],
      'meta': ['comic'],
      'species': ['bird_dog', ... ]}
+
+Examples are available in `examples directory <https://github.com/rorre/Yippi/tree/master/examples>`_.
     
 Documentation
 =============
-
 
 Documentation is available on readthedocs: https://yippi.readthedocs.io/
 
