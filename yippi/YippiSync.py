@@ -16,8 +16,14 @@ from .Exceptions import UserError
 
 
 class YippiClient(AbstractYippi):
-    def __init__(self, *args, session: requests.Session = None, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        project_name: str,
+        version: str,
+        creator: str,
+        session: requests.Session = None,
+    ) -> None:
+        super().__init__(project_name, version, creator)
         self._session: requests.Session = session or requests.Session()
 
     @limiter.ratelimit("call_api", delay=True)
