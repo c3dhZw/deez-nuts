@@ -319,12 +319,12 @@ class Post(_BaseMixin):
             raise UserError("Post object did not come from Post endpoint.")
 
         post_data = {"post_id": str(self.id)}
-        return self._client._call_api("POST", FAVORITES_URL + ".json", data=post_data)
+        return self._client._call_api("POST", FAVORITES_URL, data=post_data)
 
     def unfavorite(self) -> None:
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
-        self._client._call_api("DELETE", f"{FAVORITES_URL}/{str(self.id)}.json")
+        self._client._call_api("DELETE", FAVORITES_URL + f"{str(self.id)}.json")
 
 
 class Note(_BaseMixin):
