@@ -312,7 +312,9 @@ class Post(_BaseMixin):
             }
         )
 
-        return self._client._call_api("PATCH", POST_URL + str(self.id), data=post_data)
+        return self._client._call_api(
+            "PATCH", POST_URL + f"{self.id}.json", data=post_data
+        )
 
     def favorite(self) -> dict:
         if not self._original_data:
@@ -407,7 +409,7 @@ class Note(_BaseMixin):
             "note[body]": self.body,
         }
         api_response = self._client._call_api(
-            "PUT", NOTE_URL + str(self.id), data=post_data
+            "PUT", NOTE_URL + f"{self.id}.json", data=post_data
         )
         api_response = cast(dict, api_response)
         return api_response
@@ -464,7 +466,7 @@ class Note(_BaseMixin):
 
     def delete(self) -> None:
         warnings.warn("This function has not been tested and should not be used.")
-        self._client._call_api("DELETE", NOTE_URL + str(self.id))
+        self._client._call_api("DELETE", NOTE_URL + f"{self.id}.json")
 
 
 class Pool(_BaseMixin):
