@@ -7,7 +7,6 @@ import re
 import warnings
 from copy import deepcopy
 from enum import IntEnum
-from functools import wraps
 from typing import TYPE_CHECKING
 from typing import Awaitable
 from typing import Callable
@@ -43,16 +42,6 @@ regex = re.compile(
 )
 
 
-def ensure_client(fn):
-    @wraps(fn)
-    def wrapped(self: _BaseMixin, *args, **kwargs):
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-        return fn(self, *args, **kwargs)
-
-    return wrapped
-
-
 class _BaseMixin:
     def __init__(self, json_data: dict, client: AbstractYippi = None) -> None:
         if json_data:
@@ -60,7 +49,13 @@ class _BaseMixin:
             self.id: Optional[int] = json_data.get("id")
             self.created_at: Optional[str] = json_data.get("created_at")
             self.updated_at: Optional[str] = json_data.get("updated_at")
-        self._client = client
+        self.__client = client
+
+    @property
+    def _client(self) -> AbstractYippi:
+        if self.__client is None:
+            raise UserError("Yippi client isn't initialized.")
+        return self.__client
 
 
 class Post(_BaseMixin):
@@ -173,7 +168,6 @@ class Post(_BaseMixin):
             output += " -" + " -".join(deleted)
         return output.strip()
 
-    @ensure_client
     def vote(self, score: int = 1, replace: bool = False) -> dict:
         """Vote the post.
 
@@ -226,7 +220,6 @@ class Post(_BaseMixin):
         new_post.file_url = url
         return new_post
 
-    @ensure_client
     def upload(self) -> dict:
         warnings.warn("This function has not been tested and should not be used.")
         if isinstance(self.tags, str):
@@ -262,7 +255,6 @@ class Post(_BaseMixin):
 
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
-    @ensure_client
     def update(self, has_notes: bool, reason: str = None) -> Union[List[dict], dict]:
         """Updates the post. **This function has not been tested.**
 
@@ -324,7 +316,6 @@ class Post(_BaseMixin):
             "PATCH", POST_URL + f"{self.id}.json", data=post_data
         )
 
-    @ensure_client
     def favorite(self) -> dict:
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
@@ -332,7 +323,6 @@ class Post(_BaseMixin):
         post_data = {"post_id": str(self.id)}
         return self._client._call_api("POST", FAVORITES_URL, data=post_data)
 
-    @ensure_client
     def unfavorite(self) -> None:
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
@@ -369,7 +359,6 @@ class Note(_BaseMixin):
     def __repr__(self) -> str:
         return f"Note(id={self.id})"
 
-    @ensure_client
     def get_post(self) -> MaybeAwaitable["Post"]:
         """Fetch the post linked with this note.
 
@@ -398,7 +387,6 @@ class Note(_BaseMixin):
         new_post.body = body
         return new_post
 
-    @ensure_client
     def update(self) -> dict:
         """Updates the note. **This function has not been tested.**
 
@@ -421,7 +409,6 @@ class Note(_BaseMixin):
         api_response = cast(dict, api_response)
         return api_response
 
-    @ensure_client
     def upload(self) -> dict:
         """Uploads the note. **This function has not been tested.**
 
@@ -442,7 +429,6 @@ class Note(_BaseMixin):
         api_response = cast(dict, api_response)
         return api_response
 
-    @ensure_client
     def revert(self, version_id: str) -> dict:
         """Reverts note to specified version_id. **This function has not been tested.**
 
@@ -468,7 +454,6 @@ class Note(_BaseMixin):
         api_response = cast(dict, api_response)
         return api_response
 
-    @ensure_client
     def delete(self) -> None:
         warnings.warn("This function has not been tested and should not be used.")
         self._client._call_api("DELETE", NOTE_URL + f"{self.id}.json")
@@ -533,7 +518,6 @@ class Pool(_BaseMixin):
                 current.previous = previous
             previous = current
 
-    @ensure_client
     async def get_posts_async(self) -> List["Post"]:
         """Async representation of :meth:`.get-posts()`
 
@@ -554,7 +538,6 @@ class Pool(_BaseMixin):
         self._register_linked(result)
         return result
 
-    @ensure_client
     def get_posts(self) -> MaybeAwaitable[List["Post"]]:
         """Fetch all posts linked with this pool.
 
@@ -585,7 +568,6 @@ class Pool(_BaseMixin):
     def update(self):
         raise NotImplementedError
 
-    @ensure_client
     def revert(self, version_id: str) -> dict:
         """Reverts note to specified version_id. **This function has not been tested.**
 
@@ -638,7 +620,6 @@ class Flag(_BaseMixin):
     def __repr__(self) -> str:
         return f"Flag(id={self.id})"
 
-    @ensure_client
     def get_post(self) -> "Post":
         """Fetch the post linked with this flag.
 
