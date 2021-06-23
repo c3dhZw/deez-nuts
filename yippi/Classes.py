@@ -49,7 +49,13 @@ class _BaseMixin:
             self.id: Optional[int] = json_data.get("id")
             self.created_at: Optional[str] = json_data.get("created_at")
             self.updated_at: Optional[str] = json_data.get("updated_at")
-        self._client = client
+        self.__client = client
+
+    @property
+    def _client(self) -> AbstractYippi:
+        if self.__client is None:
+            raise UserError("Yippi client isn't initialized.")
+        return self.__client
 
 
 class Post(_BaseMixin):
@@ -185,9 +191,6 @@ class Post(_BaseMixin):
                 JSON response with keys ``score``, ``up``, ``down``, and ``our_score``.
                 Where ``dict['our_score']`` is 1, 0, -1 depending on the action.
         """
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-
         if not self.id:
             raise UserError("Post does not come from e621 API.")
 
@@ -263,9 +266,6 @@ class Post(_BaseMixin):
             UserError: If the post did not come from any Post endpoint or if no changes has been made.
         """
         warnings.warn("This function has not been tested and should not be used.")
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
 
@@ -365,9 +365,6 @@ class Note(_BaseMixin):
         Returns:
             :class:`yippi.Classes.Post`: The post linked with this note.
         """
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-
         return self._client.post(self.post_id)
 
     @classmethod
@@ -398,8 +395,6 @@ class Note(_BaseMixin):
         """
 
         warnings.warn("This function has not been tested and should not be used.")
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
 
         post_data = {
             "note[x]": self.x,
@@ -421,8 +416,6 @@ class Note(_BaseMixin):
             dict: JSON status response from API.
         """
         warnings.warn("This function has not been tested and should not be used.")
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
 
         post_data = {
             "note[post_id]": self.post_id,
@@ -451,9 +444,6 @@ class Note(_BaseMixin):
             dict: JSON status response from API.
         """
         warnings.warn("This function has not been tested and should not be used.")
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-
         if not self.id:
             raise UserError("Post does not come from e621 API.")
 
@@ -534,9 +524,6 @@ class Pool(_BaseMixin):
         Returns:
             :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
         """
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-
         result: List["Post"] = []
         get_posts_func = cast(Callable[..., Awaitable[List[Post]]], self._client.posts)
 
@@ -559,9 +546,6 @@ class Pool(_BaseMixin):
         Returns:
             :obj:`list` of :class:`yippi.Classes.Post`: All the posts linked with this pool.
         """
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-
         if inspect.iscoroutinefunction(self._client.post):
             return self.get_posts_async()
 
@@ -599,9 +583,6 @@ class Pool(_BaseMixin):
             dict: JSON status response from API.
         """
         warnings.warn("This function has not been tested and should not be used.")
-        if not self._client:
-            raise UserError("Yippi client isn't initialized.")
-
         if not self.id:
             raise UserError("Post does not come from e621 API.")
 
