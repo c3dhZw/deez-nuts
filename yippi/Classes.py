@@ -255,7 +255,7 @@ class Post(_BaseMixin):
 
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
-    def update(self, has_notes: bool, reason: str = None) -> Union[List[dict], dict]:
+    def update(self, has_notes: bool = None, reason: str = None) -> Union[List[dict], dict]:
         """Updates the post. **This function has not been tested.**
 
         Args:
@@ -305,12 +305,10 @@ class Post(_BaseMixin):
         if not post_data:
             raise UserError("No changes has been made to the object.")
 
-        post_data.update(
-            {
-                "post[edit_reason]": reason or "",
-                "post[has_embedded_notes]": str(has_notes).lower(),
-            }
-        )
+        if has_notes is not None:
+            post_data["post[has_embedded_notes]"] = str(has_notes).lower()
+
+        post_data["post[edit_reason]"] = reason or ""
 
         return self._client._call_api(
             "PATCH", POST_URL + f"{self.id}.json", data=post_data
