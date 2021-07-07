@@ -255,12 +255,12 @@ class Post(_BaseMixin):
 
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
-    def update(self, has_notes: bool = None, reason: str = None) -> Union[List[dict], dict]:
+    def update(self, reason: str = None, has_notes: bool = None) -> Union[List[dict], dict]:
         """Updates the post. **This function has not been tested.**
 
         Args:
-            has_notes: Does the post have embedded notes or not.
             reason (optional): Reasoning behind the edit. Defaults to None.
+            has_notes (optional): Does the post have embedded notes or not.
 
         Raises:
             UserError: If the post did not come from any Post endpoint or if no changes has been made.
