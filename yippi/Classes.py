@@ -255,7 +255,9 @@ class Post(_BaseMixin):
 
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
-    def update(self, reason: str = None, has_notes: bool = None) -> Union[List[dict], dict]:
+    def update(
+        self, reason: str = None, has_notes: bool = None
+    ) -> Union[List[dict], dict]:
         """Updates the post. **This function has not been tested.**
 
         Args:
