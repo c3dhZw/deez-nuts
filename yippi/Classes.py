@@ -95,6 +95,7 @@ class Post(_BaseMixin):
             self.description: str = json_data.get("description")
             self.comment_count: int = json_data.get("comment_count")
             self.is_favorited: bool = json_data.get("is_favorited")
+            self.has_notes: bool = json_data.get("has_notes")
 
     def __repr__(self) -> str:
         if self.id:
@@ -256,13 +257,12 @@ class Post(_BaseMixin):
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
     def update(
-        self, reason: str = None, has_notes: bool = None
+        self, reason: str = None
     ) -> Union[List[dict], dict]:
         """Updates the post. **This function has not been tested.**
 
         Args:
             reason (optional): Reasoning behind the edit. Defaults to None.
-            has_notes (optional): Does the post have embedded notes or not.
 
         Raises:
             UserError: If the post did not come from any Post endpoint or if no changes has been made.
@@ -303,12 +303,12 @@ class Post(_BaseMixin):
 
         if self.flags["note_locked"] != original["flags"]["note_locked"]:
             post_data["post[is_note_locked]"] = str(self.flags["note_locked"]).lower()
+        
+        if self.has_notes != original["has_notes"]:
+            post_data["post[has_embedded_notes]"] = str(self.has_notes).lower()
 
         if not post_data:
             raise UserError("No changes has been made to the object.")
-
-        if has_notes is not None:
-            post_data["post[has_embedded_notes]"] = str(has_notes).lower()
 
         post_data["post[edit_reason]"] = reason or ""
 
