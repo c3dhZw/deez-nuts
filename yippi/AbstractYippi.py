@@ -1,15 +1,14 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import TYPE_CHECKING
+from typing import Any
 from typing import Awaitable
 from typing import List
-from typing import Optional
 from typing import Tuple
 from typing import TypeVar
 from typing import Union
 from urllib.parse import urlencode
 
-import aiohttp
-import requests
 from pyrate_limiter import Limiter
 from pyrate_limiter import RequestRate
 
@@ -24,6 +23,10 @@ from .Constants import POOLS_URL
 from .Constants import POST_URL
 from .Constants import POSTS_URL
 from .Exceptions import UserError
+
+if TYPE_CHECKING:
+    import aiohttp
+    import requests
 
 T = TypeVar("T")
 MaybeAwaitable = Union[T, Awaitable[T]]
@@ -64,7 +67,7 @@ class AbstractYippi(ABC):
     @abstractmethod
     def _call_api(
         self, method: str, url: str, data: dict = None, **kwargs
-    ) -> MaybeAwaitable[Optional[Union[List[dict], dict]]]:
+    ) -> MaybeAwaitable[Any]:
         """Calls the API with specified method and url.
 
         Args:
@@ -81,7 +84,7 @@ class AbstractYippi(ABC):
 
     @abstractmethod
     def _verify_response(
-        self, r: Union[requests.Response, aiohttp.ClientResponse]
+        self, r: Union["requests.Response", "aiohttp.ClientResponse"]
     ) -> MaybeAwaitable[None]:
         """Verifies response from server.
 

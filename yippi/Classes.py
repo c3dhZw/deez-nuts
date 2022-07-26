@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import inspect
 import mimetypes
-import os.path
 import re
 import warnings
 from copy import deepcopy
 from enum import IntEnum
+from typing import IO
 from typing import TYPE_CHECKING
 from typing import Awaitable
 from typing import Callable
@@ -76,6 +76,8 @@ class Post(_BaseMixin):
         super().__init__(json_data, *args, **kwargs)
         self.file_path: Optional[str] = None
         self.file_url: Optional[str] = None
+        self.file_io: Optional[IO] = None
+
         if json_data:
             self.file: dict = json_data.get("file")
             self.preview: dict = json_data.get("preview")
@@ -208,9 +210,8 @@ class Post(_BaseMixin):
     @classmethod
     def from_file(cls, path) -> "Post":
         new_post = cls()
-        new_post.file = open(path, "rb")
+        new_post.file_io = open(path, "rb")
         new_post.file_path = path
-        new_post.file_name = os.path.basename(path)
         return new_post
 
     @classmethod
@@ -221,7 +222,7 @@ class Post(_BaseMixin):
         new_post.file_url = url
         return new_post
 
-    def upload(self) -> dict:
+    def upload(self) -> MaybeAwaitable[dict]:
         warnings.warn("This function has not been tested and should not be used.")
         if isinstance(self.tags, str):
             tags = self.tags
@@ -251,12 +252,14 @@ class Post(_BaseMixin):
         if hasattr(self, "file_url"):
             post_data["upload[direct_url]"] = self.file_url
         else:
+            assert self.file_path
+
             file_mime = mimetypes.guess_type(self.file_path)[0]
-            file = {"upload[file]": (self.file_path, self.file, file_mime, {})}
+            file = {"upload[file]": (self.file_path, self.file_io, file_mime, {})}
 
         return self._client._call_api("POST", UPLOAD_URL, files=file, data=post_data)
 
-    def update(self, reason: str = None) -> Union[List[dict], dict]:
+    def update(self, reason: str = None) -> MaybeAwaitable[Union[List[dict], dict]]:
         """Updates the post. **This function has not been tested.**
 
         Args:
@@ -314,7 +317,7 @@ class Post(_BaseMixin):
             "PATCH", POST_URL + f"{self.id}.json", data=post_data
         )
 
-    def favorite(self) -> dict:
+    def favorite(self) -> MaybeAwaitable[dict]:
         if not self._original_data:
             raise UserError("Post object did not come from Post endpoint.")
 
@@ -618,7 +621,7 @@ class Flag(_BaseMixin):
     def __repr__(self) -> str:
         return f"Flag(id={self.id})"
 
-    def get_post(self) -> "Post":
+    def get_post(self) -> MaybeAwaitable["Post"]:
         """Fetch the post linked with this flag.
 
         Returns:

@@ -2,6 +2,7 @@ import os
 
 import aiohttp
 import pytest
+import pytest_asyncio
 import requests
 
 from yippi import AsyncYippiClient
@@ -32,7 +33,7 @@ def client():
     return client
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def async_client(event_loop):
     async with aiohttp.ClientSession(loop=event_loop) as session:
         async_client = AsyncYippiClient("Yippi", "0.1", "Error-", session=session)

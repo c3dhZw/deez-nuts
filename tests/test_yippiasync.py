@@ -1,5 +1,6 @@
 import aiohttp
 import pytest
+import pytest_asyncio
 
 from yippi import AsyncYippiClient
 from yippi.Enums import Rating
@@ -12,7 +13,7 @@ def vcr_cassette_dir(request):
     return "tests/cassettes/async"
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def client(event_loop):
     async with aiohttp.ClientSession(loop=event_loop) as session:
         client = AsyncYippiClient("Yippi", "0.1", "Error-", session=session)
@@ -29,7 +30,7 @@ async def test_context(event_loop):
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_getpost(client):
+async def test_getpost(client: AsyncYippiClient):
     post = await client.post(1383235)
     assert post.id == 1383235
     assert post.created_at == "2017-11-20T12:23:11.340-05:00"
@@ -127,14 +128,14 @@ async def test_getpost(client):
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_404(client):
+async def test_404(client: AsyncYippiClient):
     with pytest.raises(UserError):
         await client.post(99999999999)
 
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_post_search(client):
+async def test_post_search(client: AsyncYippiClient):
     assert await client.posts("m/m")
     assert await client.posts(["m/m", "rating:s"])
     assert len(await client.posts("m/m", limit=1)) == 1
@@ -143,14 +144,14 @@ async def test_post_search(client):
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_post_search_error(client):
+async def test_post_search_error(client: AsyncYippiClient):
     with pytest.raises(UserError):
         await client.posts("m/m", page=1000)
 
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_note(client):
+async def test_note(client: AsyncYippiClient):
     note = (await client.notes(post_id=2222254, creator_id=366315, limit=1))[0]
     assert note.id == 257037
     assert note.created_at == "2020-04-19T02:58:56.716-04:00"
@@ -169,7 +170,7 @@ async def test_note(client):
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_flags(client):
+async def test_flags(client: AsyncYippiClient):
     flag = (await client.flags(post_id=2213076, limit=1))[-1]
     assert flag.id == 368383
     assert flag.created_at == "2020-04-19T02:50:38.030-04:00"
@@ -183,7 +184,7 @@ async def test_flags(client):
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_pools(client):
+async def test_pools(client: AsyncYippiClient):
     pool = (await client.pools("Critical Success"))[0]
     assert pool.id == 6059
     assert pool.name == "Critical_Success"
@@ -201,7 +202,7 @@ async def test_pools(client):
 
 @pytest.mark.asyncio
 @pytest.mark.vcr()
-async def test_500(client):
+async def test_500(client: AsyncYippiClient):
     # We can't simulate e621 error, so we just use external help.
     with pytest.raises(APIError):
         await client._call_api("GET", "https://httpstat.us/500")
