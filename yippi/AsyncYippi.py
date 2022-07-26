@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 from typing import Optional
 from typing import Union
 
@@ -8,7 +8,7 @@ from aiohttp import FormData
 
 from .AbstractYippi import AbstractYippi
 from .AbstractYippi import limiter
-from .Classes import Flag
+from .Classes import Flag, Set
 from .Classes import Note
 from .Classes import Pool
 from .Classes import Post
@@ -167,3 +167,22 @@ class AsyncYippiClient(AbstractYippi):
     async def pool(self, pool_id: int) -> Pool:
         response = await self._get_pool(pool_id)  # type: ignore
         return Pool(response, client=self)
+
+    async def sets(
+        self,
+        name: str = None,
+        shortname: str = None,
+        creator_name: str = None,
+        order: Literal[
+            "name", "shortname", "postcount", "created_at", "update"
+        ] = "name",
+    ) -> List[Set]:
+        response = await self._get_sets(
+            name, shortname, creator_name, order
+        )  # type: ignore
+        result = [Set(p, client=self) for p in response]
+        return result
+
+    async def set(self, set_id: int) -> Set:
+        response = await self._get_set(set_id)  # type: ignore
+        return Set(response, client=self)

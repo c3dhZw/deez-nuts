@@ -16,7 +16,7 @@ from .Classes import Flag
 from .Classes import Note
 from .Classes import Pool
 from .Classes import Post
-from .Constants import FLAGS_URL
+from .Constants import FLAGS_URL, SET_URL, SETS_URL
 from .Constants import NOTES_URL
 from .Constants import POOL_URL
 from .Constants import POOLS_URL
@@ -355,6 +355,23 @@ class AbstractYippi(ABC):
             "name", "shortname", "postcount", "created_at", "update"
         ] = "name",
     ) -> ArrayRequestResponse:
+        """Internal fetch of sets lookup.
+
+        In general you don't need to touch this. If you want to override
+        how the call works, change :meth:`._call_api` instead.
+
+        Args:
+            name: Search for set names.
+            shortname: Search for a set by its short name.
+            creator_name: Search for pools based on creator name.
+            order: The order that pools should be returned,
+                can be any of: ``name``, ``shortname``, ``postcount``, ``post_count``, ``update``.
+                If not specified it orders by ``updated_at``.
+
+        Returns:
+            JSON object of server's response.
+
+        """
         if order and order not in self.VALID_ORDER_SETS:
             raise UserError(
                 f"Invalid category {order}. Valid categories are {self.VALID_ORDER_SETS}"
@@ -366,7 +383,23 @@ class AbstractYippi(ABC):
             creator_name=creator_name,
             order=order,
         )
-        return self._call_api("GET", POOLS_URL, **queries)
+        return self._call_api("GET", SETS_URL, **queries)
+
+    def _get_set(self, set_id: int) -> RequestResponse:
+        """Internal fetch of set lookup.
+
+        In general you don't need to touch this. If you want to override
+        how the call works, change :meth:`._call_api` instead.
+
+        Args:
+            set_id: The set's ID to look up.
+
+        Returns:
+            JSON object of server's response.
+
+        """
+        url = SET_URL + str(set_id) + ".json"
+        return self._call_api("GET", url)  # type: ignore
 
     def login(self, username: str, api_key: str) -> None:
         """Supply login credentials to client.
@@ -508,6 +541,44 @@ class AbstractYippi(ABC):
 
         Returns:
             :class:`~yippi.Classes.Pool` of the pool.
+
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def sets(
+        self,
+        name: str = None,
+        shortname: str = None,
+        creator_name: str = None,
+        order: Literal[
+            "name", "shortname", "postcount", "created_at", "update"
+        ] = "name",
+    ):
+        """Search for sets.
+
+        Args:
+            name: Search for set names.
+            shortname: Search for a set by its short name.
+            creator_name: Search for pools based on creator name.
+            order: The order that pools should be returned,
+                can be any of: ``name``, ``shortname``, ``postcount``, ``post_count``, ``update``.
+                If not specified it orders by ``updated_at``.
+
+        Returns:
+            :obj:`list` of :class:`~yippi.Classes.Set` of the pools.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def set(self, set_id: int):
+        """Fetch for a set.
+
+        Args:
+            set_id: The set's ID to look up.
+
+        Returns:
+            :class:`~yippi.Classes.Set` of the pool.
 
         """
         raise NotImplementedError
