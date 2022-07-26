@@ -1,14 +1,13 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import Any, Awaitable
+from typing import TYPE_CHECKING, Any, Awaitable
 from typing import List
 from typing import Tuple
 from typing import TypeVar
 from typing import Union
 from urllib.parse import urlencode
 
-import aiohttp
-import requests
+
 from pyrate_limiter import Limiter
 from pyrate_limiter import RequestRate
 
@@ -23,6 +22,10 @@ from .Constants import POOLS_URL
 from .Constants import POST_URL
 from .Constants import POSTS_URL
 from .Exceptions import UserError
+
+if TYPE_CHECKING:
+    import aiohttp
+    import requests
 
 T = TypeVar("T")
 MaybeAwaitable = Union[T, Awaitable[T]]
