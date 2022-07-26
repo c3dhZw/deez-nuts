@@ -655,3 +655,36 @@ class Tag(_BaseMixin):
             self.related_tags_updated_at = json_data.get("related_tags_updated_at")
             self.category: TagCategory = TagCategory(json_data.get("category"))
             self.is_locked: bool = json_data.get("is_locked")
+
+
+class Set(_BaseMixin):
+    def __init__(self, json_data=None, *args, **kwargs) -> None:
+        super().__init__(json_data, *args, **kwargs)
+        if json_data:
+            self.creator_id: int = json_data.get("creator_id")
+            self.is_public: bool = json_data.get("is_public")
+            self.name: str = json_data.get("name")
+            self.shortname: str = json_data.get("shortname")
+            self.description: str = json_data.get("description")
+            self.post_count: int = json_data.get("post_count", 0)
+            self.transfer_on_delete: bool = json_data.get("transfer_on_delete", True)
+            self.post_ids: List[int] = json_data.get("post_ids", [])
+
+    async def get_posts_async(self) -> List[Post]:
+        get_post_func = cast(Callable[..., Awaitable[Post]], self._client.post)
+
+        result: List[Post] = []
+        for pid in self.post_ids:
+            result.append(await get_post_func(pid))
+        return result
+
+    def get_posts(self) -> MaybeAwaitable[List[Post]]:
+        if inspect.iscoroutinefunction(self._client.post):
+            return self.get_posts_async()
+
+        get_post_func = cast(Callable[..., Post], self._client.post)
+
+        result: List[Post] = []
+        for pid in self.post_ids:
+            result.append(get_post_func(pid))
+        return result
