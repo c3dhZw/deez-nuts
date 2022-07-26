@@ -43,6 +43,8 @@ class YippiClient(AbstractYippi):
         if not r.status_code == 204:
             return r.json()
 
+        return None
+
     def _verify_response(self, r) -> None:
         if 300 <= r.status_code < 500:
             res = r.json()

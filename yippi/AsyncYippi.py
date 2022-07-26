@@ -40,7 +40,7 @@ class AsyncYippiClient(AbstractYippi):
 
     @limiter.ratelimit("call_api", delay=True)
     async def _call_api(
-        self, method: str, url: str, data: dict = None, file=None, **kwargs
+        self, method: str, url: str, data: Union[dict, FormData] = None, file=None, **kwargs
     ) -> Optional[Union[List[dict], dict]]:
         auth = None
         if self._login != ("", ""):
@@ -63,6 +63,8 @@ class AsyncYippiClient(AbstractYippi):
         await self._verify_response(r)
         if not r.status == 204:
             return await r.json()
+
+        return None
 
     async def _verify_response(self, r) -> None:
         if 300 <= r.status < 500:
