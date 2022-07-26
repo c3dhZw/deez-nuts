@@ -83,7 +83,7 @@ class AbstractYippi(ABC):
 
     @abstractmethod
     def _verify_response(
-        self, r: Union[requests.Response, aiohttp.ClientResponse]
+        self, r: Union['requests.Response', 'aiohttp.ClientResponse']
     ) -> MaybeAwaitable[None]:
         """Verifies response from server.
 
