@@ -1,6 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 from typing import Any
 from typing import Awaitable
 from typing import List
@@ -52,6 +52,7 @@ class AbstractYippi(ABC):
 
     VALID_CATEGORY = ("series", "collection")
     VALID_ORDER = ("name", "created_at", "updated_at", "post_count")
+    VALID_ORDER_SETS = ("name", "shortname", "postcount", "created_at", "update")
 
     def __init__(
         self,
@@ -344,6 +345,28 @@ class AbstractYippi(ABC):
         """
         url = POOL_URL + str(pool_id) + ".json"
         return self._call_api("GET", url)  # type: ignore
+
+    def _get_sets(
+        self,
+        name: str = None,
+        shortname: str = None,
+        creator_name: str = None,
+        order: Literal[
+            "name", "shortname", "postcount", "created_at", "update"
+        ] = "name",
+    ) -> ArrayRequestResponse:
+        if order and order not in self.VALID_ORDER_SETS:
+            raise UserError(
+                f"Invalid category {order}. Valid categories are {self.VALID_ORDER_SETS}"
+            )
+
+        queries = self._convert_search_query(
+            name=name,
+            shortname=shortname,
+            creator_name=creator_name,
+            order=order,
+        )
+        return self._call_api("GET", POOLS_URL, **queries)
 
     def login(self, username: str, api_key: str) -> None:
         """Supply login credentials to client.
