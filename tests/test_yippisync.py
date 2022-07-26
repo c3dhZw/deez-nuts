@@ -19,7 +19,7 @@ def client():
 
 
 @pytest.mark.vcr()
-def test_getpost(client):
+def test_getpost(client: YippiClient):
     post = client.post(1383235)
     assert post.id == 1383235
     assert post.created_at == "2017-11-20T12:23:11.340-05:00"
@@ -116,13 +116,13 @@ def test_getpost(client):
 
 
 @pytest.mark.vcr()
-def test_404(client):
+def test_404(client: YippiClient):
     with pytest.raises(UserError):
         client.post(99999999999)
 
 
 @pytest.mark.vcr()
-def test_post_search(client):
+def test_post_search(client: YippiClient):
     assert client.posts("m/m")
     assert client.posts(["m/m", "rating:s"])
     assert len(client.posts("m/m", limit=1)) == 1
@@ -130,13 +130,13 @@ def test_post_search(client):
 
 
 @pytest.mark.vcr()
-def test_post_search_error(client):
+def test_post_search_error(client: YippiClient):
     with pytest.raises(UserError):
         client.posts("m/m", page=1000)
 
 
 @pytest.mark.vcr()
-def test_note(client):
+def test_note(client: YippiClient):
     note = client.notes(post_id=2222254, creator_id=366315, limit=1)[0]
     assert note.id == 257037
     assert note.created_at == "2020-04-19T02:58:56.716-04:00"
@@ -154,7 +154,7 @@ def test_note(client):
 
 
 @pytest.mark.vcr()
-def test_flags(client):
+def test_flags(client: YippiClient):
     flag = client.flags(post_id=2213076, limit=1)[-1]
     assert flag.id == 368383
     assert flag.created_at == "2020-04-19T02:50:38.030-04:00"
@@ -167,7 +167,7 @@ def test_flags(client):
 
 
 @pytest.mark.vcr()
-def test_pools(client):
+def test_pools(client: YippiClient):
     pool = client.pools("Critical Success")[0]
     assert pool.id == 6059
     assert pool.name == "Critical_Success"
@@ -184,7 +184,7 @@ def test_pools(client):
 
 
 @pytest.mark.vcr()
-def test_500(client):
+def test_500(client: YippiClient):
     with pytest.raises(APIError):
         # We can't simulate e621 error, so we just use external help.
         client._call_api("GET", "https://httpstat.us/500")
