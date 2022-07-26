@@ -6,7 +6,8 @@ import re
 import warnings
 from copy import deepcopy
 from enum import IntEnum
-from typing import IO, TYPE_CHECKING
+from typing import IO
+from typing import TYPE_CHECKING
 from typing import Awaitable
 from typing import Callable
 from typing import List

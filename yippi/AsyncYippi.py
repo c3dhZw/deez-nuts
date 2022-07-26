@@ -40,7 +40,12 @@ class AsyncYippiClient(AbstractYippi):
 
     @limiter.ratelimit("call_api", delay=True)
     async def _call_api(
-        self, method: str, url: str, data: Union[dict, FormData] = None, file=None, **kwargs
+        self,
+        method: str,
+        url: str,
+        data: Union[dict, FormData] = None,
+        file=None,
+        **kwargs
     ) -> Optional[Union[List[dict], dict]]:
         auth = None
         if self._login != ("", ""):

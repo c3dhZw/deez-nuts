@@ -1,12 +1,13 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import TYPE_CHECKING, Any, Awaitable
+from typing import TYPE_CHECKING
+from typing import Any
+from typing import Awaitable
 from typing import List
 from typing import Tuple
 from typing import TypeVar
 from typing import Union
 from urllib.parse import urlencode
-
 
 from pyrate_limiter import Limiter
 from pyrate_limiter import RequestRate
@@ -83,7 +84,7 @@ class AbstractYippi(ABC):
 
     @abstractmethod
     def _verify_response(
-        self, r: Union['requests.Response', 'aiohttp.ClientResponse']
+        self, r: Union["requests.Response", "aiohttp.ClientResponse"]
     ) -> MaybeAwaitable[None]:
         """Verifies response from server.
 
